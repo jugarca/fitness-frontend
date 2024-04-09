@@ -1,0 +1,25 @@
+<mat-table [dataSource]="listaCompra">
+
+    <!-- Nombre del producto Column -->
+    <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef> Nombre del producto </mat-header-cell>
+        <mat-cell *matCellDef="let producto"> {{producto.nombre}} </mat-cell>
+    </ng-container>
+
+    <!-- Cantidad a comprar Column -->
+    <ng-container matColumnDef="cantidad">
+        <mat-header-cell *matHeaderCellDef> Cantidad a comprar </mat-header-cell>
+        <mat-cell *matCellDef="let producto"> {{producto.cantidad}} </mat-cell>
+    </ng-container>
+
+    <!-- Comprado Column -->
+    <ng-container matColumnDef="comprado">
+        <mat-header-cell *matHeaderCellDef> Comprado </mat-header-cell>
+        <mat-cell *matCellDef="let producto"> 
+            <mat-checkbox [(ngModel)]="producto.comprado"></mat-checkbox>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

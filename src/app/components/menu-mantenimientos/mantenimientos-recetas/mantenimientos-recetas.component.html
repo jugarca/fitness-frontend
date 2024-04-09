@@ -1,0 +1,70 @@
+<!-- Botón para mostrar/ocultar el campo de búsqueda -->
+<button mat-raised-button color="primary" class="margin-standard" (click)="showSearch = !showSearch">{{ 'recetas.btn.ocultar' | transloco }}</button>
+
+<!-- Campo de búsqueda -->
+<div *ngIf="showSearch" class="margin-standard">
+    <fieldset>
+      <legend>{{'general.busqueda' | transloco}}</legend>
+      <mat-form-field>
+        <mat-label>{{'recetas.buscar' | transloco}}</mat-label>
+        <input matInput [(ngModel)]="searchValue">
+        <button mat-button matSuffix aria-label="Buscar" (click)="applyFilter(searchValue!)">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </fieldset>
+  </div>
+
+
+<mat-table [dataSource]="recetas">
+
+    <!-- ID de la receta Column -->
+    <ng-container matColumnDef="idReceta">
+        <mat-header-cell *matHeaderCellDef> {{'recetas.header.id' | transloco}} </mat-header-cell>
+        <mat-cell *matCellDef="let receta"> {{receta.idReceta}} </mat-cell>
+    </ng-container>
+
+    <!-- Nombre de la receta Column -->
+    <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef> {{'recetas.header.nombre' | transloco}}</mat-header-cell>
+        <mat-cell *matCellDef="let receta"> {{receta.nombre}} </mat-cell>
+    </ng-container>
+
+    <!-- Descripción de la receta Column -->
+    <ng-container matColumnDef="descripcion">
+        <mat-header-cell *matHeaderCellDef> {{'recetas.header.descripcion' | transloco}} </mat-header-cell>
+        <mat-cell *matCellDef="let receta"> {{receta.descripcion}} </mat-cell>
+    </ng-container>
+
+    <!-- Kilocalorías Column -->
+    <ng-container matColumnDef="kilocalorias">
+        <mat-header-cell *matHeaderCellDef> {{'recetas.header.kcal' | transloco}} </mat-header-cell>
+        <mat-cell *matCellDef="let receta"> {{receta.kilocalorias}} </mat-cell>
+    </ng-container>
+
+    <!-- Tipo de alimentación Column -->
+    <ng-container matColumnDef="tipoAlimentacion">
+        <mat-header-cell *matHeaderCellDef> {{'recetas.header.tipo' | transloco}} </mat-header-cell>
+        <mat-cell *matCellDef="let receta"> {{receta.tipoAlimentacion}} </mat-cell>
+    </ng-container>
+
+  <!-- Acciones Column -->
+  <ng-container matColumnDef="acciones">
+    <mat-header-cell *matHeaderCellDef> {{'general.acciones' | transloco}} 
+        <button mat-icon-button color="primary" (click)="abrirModal()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let receta"> 
+      <button mat-icon-button color="primary" aria-label="Editar receta" (click)="openEditDialog(receta)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" aria-label="Borrar receta">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

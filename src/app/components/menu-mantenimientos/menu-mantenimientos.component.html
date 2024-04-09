@@ -1,0 +1,97 @@
+<div class="px-2 sm:px-6 xl:px-24">
+    <div class="flex h-[calc(100dvh-6rem)] w-full flex-col rounded-xl border bg-background">
+    </div>
+</div>   
+<!-- <app-board-header> -->
+    <div class="d-flex align-items-center justify-content-center" style="height: 40px;">
+        <div class="d-flex align-items-center justify-content-center border-bottom w-100 h-100">
+            <h1 class="title-custom">
+                {{ 'mantenimientosMenu' | transloco }}
+            </h1>
+        </div>
+    </div>
+<!-- </app-board-header> -->
+<!-- <app-board-content class="h-full overflow-y-auto"> -->
+    <!-- Primera Fila de los iconos -->
+    <div class="container py-4">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <button class="btn btn-block d-flex flex-column align-items-center" routerLink="/mantenimientosRecetas">
+                        <img
+                            class="w-50 mx-auto"
+                            src="https://cdn-icons-png.flaticon.com/512/2253/2253461.png"
+                            alt="Icono representativo de Mantenimiento de Recetas"
+                        />
+                        <span class="btn title-custom mt-2">
+                            {{ 'recetas' | transloco }}
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <button id="btnEjercicios" class="btn btn-block d-flex flex-column align-items-center">
+                        <img
+                            class="w-50 mx-auto"
+                            src="https://cdn-icons-png.flaticon.com/512/1198/1198314.png"
+                            alt="Icono representativo de Mantenimiento Ejercicios"
+                        />
+                        <span class="btn title-custom mt-2">
+                            {{ 'ejercicios' | transloco }} 
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <button class="btn btn-block d-flex flex-column align-items-center">
+                        <img
+                            class="w-50 mx-auto"
+                            src="https://cdn-icons-png.flaticon.com/512/921/921347.png"
+                            alt="Icono representativo de Mantenimientos de Usuarios"
+                        />
+                        <span class="btn title-custom mt-2">
+                            {{ 'usuarios' | transloco }}
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <button class="btn btn-block d-flex flex-column align-items-center">
+                        <img
+                            class="w-50 mx-auto"
+                            src="https://cdn-icons-png.flaticon.com/512/1601/1601561.png"
+                            alt="Icono representativo de mantenimientos de tipos"
+                        />
+                        <span class="btn title-custom mt-2">
+                            {{ 'tipos' | transloco }}
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Segunda Fila de los iconos -->
+    <div class="container py-4">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <button class="btn btn-block d-flex flex-column align-items-center">
+                        <img
+                            class="w-50 mx-auto"
+                            src="https://cdn-icons-png.flaticon.com/512/8566/8566135.png"
+                            alt="Icono representativo de mantenimiento de parametros"
+                        />
+                        <span class="btn title-custom mt-2">
+                            {{ 'parametros' | transloco }}
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+<!-- </app-board-content> -->

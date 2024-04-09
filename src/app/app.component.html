@@ -1,0 +1,52 @@
+<!-- TODO: Montar lo comun en todas las pantallas Cabecera y Footer -->
+<mat-toolbar color="primary" style="display: flex; justify-content: space-between;">
+  <div>
+    <mat-icon>fitness_center</mat-icon>
+    <button mat-button [matMenuTriggerFor]="menu">Fitness</button>
+  </div>
+  <div>
+    <button mat-button [matMenuTriggerFor]="languageMenu">
+      <mat-icon>public</mat-icon>
+      {{ 'idioma' | transloco }}
+    </button>
+    <button mat-button [matMenuTriggerFor]="userMenu">
+      <mat-icon>account_circle</mat-icon>
+      {{ 'usuario' | transloco }}
+    </button>
+  </div>
+</mat-toolbar>
+
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="/entrenamiento">Plan de Entrenamiento</button>
+  <button mat-menu-item routerLink="/ejercicios">Ejercicios</button>
+  <button mat-menu-item routerLink="/recetas">Recetas</button>
+  <button mat-menu-item routerLink="/compra">Lista de la Compra</button>
+  <button mat-menu-item [matMenuTriggerFor]="submenu">Mantenimiento</button>
+</mat-menu>
+
+<mat-menu #submenu="matMenu">
+  <button mat-menu-item routerLink="/mantenimiento/ejercicios">Ejercicios</button>
+  <button mat-menu-item routerLink="/mantenimiento/valores">Valores</button>
+</mat-menu>
+
+<mat-menu #userMenu="matMenu">
+  <button mat-menu-item>Ver perfil</button>
+  <button mat-menu-item>Logout</button>
+</mat-menu>
+
+<mat-menu #languageMenu="matMenu">
+  <button mat-menu-item (click)="changeLanguage('es')">Castellano</button>
+  <button mat-menu-item (click)="changeLanguage('ca')">Valenciano</button>
+  <button mat-menu-item (click)="changeLanguage('en')">Inglés</button>
+</mat-menu>
+<!-- Contenido Central de la pantalla-->
+<router-outlet></router-outlet>
+
+
+<!-- Se crea el footer -->
+<mat-toolbar class="mat-footer">
+  <span class="mat-footer-content">
+    © {{currentYear}} Judit SL
+  </span>
+</mat-toolbar>

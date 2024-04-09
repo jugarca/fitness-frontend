@@ -1,0 +1,138 @@
+<div class="px-2 sm:px-6 xl:px-24">
+    <div class="flex h-[calc(100dvh-6rem)] w-full flex-col rounded-xl border bg-background">
+    </div>
+</div>   
+<!-- <app-board-header> -->
+    <div class="d-flex align-items-center justify-content-center" style="height: 40px;">
+        <div class="d-flex align-items-center justify-content-center border-bottom w-100 h-100">
+            <h1 class="title-custom">
+                {{ 'menuPrincipal' | transloco }}
+            </h1>
+        </div>
+    </div>
+<!-- </app-board-header> -->
+<!-- <app-board-content class="h-full overflow-y-auto"> -->
+    <!-- Primera Fila de los iconos -->
+    <div class="container py-4">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <button class="btn btn-block d-flex flex-column align-items-center" routerLink="/planEntrenamiento">
+                        <img
+                            class="w-50 mx-auto"
+                            src="https://cdn-icons-png.flaticon.com/512/2117/2117285.png"
+                            alt="Icono representativo de Plan de Entrenamiento"
+                        />
+                        <span class="btn title-custom mt-2">
+                            {{ 'planEntrenamiento' | transloco }}
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <button id="btnEjercicios" class="btn btn-block d-flex flex-column align-items-center" routerLink="/ejercicios">
+                        <img
+                            class="w-50 mx-auto"
+                            src="https://cdn-icons-png.flaticon.com/512/2043/2043952.png"
+                            alt="Icono representativo de Ejercicios"
+                        />
+                        <span class="btn title-custom mt-2">
+                            {{ 'entrenamientos' | transloco }} 
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <button class="btn btn-block d-flex flex-column align-items-center" routerLink="/misRecetas">
+                        <img
+                            class="w-50 mx-auto"
+                            src="https://cdn-icons-png.flaticon.com/512/9757/9757044.png"
+                            alt="Icono representativo de Recetas"
+                        />
+                        <span class="btn title-custom mt-2">
+                            {{ 'recetas' | transloco }}
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <button class="btn btn-block d-flex flex-column align-items-center" routerLink="/misListaCompra">
+                        <img
+                            class="w-50 mx-auto"
+                            src="https://cdn-icons-png.flaticon.com/512/3585/3585145.png"
+                            alt="Icono representativo de Lista de la compra"
+                        />
+                        <span class="btn title-custom mt-2">
+                            {{ 'listaCompra' | transloco }}
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Segunda Fila de los iconos -->
+    <div class="container py-4">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <button class="btn btn-block d-flex flex-column align-items-center">
+                        <img
+                            class="w-50 mx-auto"
+                            src="https://cdn-icons-png.flaticon.com/512/1582/1582043.png"
+                            alt="Icono representativo de Accidentes Graves"
+                        />
+                        <span class="btn title-custom mt-2">
+                            {{ 'calendario' | transloco }}
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <button id="btnEjercicios" class="btn btn-block d-flex flex-column align-items-center">
+                        <img
+                            class="w-50 mx-auto"
+                            src="https://cdn-icons-png.flaticon.com/512/609/609179.png"
+                            alt="Icono representativo de Estadisticas"
+                        />
+                        <span class="btn title-custom mt-2">
+                            {{ 'estadisticas' | transloco }} 
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <button class="btn btn-block d-flex flex-column align-items-center">
+                        <img
+                            class="w-50 mx-auto"
+                            src="https://cdn-icons-png.flaticon.com/512/3476/3476457.png"
+                            alt="Icono representativo de Usuarios"
+                        />
+                        <span class="btn title-custom mt-2">
+                            {{ 'usuario' | transloco }}
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <button class="btn btn-block d-flex flex-column align-items-center" routerLink="/mantenimientos">
+                        <img
+                            class="w-50 mx-auto"
+                            src="https://cdn-icons-png.flaticon.com/512/802/802239.png"
+                            alt="Icono representativo de Mantenimientos"
+                        />
+                        <span class="btn title-custom mt-2">
+                            {{ 'mantenimientos' | transloco }}
+                        </span>
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<!-- </app-board-content> -->

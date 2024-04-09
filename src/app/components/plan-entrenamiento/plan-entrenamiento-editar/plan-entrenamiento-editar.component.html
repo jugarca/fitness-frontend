@@ -1,0 +1,136 @@
+<h1 class="titulo-centrado">Crear/Editar Plan de Entrenamiento</h1>
+<mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="primerFormGroup">
+        <div class="d-flex justify-content-center">
+        <form [formGroup]="primerFormGroup">
+            <ng-template matStepLabel>Datos de entrenamiento</ng-template>
+            <div class="mb-3">
+                <mat-form-field class="mr-3 margin-campos">
+                    <mat-label>Altura</mat-label>
+                    <input matInput type="number" formControlName="altura">
+                    <span matSuffix> cm</span>
+                    <mat-error *ngIf="primerFormGroup.get('altura')?.hasError('max')">
+                        La altura no puede exceder los 300 cm.
+                    </mat-error>
+                    <mat-error *ngIf="primerFormGroup.get('altura')?.hasError('required')">
+                        Este campo es requerido.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="mr-3 margin-campos">
+                    <mat-label>Peso</mat-label>
+                    <input matInput type="number" formControlName="peso">
+                    <span matSuffix> kg</span>
+                    <mat-error *ngIf="primerFormGroup.get('peso')?.hasError('max')">
+                        La altura no puede exceder los 350 kg.
+                    </mat-error>
+                    <mat-error *ngIf="primerFormGroup.get('peso')?.hasError('required')">
+                        Este campo es requerido.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="mb-3">
+                <mat-form-field class="mr-3 margin-campos">
+                    <mat-label>Nivel</mat-label>
+                    <mat-select formControlName="nivel">
+                      <mat-option *ngFor="let nivel of niveles" [value]="nivel">{{nivel}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="mr-3 margin-campos">
+                    <mat-label>Tiempo de entrenamiento</mat-label>
+                    <mat-select formControlName="tiempo">
+                      <mat-option *ngFor="let tiempo of tiempos" [value]="tiempo">{{tiempo}}</mat-option>
+                    </mat-select>
+                </mat-form-field>    
+            </div>
+            <div class="mb-3">
+                <mat-form-field class="mr-3 margin-campos">
+                    <mat-label>Objetivo</mat-label>
+                    <mat-select formControlName="objetivo">
+                      <mat-option *ngFor="let objetivo of objetivos" [value]="objetivo">{{objetivo}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="mr-3 margin-campos">
+                    <mat-label>Grupo Muscular</mat-label>
+                    <mat-select formControlName="grupoMuscular">
+                      <mat-option *ngFor="let grupo of grupoMuscular" [value]="grupo">{{grupo}}</mat-option>
+                    </mat-select>
+                </mat-form-field>    
+            </div>
+            <!-- Agrega más campos aquí -->
+            <div>
+                <button mat-button matStepperNext class="button-step">Siguiente</button>
+            </div>
+        </form>
+    </div>
+    </mat-step>
+    <mat-step [stepControl]="segundoFormGroup">
+        <div class="d-flex justify-content-center">
+        <form [formGroup]="segundoFormGroup">
+            <ng-template matStepLabel>Material para ejercicio</ng-template>
+                  <!--<mat-form-field>
+                    <mat-label>Material Disponible</mat-label>
+                    <mat-chip-grid #chipGrid aria-label="Material selection">
+                            <mat-chip *ngFor="let material of materials" (removed)="remove(material)">
+                                {{material}}
+                                <button matChipRemove [attr.aria-label]="'remove ' + material">
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                            </mat-chip>
+                    </mat-chip-grid>
+                  <input placeholder="Nuevo Material..." #materialInput [formControl]="materialCtrl"
+                      [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      (matChipInputTokenEnd)="add($event)"/>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                      @for (material of filteredMaterials | async; track material) {
+                        <mat-option [value]="material">{{material}}</mat-option>
+                      }
+                    </mat-autocomplete>
+                  </mat-form-field>-->
+            <!-- Agrega más campos aquí -->
+            <div>
+                <button mat-button matStepperPrevious class="button-step">Anterior</button>
+                <button mat-button matStepperNext class="button-step">Siguiente</button>
+            </div>
+        </form>
+    </div>
+    </mat-step>
+    <mat-step [stepControl]="tercerFormGroup">
+        <div class="d-flex justify-content-center">
+        <form [formGroup]="tercerFormGroup">
+            <ng-template matStepLabel>Días de la semana para ejercicio</ng-template>
+            <mat-form-field>
+                <mat-label>Días de la semana</mat-label>
+                <input matInput formControlName="diasSemana">
+            </mat-form-field>
+            <!-- Agrega más campos aquí -->
+            <div>
+                <button mat-button matStepperPrevious class="button-step">Anterior</button>
+                <button mat-button matStepperNext class="button-step">Siguiente</button>
+            </div>
+        </form>
+    </div>
+    </mat-step>
+    <mat-step [stepControl]="cuartoFormGroup">
+        <div class="d-flex justify-content-center">
+        <form [formGroup]="cuartoFormGroup">
+            <ng-template matStepLabel>Datos de alimentación</ng-template>
+            <mat-form-field>
+                <mat-label>Kilocalorías máximas</mat-label>
+                <input matInput formControlName="kilocaloriasMaximas">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Tipo de alimentación</mat-label>
+                <input matInput formControlName="tipoAlimentacion">
+            </mat-form-field>
+            <!-- Agrega más campos aquí -->
+            <div>
+                <button mat-button matStepperPrevious class="button-step">Anterior</button>
+                <button mat-button matStepperNext class="button-step">Siguiente</button>
+            </div>
+        </form>
+    </div>
+    </mat-step>
+</mat-horizontal-stepper>
+    <!-- Agrega más pasos aquí si es necesario -->
+

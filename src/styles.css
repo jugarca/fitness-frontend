@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.titulo-centrado {
+    text-align: center;
+}
+
+.margin-campos {
+    margin:5px;
+}
+
+.button-step{
+    background-color: #3f51b5 !important;
+    color: white !important;
+    margin-left: 5px;
+    float: right;
+}
+
+.card-buttons {
+    max-width: 20%;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    transition: transform .3s ease-in-out;
+    background-color: rgb(241, 241, 241);
+}
+
+.title-custom {
+    color: #2b2c43; /* Cambia esto por el color que prefieras */
+    font-size: 1.5em;
+    text-align: center;
+    transition: color .3s;
+  }
+  
+  .title-custom:hover {
+    color: #616281; /* Cambia esto por el color que prefieras */
+  }
+
+  .margin-standard{
+    margin: 5px;
+  }
+
+  
