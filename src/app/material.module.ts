@@ -26,6 +26,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
         declarations: [
@@ -35,6 +36,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
             MatAutocompleteModule,
             MatBadgeModule, 
             MatButtonModule,
+            MatButtonToggleModule,
             MatCardModule,
             MatCheckboxModule,
             MatChipsModule,
@@ -62,6 +64,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
              MatAutocompleteModule,
              MatBadgeModule,
              MatButtonModule,
+             MatButtonToggleModule,
              MatCardModule,
              MatCheckboxModule,
              MatChipsModule,

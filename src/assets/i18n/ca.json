@@ -11,7 +11,7 @@
     "mantenimientos": "Manteniments",
     "crearEntrenamiento": "Crear/Editar Entrenament",
     "mantenimientosMenu": "Menu de Manteniments",
-    "ejercicios": "Entrenaments",
+    "ejercicios2": "Entrenaments",
     "usuarios": "Usuaris",
     "tipos": "Tipus",
     "parametros": "Paràmetres",
@@ -29,6 +29,63 @@
     "recetas.modal.nombre": "Nombre de la recepta",
     "recetas.modal.descripcion": "Descripció de la recepta",
     "recetas.modal.kcal": "Kcal de la recepta",
-    "recetas.modal.tipo": "Tipo de Alimentació"
+    "recetas.modal.tipo": "Tipo de Alimentació",
+    "formulario": {
+        "iniciarSesion": "Inicia sessió",
+        "registrarse": "Registra't"
+      },
+      "login": {
+        "formulario": {
+          "usuario": "Usuari",
+          "contrasena": "Contrasenya",
+          "olvidasteContrasena": "Has oblidat la contrasenya?",
+          "botonIniciarSesion": "Inicia sessió"
+        }
+      },
+      "registro": {
+        "formulario": {
+          "email": "Correu electrònic",
+          "usuario": "Usuari",
+          "contrasena": "Contrasenya",
+          "confirmarContrasena": "Confirma la contrasenya",
+          "aceptoTerminos": "Accepto els termes del contracte",
+          "botonRegistrarse": "Registra't"
+        }
+      },
+      "ejercicios": {
+        "btn": {
+          "ocultar": "Ocultar/Mostrar búsqueda"
+        },
+        "buscar": "Buscar ejercici",
+        "modal": {
+          "title": "Editar Ejercici",
+          "id": "ID del Ejercici",
+          "nombre": "Nombre del Ejercici",
+          "objetivo": "Objectiu del Ejercici",
+          "nivel": "Nivel del Ejercici",
+          "duracion": "Duració del Ejercici",
+          "grupoMuscular": "Grup Muscular del Ejercici",
+          "deporte": "Esport del Ejercici",
+          "material": "Material del Ejercici",
+          "cancel": "Cancelar",
+          "save": "Guardar"
+        },
+        "header": {
+           "title": "Editar Ejercici",
+           "id": "ID del Ejercici",
+           "nombre": "Nombre del Ejercici",
+           "objetivo": "Objetiu del Ejercici",
+           "nivel": "Nivel del Ejercici",
+           "duracion": "Duració del Ejercici",
+           "grupoMuscular": "Grup Muscular del Ejercici",
+           "deporte": "Esport del Ejercici",
+           "material": "Material del Ejercici"
+         }
+      },
+      "general": {
+        "busqueda": "Búsqueda"
+      }
+
+    
     
 }

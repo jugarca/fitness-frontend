@@ -10,6 +10,8 @@ import { RecetasUsuarioComponent } from './components/recetas-usuario/recetas-us
 import { ListaCompraComponent } from './components/lista-compra/lista-compra.component';
 import { MenuMantenimientosComponent } from './components/menu-mantenimientos/menu-mantenimientos.component';
 import { MantenimientosRecetasComponent } from './components/menu-mantenimientos/mantenimientos-recetas/mantenimientos-recetas.component';
+import { LoginComponent } from './components/login/login.component';
+import { MantenimientosEjerciciosComponent } from './components/menu-mantenimientos/mantenimientos-ejercicios/mantenimientos-ejercicios.component';
 
 
 const routes: Routes = [
@@ -23,6 +25,8 @@ const routes: Routes = [
   { path: 'misListaCompra', component: ListaCompraComponent },
   { path: 'mantenimientos', component: MenuMantenimientosComponent },
   { path: 'mantenimientosRecetas', component: MantenimientosRecetasComponent },
+  { path: 'mantenimientosEjercicios', component: MantenimientosEjerciciosComponent },
+  { path: '', component: LoginComponent },
 ];
 
 @NgModule({

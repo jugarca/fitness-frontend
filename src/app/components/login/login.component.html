@@ -1,0 +1,71 @@
+<div>
+        <div class="button-container">
+                <mat-button-toggle-group (change)="cambiarFormulario($event.value)" aria-label="Formulario">
+                        <mat-button-toggle class="button-login" value="login">{{ 'formulario.iniciarSesion' | transloco }}</mat-button-toggle>
+                        <mat-button-toggle class="button-register" value="registro">{{ 'formulario.registrarse' | transloco }}</mat-button-toggle>
+                </mat-button-toggle-group>
+        </div>
+
+        <form id="login" class="margin-form d-flex flex-column" *ngIf="mostrarLogin">
+                <div class="form-field mb-3">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ 'login.formulario.usuario' | transloco }}</mat-label>
+                        <input matInput type="text" required>
+                    </mat-form-field>
+                </div>
+            
+                <div class="form-field mb-3 ">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ 'login.formulario.contrasena' | transloco }}</mat-label>
+                        <input matInput type="password" required>
+                    </mat-form-field>
+                </div>
+            
+                <div class="form-field mb-3">
+                    <a href="#">{{ 'login.formulario.olvidasteContrasena' | transloco }}</a>
+                </div>
+
+                <div class="form-field mb-3 ml-auto d-flex">
+                        <button mat-raised-button color="primary">{{ 'login.formulario.botonIniciarSesion' | transloco }}</button>
+                </div>
+                
+            </form>
+
+            <form id="registro" class="margin-form d-flex flex-column" *ngIf="mostrarRegistro">
+                <div class="form-field mb-3">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ 'registro.formulario.email' | transloco }}</mat-label>
+                        <input matInput type="email" required>
+                    </mat-form-field>
+                </div>
+            
+                <div class="form-field mb-3">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ 'registro.formulario.usuario' | transloco }}</mat-label>
+                        <input matInput type="text" required>
+                    </mat-form-field>
+                </div>
+            
+                <div class="form-field mb-3">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ 'registro.formulario.contrasena' | transloco }}</mat-label>
+                        <input matInput type="password" required>
+                    </mat-form-field>
+                </div>
+            
+                <div class="form-field mb-3">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ 'registro.formulario.confirmarContrasena' | transloco }}</mat-label>
+                        <input matInput type="password" required>
+                    </mat-form-field>
+                </div>
+            
+                <div class="form-field mb-3">
+                    <mat-checkbox>{{ 'registro.formulario.aceptoTerminos' | transloco }}</mat-checkbox>
+                </div>
+            
+                <div class="form-field mb-3 d-flex">
+                    <button mat-raised-button color="primary" class="ml-auto">{{ 'registro.formulario.botonRegistrarse' | transloco }}</button>
+                </div>
+            </form>
+    </div>

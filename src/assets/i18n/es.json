@@ -11,7 +11,7 @@
    "mantenimientos": "Mantenimientos",
    "crearEntrenamiento": "Crear Entrenamiento",
    "mantenimientosMenu": "Menu de Mantenimientos",
-   "ejercicios": "Entrenamientos",
+   "ejercicios2": "Entrenamientos",
    "usuarios": "Usuarios",
    "tipos": "Tipos",
    "parametros": "Parámetros",
@@ -29,6 +29,61 @@
    "recetas.modal.nombre": "Nombre de la receta",
    "recetas.modal.descripcion": "Descripción de la receta",
    "recetas.modal.kcal": "Kcal de la receta",
-   "recetas.modal.tipo": "Tipo de Alimentación"
+   "recetas.modal.tipo": "Tipo de Alimentación",
+   "formulario": {
+      "iniciarSesion": "Iniciar sesión",
+      "registrarse": "Registrarse"
+    },
+    "login": {
+      "formulario": {
+        "usuario": "Usuario",
+        "contrasena": "Contraseña",
+        "olvidasteContrasena": "¿Has olvidado la contraseña?",
+        "botonIniciarSesion": "Iniciar sesión"
+      }
+    },
+    "registro": {
+      "formulario": {
+        "email": "Email",
+        "usuario": "Usuario",
+        "contrasena": "Contraseña",
+        "confirmarContrasena": "Confirmar contraseña",
+        "aceptoTerminos": "Acepto los términos del contrato",
+        "botonRegistrarse": "Registrarse"
+      }
+    },
+    "ejercicios": {
+      "btn": {
+        "ocultar": "Ocultar/Mostrar búsqueda"
+      },
+      "buscar": "Buscar ejercicio",
+      "modal": {
+        "title": "Editar Ejercicio",
+        "id": "ID del Ejercicio",
+        "nombre": "Nombre del Ejercicio",
+        "objetivo": "Objetivo del Ejercicio",
+        "nivel": "Nivel del Ejercicio",
+        "duracion": "Duración del Ejercicio",
+        "grupoMuscular": "Grupo Muscular del Ejercicio",
+        "deporte": "Deporte del Ejercicio",
+        "material": "Material del Ejercicio",
+        "cancel": "Cancelar",
+        "save": "Guardar"
+      },
+      "header": {
+         "title": "Editar Ejercicio",
+         "id": "ID del Ejercicio",
+         "nombre": "Nombre del Ejercicio",
+         "objetivo": "Objetivo del Ejercicio",
+         "nivel": "Nivel del Ejercicio",
+         "duracion": "Duración del Ejercicio",
+         "grupoMuscular": "Grupo Muscular del Ejercicio",
+         "deporte": "Deporte del Ejercicio",
+         "material": "Material del Ejercicio"
+       }
+    },
+    "general": {
+      "busqueda": "Búsqueda"
+    }
 }
 

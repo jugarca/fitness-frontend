@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { EditRecetaComponent } from './edit-receta/edit-receta.component';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 
 @Component({
   selector: 'app-mantenimientos-recetas',
@@ -31,7 +32,7 @@ showSearch = false;
 searchValue: string | undefined;
 recetas = new MatTableDataSource(this.recetasArray); // Asegúrate de reemplazar RECETAS_ARRAY con tu array de recetas
 
-constructor(public dialog: MatDialog) {}
+constructor(public dialog: MatDialog, public dialogService: DialogService) {}
 
 applyFilter(filterValue: string) {
   this.recetas.filter = filterValue.trim().toLowerCase();
@@ -54,6 +55,18 @@ openEditDialog(receta: any) {
   dialogRef.afterClosed().subscribe(result => {
     console.log('El diálogo fue cerrado');
     // Aquí puedes manejar el resultado del diálogo (por ejemplo, actualizar la receta)
+  });
+}
+
+confirmarBorrado(){
+  this.dialogService.openConfirmDialog('¿Estás seguro de que quieres borrar el registro?').afterClosed().subscribe(res => {
+    if (res) {
+      // El usuario hizo clic en Aceptar
+      alert('Borrado Correctamente');
+    } else {
+      // El usuario hizo clic en Cancelar
+      alert('Cancelado');
+    }
   });
 }
 

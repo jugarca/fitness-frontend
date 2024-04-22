@@ -11,7 +11,7 @@
     "mantenimientos": "Maintenance",
     "crearEntrenamiento": "Create/edit Workout",
     "mantenimientosMenu": "Dashboard Maintenance",
-    "ejercicios": "Workouts",
+    "ejercicios2": "Workouts",
     "usuarios": "Users",
     "tipos": "Types",
     "parametros": "Parameters",
@@ -29,6 +29,61 @@
     "recetas.modal.nombre": "Name of the recipe",
     "recetas.modal.descripcion": "Description of the recipe",
     "recetas.modal.kcal": "Kcal of the recipe",
-    "recetas.modal.tipo": "Food types"
+    "recetas.modal.tipo": "Food types",
+    "formulario": {
+        "iniciarSesion": "Log in",
+        "registrarse": "Register"
+      },
+      "login": {
+        "formulario": {
+          "usuario": "User",
+          "contrasena": "Password",
+          "olvidasteContrasena": "Forgot your password?",
+          "botonIniciarSesion": "Log in"
+        }
+      },
+      "registro": {
+        "formulario": {
+          "email": "Email",
+          "usuario": "User",
+          "contrasena": "Password",
+          "confirmarContrasena": "Confirm password",
+          "aceptoTerminos": "I accept the terms of the contract",
+          "botonRegistrarse": "Register"
+        }
+      },
+      "ejercicios": {
+        "btn": {
+          "ocultar": "Hide/Show search"
+        },
+        "buscar": "Search exercise",
+        "modal": {
+          "title": "Edit Exercise",
+          "id": "Exercise ID",
+          "nombre": "Exercise Name",
+          "objetivo": "Exercise Objective",
+          "nivel": "Exercise Level",
+          "duracion": "Exercise Duration",
+          "grupoMuscular": "Exercise Muscle Group",
+          "deporte": "Exercise Sport",
+          "material": "Exercise Material",
+          "cancel": "Cancel",
+          "save": "Save"
+        },
+        "header": {
+          "title": "Edit Exercise",
+          "id": "Exercise ID",
+          "nombre": "Exercise Name",
+          "objetivo": "Exercise Objective",
+          "nivel": "Exercise Level",
+          "duracion": "Exercise Duration",
+          "grupoMuscular": "Exercise Muscle Group",
+          "deporte": "Exercise Sport",
+          "material": "Exercise Material"
+        }
+      },
+      "general": {
+        "buscar": "Search"
+      }
    
 }

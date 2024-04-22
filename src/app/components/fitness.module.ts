@@ -21,6 +21,8 @@ import { MantenimientosTiposComponent } from './menu-mantenimientos/mantenimient
 import { MantenimientosParametrosComponent } from './menu-mantenimientos/mantenimientos-parametros/mantenimientos-parametros.component';
 import { EditRecetaComponent } from './menu-mantenimientos/mantenimientos-recetas/edit-receta/edit-receta.component';
 import { MatDialogModule } from "@angular/material/dialog";
+import { LoginComponent } from './login/login.component';
+import { EditEjercicioComponent } from "./menu-mantenimientos/mantenimientos-ejercicios/edit-ejercicio/edit-ejercicio.component";
 
 @NgModule({
     declarations: [
@@ -39,7 +41,9 @@ import { MatDialogModule } from "@angular/material/dialog";
         MantenimientosUsuariosComponent,
         MantenimientosTiposComponent,
         MantenimientosParametrosComponent,
-        EditRecetaComponent
+        EditRecetaComponent,
+        EditEjercicioComponent,
+        LoginComponent
     ],
     imports: [
         CommonModule,

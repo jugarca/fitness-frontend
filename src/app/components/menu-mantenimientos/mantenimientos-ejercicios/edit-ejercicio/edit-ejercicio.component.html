@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>{{'ejercicios.modal.title' | transloco}}</h2>
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <div class="row">
+        <div class="col-md-2">
+            <mat-form-field class="w-100">
+            <mat-label>{{'ejercicios.modal.id' | transloco}}</mat-label>
+            <input matInput formControlName="id">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field class="w-100">
+            <mat-label>{{'ejercicios.modal.nombre' | transloco}}</mat-label>
+            <input matInput formControlName="nombre">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field class="w-100">
+            <mat-label>{{'ejercicios.modal.objetivo' | transloco}}</mat-label>
+            <input matInput formControlName="objetivo">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <mat-form-field class="w-100">
+            <mat-label>{{'ejercicios.modal.nivel' | transloco}}</mat-label>
+            <input matInput formControlName="nivel">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field class="w-100">
+            <mat-label>{{'ejercicios.modal.duracion' | transloco}}</mat-label>
+            <input matInput formControlName="duracion">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field class="w-100">
+            <mat-label>{{'ejercicios.modal.grupoMuscular' | transloco}}</mat-label>
+            <input matInput formControlName="grupoMuscular">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <mat-form-field class="w-100">
+            <mat-label>{{'ejercicios.modal.deporte' | transloco}}</mat-label>
+            <input matInput formControlName="deporte">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field class="w-100">
+            <mat-label>{{'ejercicios.modal.material' | transloco}}</mat-label>
+            <input matInput formControlName="material">
+            </mat-form-field>
+        </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onNoClick()">{{'ejercicios.modal.cancel' | transloco}}</button>
+  <button mat-raised-button color="primary" (click)="onSave()">{{'ejercicios.modal.save' | transloco}}</button>
+</mat-dialog-actions>
