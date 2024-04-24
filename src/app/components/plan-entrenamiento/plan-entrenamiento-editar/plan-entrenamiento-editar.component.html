@@ -40,10 +40,10 @@
                     <mat-select formControlName="tiempo">
                       <mat-option *ngFor="let tiempo of tiempos" [value]="tiempo">{{tiempo}}</mat-option>
                     </mat-select>
-                </mat-form-field>    
+                </mat-form-field>
             </div>
-            <div class="mb-3">
-                <mat-form-field class="mr-3 margin-campos">
+            <div class="mb-6">
+                <mat-form-field class="mr-6 margin-campos">
                     <mat-label>Objetivo</mat-label>
                     <mat-select formControlName="objetivo">
                       <mat-option *ngFor="let objetivo of objetivos" [value]="objetivo">{{objetivo}}</mat-option>
@@ -54,7 +54,7 @@
                     <mat-select formControlName="grupoMuscular">
                       <mat-option *ngFor="let grupo of grupoMuscular" [value]="grupo">{{grupo}}</mat-option>
                     </mat-select>
-                </mat-form-field>    
+                </mat-form-field>
             </div>
             <!-- Agrega más campos aquí -->
             <div>
@@ -67,46 +67,66 @@
         <div class="d-flex justify-content-center">
         <form [formGroup]="segundoFormGroup">
             <ng-template matStepLabel>Material para ejercicio</ng-template>
-                  <!--<mat-form-field>
-                    <mat-label>Material Disponible</mat-label>
-                    <mat-chip-grid #chipGrid aria-label="Material selection">
-                            <mat-chip *ngFor="let material of materials" (removed)="remove(material)">
-                                {{material}}
-                                <button matChipRemove [attr.aria-label]="'remove ' + material">
-                                    <mat-icon>cancel</mat-icon>
-                                </button>
-                            </mat-chip>
-                    </mat-chip-grid>
-                  <input placeholder="Nuevo Material..." #materialInput [formControl]="materialCtrl"
-                      [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
-                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                      (matChipInputTokenEnd)="add($event)"/>
-                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                      @for (material of filteredMaterials | async; track material) {
-                        <mat-option [value]="material">{{material}}</mat-option>
-                      }
-                    </mat-autocomplete>
-                  </mat-form-field>-->
+            <div class="mr-3">
+            <mat-form-field class="margin-campos" appearance="fill">
+              <mat-label>Materiales para ejercicio</mat-label>
+              <mat-chip-grid #chipGrid aria-label="Material Selection">
+                <mat-chip-row *ngFor="let material of materiales" (removed)="removeMaterial(material)">
+                  {{material}}
+                  <button matChipRemove [attr.aria-label]="'remove ' + material">
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </mat-chip-row>
+              </mat-chip-grid>
+              <input placeholder="Elija material..." #materialInput [formControl]="materialCtrl"
+                [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="addMaterial($event)"/>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedMaterial($event)">
+                <mat-option *ngFor="let material of filteredMateriales | async" [value]="material">
+                  {{material}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
             <!-- Agrega más campos aquí -->
             <div>
-                <button mat-button matStepperPrevious class="button-step">Anterior</button>
                 <button mat-button matStepperNext class="button-step">Siguiente</button>
+                <button mat-button matStepperPrevious class="button-step">Anterior</button>
             </div>
         </form>
     </div>
     </mat-step>
     <mat-step [stepControl]="tercerFormGroup">
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center" >
         <form [formGroup]="tercerFormGroup">
             <ng-template matStepLabel>Días de la semana para ejercicio</ng-template>
-            <mat-form-field>
+            <div class="mr-3">
+              <mat-form-field class="margin-campos" appearance="fill">
                 <mat-label>Días de la semana</mat-label>
-                <input matInput formControlName="diasSemana">
-            </mat-form-field>
+                <mat-chip-grid #chipGridDia aria-label="Días Selection">
+                  <mat-chip-row *ngFor="let dia of dias" (removed)="removeDia(dia) " >
+                    {{dia}}
+                    <button matChipRemove [attr.aria-label]="'remove ' + dia">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip-row>
+                </mat-chip-grid>
+                <input placeholder="Elija Día..." #diaInput [formControl]="diaCtrl"
+                  [matChipInputFor]="chipGridDia" [matAutocomplete]="autoDia"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="addDia($event)"/>
+                <mat-autocomplete #autoDia="matAutocomplete" (optionSelected)="selectedDia($event)">
+                  <mat-option *ngFor="let dia of filteredDias | async" [value]="dia">
+                    {{dia}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
             <!-- Agrega más campos aquí -->
             <div>
-                <button mat-button matStepperPrevious class="button-step">Anterior</button>
-                <button mat-button matStepperNext class="button-step">Siguiente</button>
+              <button mat-button matStepperNext class="button-step">Siguiente</button>
+              <button mat-button matStepperPrevious class="button-step">Anterior</button>
             </div>
         </form>
     </div>
@@ -115,18 +135,23 @@
         <div class="d-flex justify-content-center">
         <form [formGroup]="cuartoFormGroup">
             <ng-template matStepLabel>Datos de alimentación</ng-template>
-            <mat-form-field>
-                <mat-label>Kilocalorías máximas</mat-label>
-                <input matInput formControlName="kilocaloriasMaximas">
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Tipo de alimentación</mat-label>
-                <input matInput formControlName="tipoAlimentacion">
-            </mat-form-field>
+            <div class="mb-3">
+              <mat-checkbox formControlName="planAlimentacion">¿Quieres tener un plan de alimentación?</mat-checkbox>
+            </div>
+            <div class="mb-3" *ngIf="cuartoFormGroup.get('planAlimentacion')?.value">
+              <mat-form-field class="margin-campos">
+                  <mat-label>Kilocalorías máximas</mat-label>
+                  <input matInput formControlName="kilocaloriasMaximas">
+              </mat-form-field>
+              <mat-form-field class="margin-campos">
+                  <mat-label>Tipo de alimentación</mat-label>
+                  <input matInput formControlName="tipoAlimentacion">
+              </mat-form-field>
+            </div>
             <!-- Agrega más campos aquí -->
             <div>
+                <button mat-button class="button-step">Guardar</button>
                 <button mat-button matStepperPrevious class="button-step">Anterior</button>
-                <button mat-button matStepperNext class="button-step">Siguiente</button>
             </div>
         </form>
     </div>

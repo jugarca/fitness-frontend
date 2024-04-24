@@ -11,9 +11,9 @@
     "mantenimientos": "Maintenance",
     "crearEntrenamiento": "Create/edit Workout",
     "mantenimientosMenu": "Dashboard Maintenance",
-    "ejercicios2": "Workouts",
-    "usuarios": "Users",
-    "tipos": "Types",
+    "ejerciciosTitle": "Workouts",
+    "usuariosTitle": "Users",
+    "tiposTitle": "Types",
     "parametros": "Parameters",
     "general.busqueda": "Search criteria",
     "general.acciones": "Actions",
@@ -84,6 +84,47 @@
       },
       "general": {
         "buscar": "Search"
+      },
+      "usuarios": {
+        "btn": {
+            "ocultar": "Hide/Show search"
+          },
+          "buscar": "Search user",
+        "header": {
+            "id": "ID",
+            "nombre": "Name",
+            "objetivo": "Goal",
+            "nivel": "Level",
+            "duracion": "Duration",
+            "grupoMuscular": "Muscle Group",
+            "deporte": "Sport",
+            "material": "Material",
+            "tiempo": "Time",
+            "email": "Email",
+            "rol": "Role",
+            "edad": "Age",
+            "altura": "Height",
+            "peso": "Weight",
+            "title": "Edit User"
+        }
+      },
+      "tipos": {
+        "btn": {
+            "ocultar": "Hide/Show search"
+          },
+          "buscar": "Search Type",
+        "header": {
+          "title": "Edit Type",
+          "codigo": "Code",
+          "descripcion": "Description",
+          "descripcionValenciano": "Description in Valencian",
+          "activo": "Active"
+        },
+        "actions": {
+          "add": "Add",
+          "edit": "Edit",
+          "delete": "Delete"
+        }
       }
    
 }

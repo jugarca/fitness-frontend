@@ -11,9 +11,9 @@
    "mantenimientos": "Mantenimientos",
    "crearEntrenamiento": "Crear Entrenamiento",
    "mantenimientosMenu": "Menu de Mantenimientos",
-   "ejercicios2": "Entrenamientos",
-   "usuarios": "Usuarios",
-   "tipos": "Tipos",
+   "ejerciciosTitle": "Entrenamientos",
+   "usuariosTitle": "Usuarios",
+   "tiposTitle": "Tipos",
    "parametros": "Parámetros",
    "general.busqueda": "Críterios de búsqueda",
    "general.acciones": "Acciones",
@@ -84,6 +84,47 @@
     },
     "general": {
       "busqueda": "Búsqueda"
+    },
+    "usuarios": {
+      "btn": {
+         "ocultar": "Ocultar/Mostrar búsqueda"
+       },
+       "buscar": "Buscar usuario",
+      "header": {
+        "id": "ID",
+        "nombre": "Nombre",
+         "objetivo": "Objetivo",
+         "nivel": "Nivel",
+         "duracion": "Duración",
+         "grupoMuscular": "Grupo Muscular",
+         "deporte": "Deporte",
+         "material": "Material",
+         "tiempo": "Tiempo",
+         "email": "Correo electrónico",
+         "rol": "Rol",
+         "edad": "Edad",
+         "altura": "Altura",
+         "peso": "Peso",
+         "title": "Editar Usuario"
+      }
+    },
+    "tipos": {
+      "btn": {
+         "ocultar": "Ocultar/Mostrar búsqueda"
+       },
+       "buscar": "Buscar Tipos",
+      "header": {
+        "title": "Editar Tipo",
+        "codigo": "Código",
+        "descripcion": "Descripción",
+        "descripcionValenciano": "Descripción en Valenciano",
+        "activo": "Activo"
+      },
+      "actions": {
+        "add": "Añadir",
+        "edit": "Editar",
+        "delete": "Borrar"
+      }
     }
 }
 

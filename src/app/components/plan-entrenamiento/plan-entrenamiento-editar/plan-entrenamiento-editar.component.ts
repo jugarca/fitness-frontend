@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatChipsModule } from '@angular/material/chips';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import { map, Observable, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-plan-entrenamiento-editar',
@@ -15,12 +18,29 @@ export class PlanEntrenamientoEditarComponent{
   public cuartoFormGroup: FormGroup;
 
   materials: string[] = ['Pesas'];
-  
+
   //TODO: Cargarlo en el constructor desde Base de datos.
   public niveles = ['nivel basico', 'nivel intermedio', 'nivel avanzado', 'elite'];
   public tiempos = ['15 minutos', '30 minutos', '45 minutos', '60 minutos', '75 minutos', '90 minutos'];
   public objetivos = ['Perdida de grasa', 'Aumento Muscular', 'Resistencia', 'Mantenimiento'];
   public grupoMuscular = ['Todo', 'Core', 'Brazos', 'Hombros','Pecho','Espalda','Pierna','Tren Superior','Tren Inferior'];
+
+  //Esto es una prueba de concepto de autocomplete con chips
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  filteredMateriales: Observable<string[]>;
+  //TODO: Aqui se marcaran los que vienen de Base de datos.
+  materiales: string[] = [];
+  allMaterials: string[] = ['Mancuernas', 'Comba', 'Cintas', 'Pesas Rusas', 'Barra'];
+  materialCtrl = new FormControl('');
+  @ViewChild('materialInput') materialInput: ElementRef<HTMLInputElement> | undefined;
+
+  //Para el autocomplete de dias
+  filteredDias: Observable<string[]>;
+  //TODO: Aqui se marcaran los que vienen de Base de datos.
+  dias: string[] = [];
+  allDias: string[] = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
+  diaCtrl = new FormControl('');
+  @ViewChild('diaInput') diaInput: ElementRef<HTMLInputElement> | undefined;
 
   constructor(private _formBuilder: FormBuilder) {
     this.primerFormGroup = this._formBuilder.group({
@@ -42,19 +62,96 @@ export class PlanEntrenamientoEditarComponent{
     })
 
     this.cuartoFormGroup = this._formBuilder.group({
+      planAlimentacion: [false],
       kilocaloriasMaximas: ['', Validators.required],
       tipoAlimentacion: ['', Validators.required],
       // Agrega más controles aquí
     });
+
+    //Prueba de concepto del autocomplete
+    this.filteredMateriales = this.segundoFormGroup.valueChanges.pipe(
+      startWith(null),
+      map((material: string | null) => (material ? this._filter(material) : this.allMaterials.slice())),
+    );
+
+    this.filteredDias = this.tercerFormGroup.valueChanges.pipe(
+      startWith(null),
+      map((dia: string | null) => (dia ? this._filterDia(dia) : this.allDias.slice())),
+    );
   }
 
   /* Metodos para crear los Autocomplete */
-  remove(material: string): void {
-    const index = this.materials.indexOf(material);
+  addMaterial(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our fruit
+    if (value) {
+      this.materiales.push(value);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+
+    this.materialCtrl.setValue(null);
+  }
+
+  removeMaterial(fruit: string): void {
+    const index = this.materiales.indexOf(fruit);
 
     if (index >= 0) {
-      this.materials.splice(index, 1);
+      this.materiales.splice(index, 1);
     }
+  }
+
+  selectedMaterial(event: MatAutocompleteSelectedEvent): void {
+    this.materiales.push(event.option.viewValue);
+    if (this.materialInput) {
+      this.materialInput.nativeElement.value = '';
+    }
+    this.materialCtrl.setValue(null);
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allMaterials.filter(material => material.toLowerCase().includes(filterValue));
+  }
+
+  //Metodo AutoComplete Días.
+  addDia(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our fruit
+    if (value) {
+      this.dias.push(value);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+
+    this.diaCtrl.setValue(null);
+  }
+
+  removeDia(dia: string): void {
+    const index = this.dias.indexOf(dia);
+
+    if (index >= 0) {
+      this.dias.splice(index, 1);
+    }
+  }
+
+  selectedDia(event: MatAutocompleteSelectedEvent): void {
+    this.dias.push(event.option.viewValue);
+    if (this.diaInput) {
+      this.diaInput.nativeElement.value = '';
+    }
+    this.diaCtrl.setValue(null);
+  }
+
+  private _filterDia(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allDias.filter(dia => dia.toLowerCase().includes(filterValue));
   }
 
 

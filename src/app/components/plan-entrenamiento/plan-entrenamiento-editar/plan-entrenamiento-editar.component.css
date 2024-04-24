@@ -1,0 +1,8 @@
+.chips-width.mat-form-field {
+  width: 100%; /* O cualquier otro valor que prefieras */
+}
+
+
+.large-chip-grid {
+  width: 50%; /* O cualquier otro valor que prefieras para el ancho */
+}

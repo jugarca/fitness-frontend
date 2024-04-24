@@ -11,9 +11,9 @@
     "mantenimientos": "Manteniments",
     "crearEntrenamiento": "Crear/Editar Entrenament",
     "mantenimientosMenu": "Menu de Manteniments",
-    "ejercicios2": "Entrenaments",
-    "usuarios": "Usuaris",
-    "tipos": "Tipus",
+    "ejerciciosTitle": "Entrenaments",
+    "usuariosTitle": "Usuaris",
+    "tiposTitle": "Tipus",
     "parametros": "Paràmetres",
     "general.busqueda": "Críteris de búsqueda",
     "general.acciones": "Accions",
@@ -84,6 +84,47 @@
       },
       "general": {
         "busqueda": "Búsqueda"
+      },
+      "usuarios": {
+        "btn": {
+            "ocultar": "Ocultar/Mostrar búsqueda"
+          },
+          "buscar": "Buscar usuari",
+        "header": {
+            "id": "ID",
+            "nombre": "Nom",
+            "objetivo": "Objectiu",
+            "nivel": "Nivell",
+            "duracion": "Duració",
+            "grupoMuscular": "Grup Muscular",
+            "deporte": "Esport",
+            "material": "Material",
+            "tiempo": "Temps",
+            "email": "Correu electrònic",
+            "rol": "Rol",
+            "edad": "Edat",
+            "altura": "Altura",
+            "peso": "Pes",
+            "title": "Editar Usuari"
+        }
+      },
+      "tipos": {
+        "btn": {
+            "ocultar": "Ocultar/Mostrar búsqueda"
+          },
+          "buscar": "Buscar Tipus",
+        "header": {
+          "title": "Editar Tipus",  
+          "codigo": "Codi",
+          "descripcion": "Descripció",
+          "descripcionValenciano": "Descripció en Valencià",
+          "activo": "Actiu"
+        },
+        "actions": {
+          "add": "Afegeix",
+          "edit": "Edita",
+          "delete": "Esborra"
+        }
       }
 
     

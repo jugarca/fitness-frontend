@@ -12,6 +12,9 @@ import { MenuMantenimientosComponent } from './components/menu-mantenimientos/me
 import { MantenimientosRecetasComponent } from './components/menu-mantenimientos/mantenimientos-recetas/mantenimientos-recetas.component';
 import { LoginComponent } from './components/login/login.component';
 import { MantenimientosEjerciciosComponent } from './components/menu-mantenimientos/mantenimientos-ejercicios/mantenimientos-ejercicios.component';
+import { MantenimientosUsuariosComponent } from './components/menu-mantenimientos/mantenimientos-usuarios/mantenimientos-usuarios.component';
+import { MantenimientosTiposComponent } from './components/menu-mantenimientos/mantenimientos-tipos/mantenimientos-tipos.component';
+import { MantenimientosParametrosComponent } from './components/menu-mantenimientos/mantenimientos-parametros/mantenimientos-parametros.component';
 
 
 const routes: Routes = [
@@ -26,6 +29,9 @@ const routes: Routes = [
   { path: 'mantenimientos', component: MenuMantenimientosComponent },
   { path: 'mantenimientosRecetas', component: MantenimientosRecetasComponent },
   { path: 'mantenimientosEjercicios', component: MantenimientosEjerciciosComponent },
+  { path: 'mantenimientosUsuarios', component: MantenimientosUsuariosComponent },
+  { path: 'mantenimientosTipos', component: MantenimientosTiposComponent },
+  { path: 'mantenimientosParametros', component: MantenimientosParametrosComponent },
   { path: '', component: LoginComponent },
 ];
 

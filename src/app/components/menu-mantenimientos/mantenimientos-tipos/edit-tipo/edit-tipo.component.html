@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>{{'tipos.header.title' | transloco}}</h2>
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <div class="row">
+        <div class="col-md-2">
+            <mat-form-field class="w-100">
+            <mat-label>{{'tipos.header.codigo' | transloco}}</mat-label>
+            <input matInput formControlName="codigo">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field class="w-100">
+            <mat-label>{{'tipos.header.descripcion' | transloco}}</mat-label>
+            <input matInput formControlName="descripcion">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field class="w-100">
+            <mat-label>{{'tipos.header.descripcionValenciano' | transloco}}</mat-label>
+            <input matInput formControlName="descripcionValenciano">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field class="w-100">
+            <mat-label>{{'tipos.header.activo' | transloco}}</mat-label>
+            <input matInput formControlName="activo">
+            </mat-form-field>
+        </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onNoClick()">{{'ejercicios.modal.cancel' | transloco}}</button>
+  <button mat-raised-button color="primary" (click)="onSave()">{{'ejercicios.modal.save' | transloco}}</button>
+</mat-dialog-actions>

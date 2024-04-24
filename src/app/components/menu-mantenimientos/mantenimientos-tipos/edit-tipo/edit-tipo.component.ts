@@ -3,30 +3,26 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-edit-ejercicio',
-  templateUrl: './edit-ejercicio.component.html',
-  styleUrls: ['./edit-ejercicio.component.css']
+  selector: 'app-edit-tipo',
+  templateUrl: './edit-tipo.component.html',
+  styleUrls: ['./edit-tipo.component.css']
 })
-export class EditEjercicioComponent {
+export class EditTipoComponent {
 
   form: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<EditEjercicioComponent>,
+    public dialogRef: MatDialogRef<EditTipoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
         // Si se inserta un registro nuevo se crea un formulario vacio
     if (data == null){
         this.form = this.fb.group({
-          id: [null], 
-          nombre: [null, Validators.required],
-          objetivo: [null, Validators.required],
-          nivel: [null, Validators.required],
-          duracion: [null, Validators.required],
-          grupoMuscular: [null],
-          deporte: [null],
-          material: [null]
+          codigo: [null], 
+          descripcion: [null, Validators.required],
+          descripcionValenciano: [null, Validators.required],
+          activo: [null, Validators.required]
           // Agrega más controles aquí para las otras propiedades de la receta
         });
   
@@ -34,14 +30,10 @@ export class EditEjercicioComponent {
       }else{
         // Si se edita un registro se crea un formulario con los datos del registro.
         this.form = this.fb.group({
-            id: [data.ejercicio.id], 
-            nombre: [data.ejercicio.nombre, Validators.required],
-            objetivo: [data.ejercicio.objetivo, Validators.required],
-            nivel: [data.ejercicio.nivel, Validators.required],
-            duracion: [data.ejercicio.duracion, Validators.required],
-            grupoMuscular: [data.ejercicio.grupoMuscular],
-            deporte: [data.ejercicio.deporte],
-            material: [data.ejercicio.material]
+            codigo: [data.tipo.codigo], 
+            descripcion: [data.tipo.descripcion, Validators.required],
+            descripcionValenciano: [data.tipo.descripcionValenciano, Validators.required],
+            activo: [data.tipo.activo, Validators.required],
             // Agrega más controles aquí para las otras propiedades de la receta
           });
       }

@@ -23,6 +23,8 @@ import { EditRecetaComponent } from './menu-mantenimientos/mantenimientos-receta
 import { MatDialogModule } from "@angular/material/dialog";
 import { LoginComponent } from './login/login.component';
 import { EditEjercicioComponent } from "./menu-mantenimientos/mantenimientos-ejercicios/edit-ejercicio/edit-ejercicio.component";
+import { EditUsuarioComponent } from "./menu-mantenimientos/mantenimientos-usuarios/edit-usuario/edit-usuario.component";
+import { EditTipoComponent } from "./menu-mantenimientos/mantenimientos-tipos/edit-tipo/edit-tipo.component";
 
 @NgModule({
     declarations: [
@@ -43,6 +45,8 @@ import { EditEjercicioComponent } from "./menu-mantenimientos/mantenimientos-eje
         MantenimientosParametrosComponent,
         EditRecetaComponent,
         EditEjercicioComponent,
+        EditUsuarioComponent,
+        EditTipoComponent,
         LoginComponent
     ],
     imports: [

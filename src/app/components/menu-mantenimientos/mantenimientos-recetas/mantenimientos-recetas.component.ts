@@ -24,8 +24,6 @@ export class MantenimientosRecetasComponent {
     { idReceta: 6, nombre: 'Receta 6', descripcion: 'Descripción 6', kilocalorias: 700, tipoAlimentacion: 'Vegana' },
     { idReceta: 7, nombre: 'Receta 7', descripcion: 'Descripción 7', kilocalorias: 800, tipoAlimentacion: 'Sin gluten' },
     { idReceta: 8, nombre: 'Receta 8', descripcion: 'Descripción 8', kilocalorias: 900, tipoAlimentacion: 'Omnívora' },
-    { idReceta: 9, nombre: 'Receta 9', descripcion: 'Descripción 9', kilocalorias: 1000, tipoAlimentacion: 'Vegetariana' },
-    { idReceta: 10, nombre: 'Receta 10', descripcion: 'Descripción 10', kilocalorias: 1100, tipoAlimentacion: 'Vegana' },
   ];
 
 showSearch = false;
