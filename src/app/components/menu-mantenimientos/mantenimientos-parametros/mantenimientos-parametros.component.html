@@ -1,1 +1,68 @@
-<p>mantenimientos-parametros works!</p>
+<!-- Botón para mostrar/ocultar el campo de búsqueda -->
+<button mat-raised-button color="primary" class="margin-standard" (click)="showSearch = !showSearch">{{ 'tipos.btn.ocultar' | transloco }}</button>
+
+<!-- Campo de búsqueda -->
+<div *ngIf="showSearch" class="margin-standard">
+    <fieldset>
+      <legend>{{'general.busqueda' | transloco}}</legend>
+      <mat-form-field>
+        <mat-label>{{'tipos.buscar' | transloco}}</mat-label>
+        <input matInput [(ngModel)]="searchValue">
+        <button mat-button matSuffix aria-label="Buscar" (click)="applyFilter(searchValue!)">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </fieldset>
+</div>
+
+<mat-table [dataSource]="parametros">
+
+    <!-- ID del ejercicio Column -->
+    <ng-container matColumnDef="tipo">
+        <mat-header-cell *matHeaderCellDef> {{'tipos.header.tipo' | transloco}} </mat-header-cell>
+        <mat-cell *matCellDef="let parametro"> {{parametro.tipo}} </mat-cell>
+    </ng-container>
+    <!-- ID del ejercicio Column -->
+    <ng-container matColumnDef="codigo">
+        <mat-header-cell *matHeaderCellDef> {{'tipos.header.codigo' | transloco}} </mat-header-cell>
+        <mat-cell *matCellDef="let parametro"> {{parametro.codigo}} </mat-cell>
+    </ng-container>
+
+    <!-- Nombre del ejercicio Column -->
+    <ng-container matColumnDef="descripcion">
+        <mat-header-cell *matHeaderCellDef> {{'tipos.header.descripcion' | transloco}}</mat-header-cell>
+        <mat-cell *matCellDef="let parametro"> {{parametro.descripcion}} </mat-cell>
+    </ng-container>
+
+    <!-- Objetivo del ejercicio Column -->
+    <ng-container matColumnDef="descripcionValenciano">
+        <mat-header-cell *matHeaderCellDef> {{'tipos.header.descripcionValenciano' | transloco}} </mat-header-cell>
+        <mat-cell *matCellDef="let parametro"> {{parametro.descripcionValenciano}} </mat-cell>
+    </ng-container>
+
+    <!-- Nivel del ejercicio Column -->
+    <ng-container matColumnDef="activo">
+        <mat-header-cell *matHeaderCellDef> {{'tipos.header.activo' | transloco}} </mat-header-cell>
+        <mat-cell *matCellDef="let parametro"> {{parametro.activo}} </mat-cell>
+    </ng-container>
+
+  <!-- Acciones Column -->
+  <ng-container matColumnDef="acciones">
+    <mat-header-cell *matHeaderCellDef> {{'general.acciones' | transloco}} 
+        <button mat-icon-button color="primary" (click)="abrirModal()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let parametro"> 
+      <button mat-icon-button color="primary" aria-label="Editar ejercicio" (click)="openEditDialog(parametro)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" aria-label="Borrar ejercicio" (click)="confirmarBorrado()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
