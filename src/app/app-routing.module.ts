@@ -15,6 +15,7 @@ import { MantenimientosEjerciciosComponent } from './components/menu-mantenimien
 import { MantenimientosUsuariosComponent } from './components/menu-mantenimientos/mantenimientos-usuarios/mantenimientos-usuarios.component';
 import { MantenimientosTiposComponent } from './components/menu-mantenimientos/mantenimientos-tipos/mantenimientos-tipos.component';
 import { MantenimientosParametrosComponent } from './components/menu-mantenimientos/mantenimientos-parametros/mantenimientos-parametros.component';
+import { DetalleEjercicioComponent } from './components/ejercicios/detalle-ejercicio/detalle-ejercicio.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'mantenimientosUsuarios', component: MantenimientosUsuariosComponent },
   { path: 'mantenimientosTipos', component: MantenimientosTiposComponent },
   { path: 'mantenimientosParametros', component: MantenimientosParametrosComponent },
+  { path: 'detalle-entrenamiento/:id', component: DetalleEjercicioComponent},
   { path: '', component: LoginComponent },
 ];
 

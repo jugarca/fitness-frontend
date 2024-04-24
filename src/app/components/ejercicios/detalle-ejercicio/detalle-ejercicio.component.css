@@ -1,0 +1,4 @@
+.card-no-hover:hover {
+    transform: none;
+    background-color: inherit;
+  }

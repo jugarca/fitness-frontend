@@ -1,1 +1,55 @@
-<p>ejercicios works!</p>
+<div class="d-flex align-items-center justify-content-center" style="height: 40px;">
+    <div class="d-flex align-items-center justify-content-center border-bottom w-100 h-100">
+        <h1 class="title-custom">
+            Plan de Entrenamiento
+        </h1>
+    </div>
+</div>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+<mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Nombre Plato Column -->
+    <ng-container matColumnDef="nombreEntrenamiento">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre del Entrenamiento</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.nombreEntrenamiento}}</mat-cell>
+    </ng-container>
+
+    <!-- Kilocalorias Column -->
+    <ng-container matColumnDef="descripcion">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>descripcion</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.descripcion}}</mat-cell>
+    </ng-container>
+
+    <!-- Tipo Alimentacion Column -->
+    <ng-container matColumnDef="fecha">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>fecha</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.fecha}}</mat-cell>
+    </ng-container>
+
+    <!-- Fecha Column -->
+    <ng-container matColumnDef="duracion">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>duracion</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.duracion}}</mat-cell>
+    </ng-container>
+
+    <!-- Horario Comida Column -->
+    <ng-container matColumnDef="material">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>materiales</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.material}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+        <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="verEjercicio(element)" aria-label="Ver ejercicio">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<mat-paginator [pageSize]="10"></mat-paginator>

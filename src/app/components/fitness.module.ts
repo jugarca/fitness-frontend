@@ -26,6 +26,7 @@ import { EditEjercicioComponent } from "./menu-mantenimientos/mantenimientos-eje
 import { EditUsuarioComponent } from "./menu-mantenimientos/mantenimientos-usuarios/edit-usuario/edit-usuario.component";
 import { EditTipoComponent } from "./menu-mantenimientos/mantenimientos-tipos/edit-tipo/edit-tipo.component";
 import { EditParametroComponent } from "./menu-mantenimientos/mantenimientos-parametros/edit-parametro/edit-parametro.component";
+import { DetalleEjercicioComponent } from './ejercicios/detalle-ejercicio/detalle-ejercicio.component';
 
 @NgModule({
     declarations: [
@@ -49,7 +50,8 @@ import { EditParametroComponent } from "./menu-mantenimientos/mantenimientos-par
         EditUsuarioComponent,
         EditTipoComponent,
         EditParametroComponent,
-        LoginComponent
+        LoginComponent,
+        DetalleEjercicioComponent
     ],
     imports: [
         CommonModule,
