@@ -7,7 +7,7 @@
       <legend>{{'general.busqueda' | transloco}}</legend>
       <mat-form-field>
         <mat-label>{{'ejercicios.buscar' | transloco}}</mat-label>
-        <input matInput [(ngModel)]="searchValue">
+        <input matInput [(ngModel)]="searchValue" (keyup.enter)="applyFilter(searchValue!)">
         <button mat-button matSuffix aria-label="Buscar" (click)="applyFilter(searchValue!)">
           <mat-icon>search</mat-icon>
         </button>
@@ -15,53 +15,54 @@
     </fieldset>
 </div>
 
-<mat-table [dataSource]="ejercicios">
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<mat-table [dataSource]="ejercicios" matSort>
 
     <!-- ID del ejercicio Column -->
     <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> {{'ejercicios.header.id' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'ejercicios.header.id' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let ejercicio"> {{ejercicio.id}} </mat-cell>
     </ng-container>
 
     <!-- Nombre del ejercicio Column -->
     <ng-container matColumnDef="nombre">
-        <mat-header-cell *matHeaderCellDef> {{'ejercicios.header.nombre' | transloco}}</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'ejercicios.header.nombre' | transloco}}</mat-header-cell>
         <mat-cell *matCellDef="let ejercicio"> {{ejercicio.nombre}} </mat-cell>
     </ng-container>
 
     <!-- Objetivo del ejercicio Column -->
     <ng-container matColumnDef="objetivo">
-        <mat-header-cell *matHeaderCellDef> {{'ejercicios.header.objetivo' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'ejercicios.header.objetivo' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let ejercicio"> {{ejercicio.objetivo}} </mat-cell>
     </ng-container>
 
     <!-- Nivel del ejercicio Column -->
     <ng-container matColumnDef="nivel">
-        <mat-header-cell *matHeaderCellDef> {{'ejercicios.header.nivel' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'ejercicios.header.nivel' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let ejercicio"> {{ejercicio.nivel}} </mat-cell>
     </ng-container>
 
     <!-- Duración del ejercicio Column -->
     <ng-container matColumnDef="duracion">
-        <mat-header-cell *matHeaderCellDef> {{'ejercicios.header.duracion' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'ejercicios.header.duracion' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let ejercicio"> {{ejercicio.duracion}} </mat-cell>
     </ng-container>
 
     <!-- Grupo muscular del ejercicio Column -->
     <ng-container matColumnDef="grupoMuscular">
-        <mat-header-cell *matHeaderCellDef> {{'ejercicios.header.grupoMuscular' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'ejercicios.header.grupoMuscular' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let ejercicio"> {{ejercicio.grupoMuscular}} </mat-cell>
     </ng-container>
 
     <!-- Deporte del ejercicio Column -->
     <ng-container matColumnDef="deporte">
-        <mat-header-cell *matHeaderCellDef> {{'ejercicios.header.deporte' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'ejercicios.header.deporte' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let ejercicio"> {{ejercicio.deporte}} </mat-cell>
     </ng-container>
 
     <!-- Material del ejercicio Column -->
     <ng-container matColumnDef="material">
-        <mat-header-cell *matHeaderCellDef> {{'ejercicios.header.material' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'ejercicios.header.material' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let ejercicio"> {{ejercicio.material}} </mat-cell>
     </ng-container>
 
@@ -76,7 +77,7 @@
       <button mat-icon-button color="primary" aria-label="Editar ejercicio" (click)="openEditDialog(ejercicio)">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn" aria-label="Borrar ejercicio" (click)="confirmarBorrado()">
+      <button mat-icon-button color="warn" aria-label="Borrar ejercicio" (click)="confirmarBorrado(ejercicio)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>

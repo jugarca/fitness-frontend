@@ -2,6 +2,11 @@ import { Component, Inject, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { ParametrosService } from 'src/app/services/parametros.service';
+import { RecetasService } from 'src/app/services/recetas.service';
+import { RecetasIngredientesService } from '../../../../services/recetas-ingredientes.service';
+import { RecetasAlimentosVO } from 'src/app/interfaces/recetas-ingredientes.interface';
+import { ValoresTipoVO } from 'src/app/interfaces/valoresTipos.interface';
 
 @Component({
   selector: 'app-edit-receta',
@@ -12,27 +17,42 @@ export class EditRecetaComponent {
 
   tiposAlimentacion: string[] = ['Vegetariana', 'Vegana', 'Sin gluten', 'Omnívora'];
   // Datos de la tabla
-  ingredientes = [
-    {idIngrediente: 1, nombre: 'Ingrediente 1', cantidad: 10, editando: false},
-    {idIngrediente: 2, nombre: 'Ingrediente 2', cantidad: 20, editando: false},
-    // Agrega más ingredientes aquí
-  ];
-  displayedColumns: string[] = ['idIngrediente', 'nombre', 'cantidad','acciones'];
+  ingredientes:RecetasAlimentosVO[] = [];
+  displayedColumns: string[] = ['idIngrediente', 'cantidad','acciones'];
+  tiposIngredientes: ValoresTipoVO[] = [];
   form: FormGroup;
+
 
   @ViewChild(MatTable) tabla!: MatTable<any>;
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<EditRecetaComponent>,
+    private recetasService: RecetasService,
+    private recetasIngredientesService: RecetasIngredientesService,
+    private parametrosService: ParametrosService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+
+    this.recetasIngredientesService.getByReceta(data.receta.id).subscribe(data => {
+      console.log(data);
+      this.ingredientes = data;
+      this.ingredientes = this.ingredientes.map((item: RecetasAlimentosVO) => {
+        return {...item, editando: false};
+      });
+      console.log(this.ingredientes);
+    });
+
+    this.parametrosService.getByTipo('INGREDIENTE').subscribe(data => {
+      console.log(data);
+      this.tiposIngredientes = data;
+    });
 
     // Si se inserta un registro nuevo se crea un formulario vacio
     if (data == null){
       this.form = this.fb.group({
-        idReceta: [null], 
-        nombre: [null, Validators.required],
+        id: [null], 
+        nombrePlato: [null, Validators.required],
         descripcion: [null, Validators.required],
         kilocalorias: [null, Validators.required],
         tipoAlimentacion: [null, Validators.required],
@@ -45,8 +65,8 @@ export class EditRecetaComponent {
     }else{
       // Si se edita un registro se crea un formulario con los datos del registro.
       this.form = this.fb.group({
-        idReceta: [data.receta.idReceta, Validators.required], 
-        nombre: [data.receta.nombre, Validators.required],
+        id: [data.receta.id, Validators.required], 
+        nombrePlato: [data.receta.nombrePlato, Validators.required],
         descripcion: [data.receta.descripcion, Validators.required],
         kilocalorias: [data.receta.kilocalorias, Validators.required],
         tipoAlimentacion: [data.receta.tipoAlimentacion, Validators.required],
@@ -61,8 +81,10 @@ export class EditRecetaComponent {
 
   onSave(): void {
     if (this.form.valid) {
-      //TODO: Aqui se añadira la llamada al guardado de la receta en la base de datos.
-      this.dialogRef.close(this.form.value);
+      this.recetasService.save(this.form.value).subscribe(data => {
+        console.log(data);
+        this.dialogRef.close(this.form.value);
+      });
     }
   }
 
@@ -73,16 +95,17 @@ editarIngrediente(idIngrediente: number): void {
 }
 
 borrarIngrediente(idIngrediente: number): void {
-  // Aquí puedes agregar el código para borrar el ingrediente
+  console.log(idIngrediente);  
+}
+
+guardarIngrediente(ingrediente: any):void{
+  console.log(ingrediente);
+}
+
+cancelarCambio(){
 }
 
 agregarIngrediente() {
-  this.ingredientes.push({
-    idIngrediente: this.ingredientes.length + 1, // o cualquier otro método para generar un ID único
-    nombre: '',
-    cantidad: 0,
-    editando: true
-  });
 
   this.tabla.renderRows();
 }

@@ -26,7 +26,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .card:hover {
     transform: scale(1.05);
     transition: transform .3s ease-in-out;
-    background-color: rgb(241, 241, 241);
+    background-color: #ecf5f5 /*rgb(241, 241, 241)*/;
 }
 
 .title-custom {
@@ -44,4 +44,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin: 5px;
   }
 
+  /* Estilos para las tablas y sobreescribir material 
+
+  body{
+    background-color: #FEF9F2;
+  }
+
+    .mat-mdc-table tbody, .mat-mdc-table tfoot, .mat-mdc-table thead, .mat-mdc-cell, .mat-mdc-footer-cell, .mat-mdc-header-row, .mat-mdc-row, .mat-mdc-footer-row, .mat-mdc-table .mat-mdc-header-cell{
+    background-color: #FEF9F2 !important;
+    background: #FEF9F2 !important;
+  }
+
+  .mat-mdc-paginator{
+    background-color: #FEF9F2 !important;
+  }
+  */
   

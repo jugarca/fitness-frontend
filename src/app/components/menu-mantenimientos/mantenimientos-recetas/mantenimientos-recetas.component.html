@@ -15,36 +15,36 @@
     </fieldset>
   </div>
 
-
-<mat-table [dataSource]="recetas">
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<mat-table [dataSource]="recetas" matSort>
 
     <!-- ID de la receta Column -->
-    <ng-container matColumnDef="idReceta">
-        <mat-header-cell *matHeaderCellDef> {{'recetas.header.id' | transloco}} </mat-header-cell>
-        <mat-cell *matCellDef="let receta"> {{receta.idReceta}} </mat-cell>
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'recetas.header.id' | transloco}} </mat-header-cell>
+        <mat-cell *matCellDef="let receta"> {{receta.id}} </mat-cell>
     </ng-container>
 
     <!-- Nombre de la receta Column -->
-    <ng-container matColumnDef="nombre">
-        <mat-header-cell *matHeaderCellDef> {{'recetas.header.nombre' | transloco}}</mat-header-cell>
-        <mat-cell *matCellDef="let receta"> {{receta.nombre}} </mat-cell>
+    <ng-container matColumnDef="nombrePlato">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'recetas.header.nombre' | transloco}}</mat-header-cell>
+        <mat-cell *matCellDef="let receta"> {{receta.nombrePlato}} </mat-cell>
     </ng-container>
 
     <!-- Descripción de la receta Column -->
     <ng-container matColumnDef="descripcion">
-        <mat-header-cell *matHeaderCellDef> {{'recetas.header.descripcion' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'recetas.header.descripcion' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let receta"> {{receta.descripcion}} </mat-cell>
     </ng-container>
 
     <!-- Kilocalorías Column -->
     <ng-container matColumnDef="kilocalorias">
-        <mat-header-cell *matHeaderCellDef> {{'recetas.header.kcal' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'recetas.header.kcal' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let receta"> {{receta.kilocalorias}} </mat-cell>
     </ng-container>
 
     <!-- Tipo de alimentación Column -->
     <ng-container matColumnDef="tipoAlimentacion">
-        <mat-header-cell *matHeaderCellDef> {{'recetas.header.tipo' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'recetas.header.tipo' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let receta"> {{receta.tipoAlimentacion}} </mat-cell>
     </ng-container>
 
@@ -59,7 +59,7 @@
       <button mat-icon-button color="primary" aria-label="Editar receta" (click)="openEditDialog(receta)">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn" aria-label="Borrar receta" (click)="confirmarBorrado()">
+      <button mat-icon-button color="warn" aria-label="Borrar receta" (click)="confirmarBorrado(receta)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>

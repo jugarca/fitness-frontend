@@ -1,8 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { EditUsuarioComponent } from './edit-usuario/edit-usuario.component';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { TiposVO } from '../../../interfaces/tipos.interface';
+import { ParametrosService } from 'src/app/services/parametros.service';
 
 @Component({
   selector: 'app-mantenimientos-usuarios',
@@ -10,23 +15,22 @@ import { EditUsuarioComponent } from './edit-usuario/edit-usuario.component';
   styleUrls: ['./mantenimientos-usuarios.component.css']
 })
 export class MantenimientosUsuariosComponent {
-  usuariosArray = [
-    { id: 1, nombre: 'Usuario 1', email: 'usuario1@example.com', rol: 'Admin', edad: 30, altura: 170, peso: 70, nivel: 'Avanzado', tiempo: '30 minutos', objetivo: 'Perder peso' },
-    { id: 2, nombre: 'Usuario 2', email: 'usuario2@example.com', rol: 'Usuario', edad: 25, altura: 175, peso: 80, nivel: 'Intermedio', tiempo: '45 minutos', objetivo: 'Ganar músculo' },
-    { id: 3, nombre: 'Usuario 3', email: 'usuario3@example.com', rol: 'Usuario', edad: 35, altura: 180, peso: 75, nivel: 'Principiante', tiempo: '20 minutos', objetivo: 'Mejorar resistencia' },
-    { id: 4, nombre: 'Usuario 4', email: 'usuario4@example.com', rol: 'Admin', edad: 40, altura: 165, peso: 65, nivel: 'Avanzado', tiempo: '60 minutos', objetivo: 'Aumentar flexibilidad' },
-    { id: 5, nombre: 'Usuario 5', email: 'usuario5@example.com', rol: 'Usuario', edad: 28, altura: 172, peso: 68, nivel: 'Intermedio', tiempo: '30 minutos', objetivo: 'Mantener forma' },
-    { id: 6, nombre: 'Usuario 6', email: 'usuario6@example.com', rol: 'Usuario', edad: 32, altura: 185, peso: 85, nivel: 'Principiante', tiempo: '15 minutos', objetivo: 'Perder peso' }
-  ];
+  usuariosArray = [];
 
-  displayedColumns: string[] = ['id', 'nombre', 'email', 'rol', 'edad', 'altura', 'peso', 'nivel', 'tiempo', 'objetivo', 'acciones'];
+
+  displayedColumns: string[] = ['id', 'nombre', 'email', 'role', 'edad', 'altura', 'peso', 'nivelPersonalizado', 'tiempoEntrenamiento', 'objetivoEntrenamiento', 'acciones'];
 
 
   showSearch = false;
   searchValue: string | undefined;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   usuarios = new MatTableDataSource(this.usuariosArray);
 
-  constructor(public dialog: MatDialog, public dialogService: DialogService) {}
+  constructor(public dialog: MatDialog, public dialogService: DialogService, 
+              private usuariosService: UsuariosService) {
+    this.refreshTable();
+  }
 
   applyFilter(filterValue: string) {
     this.usuarios.filter = filterValue.trim().toLowerCase();
@@ -49,18 +53,31 @@ export class MantenimientosUsuariosComponent {
     dialogRef.afterClosed().subscribe(result => {
       console.log('El diálogo fue cerrado');
       // Aquí puedes manejar el resultado del diálogo (por ejemplo, actualizar el ejercicio)
+      this.refreshTable();
     });
   }
 
-  confirmarBorrado(){
+  confirmarBorrado(usuario: any){
     this.dialogService.openConfirmDialog('¿Estás seguro de que quieres borrar el registro?').afterClosed().subscribe(res => {
+      console.log(usuario);
+      console.log(res);
       if (res) {
         // El usuario hizo clic en Aceptar
-        alert('Borrado Correctamente');
-      } else {
-        // El usuario hizo clic en Cancelar
-        alert('Cancelado');
-      }
+        this.usuariosService.delete(usuario.id).subscribe(data => {
+          this.refreshTable();
+        });
+      } 
     });
+  }
+
+  private refreshTable() {
+    this.usuariosService.getUsuarios().subscribe(data => {
+      this.usuariosArray = data;
+      console.log(this.usuariosArray);
+      this.usuarios = new MatTableDataSource(this.usuariosArray);
+      this.usuarios.sort = this.sort;
+      this.usuarios.paginator = this.paginator;
+    });
+
   }
 }

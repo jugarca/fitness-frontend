@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { EditEjercicioComponent } from './edit-ejercicio/edit-ejercicio.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { EjerciciosService } from 'src/app/services/ejercicios.service';
+import { EjercicioVO } from 'src/app/interfaces/ejercicio.interface';
 
 @Component({
   selector: 'app-mantenimientos-ejercicios',
@@ -10,28 +14,34 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./mantenimientos-ejercicios.component.css']
 })
 export class MantenimientosEjerciciosComponent {
+  
   displayedColumns: string[] = ['id', 'nombre', 'objetivo', 'nivel', 'duracion', 'grupoMuscular', 'deporte', 'material', 'acciones'];
   
-  ejerciciosArray = [
-    { id: 1, nombre: 'Press Banca', objetivo: 'Perder peso', nivel: 'Avanzado', duracion: '20 minutos', grupoMuscular: 'Pecho', deporte: 'Fútbol', material: 'Balón' },
-  { id: 2, nombre: 'Sentadillas', objetivo: 'Ganar músculo', nivel: 'Intermedio', duracion: '4 minutos', grupoMuscular: 'Espalda', deporte: 'Baloncesto', material: 'Pesas' },
-  { id: 3, nombre: 'Correr', objetivo: 'Mejorar resistencia', nivel: 'Principiante', duracion: '30 minutos', grupoMuscular: 'Piernas', deporte: 'Ciclismo', material: 'Bicicleta' },
-  { id: 4, nombre: 'Salto de Soga', objetivo: 'Aumentar flexibilidad', nivel: 'Avanzado', duracion: '20 minutos', grupoMuscular: 'Todo el cuerpo', deporte: 'Yoga', material: 'Esterilla' },
-  { id: 5, nombre: 'Flexiones', objetivo: 'Mantener forma', nivel: 'Intermedio', duracion: '10 repeticiones', grupoMuscular: 'Abdominales', deporte: 'Gimnasia', material: 'Cuerda' }
-  ];
+  ejerciciosArray = [];
 
   showSearch = false;
   searchValue: string | undefined;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   ejercicios = new MatTableDataSource(this.ejerciciosArray);
 
-  constructor(public dialog: MatDialog, public dialogService: DialogService) {}
+  constructor(public dialog: MatDialog, public dialogService: DialogService,
+              private ejercicioService: EjerciciosService) {
+                this.refreshTable();
+              }
 
   applyFilter(filterValue: string) {
     this.ejercicios.filter = filterValue.trim().toLowerCase();
   }
 
   abrirModal(): void {
-    this.dialog.open(EditEjercicioComponent);
+    const dialogRef = this.dialog.open(EditEjercicioComponent, {
+      width: '50%'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.refreshTable();
+    });
   }
 
   addRecord() {
@@ -45,20 +55,30 @@ export class MantenimientosEjerciciosComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('El diálogo fue cerrado');
-      // Aquí puedes manejar el resultado del diálogo (por ejemplo, actualizar el ejercicio)
+      this.refreshTable();
     });
   }
 
-  confirmarBorrado(){
+  confirmarBorrado(ejercicio: EjercicioVO){
     this.dialogService.openConfirmDialog('¿Estás seguro de que quieres borrar el registro?').afterClosed().subscribe(res => {
       if (res) {
-        // El usuario hizo clic en Aceptar
-        alert('Borrado Correctamente');
+        this.ejercicioService.delete(ejercicio.id).subscribe(data => {
+          this.refreshTable();
+        });
       } else {
         // El usuario hizo clic en Cancelar
         alert('Cancelado');
       }
     });
+  }
+
+  private refreshTable() {
+    this.ejercicioService.getEjercicios().subscribe(data => {
+      this.ejerciciosArray = data;
+      this.ejercicios = new MatTableDataSource(this.ejerciciosArray);
+      this.ejercicios.sort = this.sort;
+      this.ejercicios.paginator = this.paginator;
+    });
+
   }
 }

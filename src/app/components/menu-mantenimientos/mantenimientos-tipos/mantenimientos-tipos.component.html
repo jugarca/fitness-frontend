@@ -15,29 +15,31 @@
     </fieldset>
 </div>
 
-<mat-table [dataSource]="tipos">
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<mat-table [dataSource]="tipos" matSort>
 
+  
     <!-- ID del ejercicio Column -->
     <ng-container matColumnDef="codigo">
-        <mat-header-cell *matHeaderCellDef> {{'tipos.header.codigo' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'tipos.header.codigo' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let tipo"> {{tipo.codigo}} </mat-cell>
     </ng-container>
 
     <!-- Nombre del ejercicio Column -->
     <ng-container matColumnDef="descripcion">
-        <mat-header-cell *matHeaderCellDef> {{'tipos.header.descripcion' | transloco}}</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'tipos.header.descripcion' | transloco}}</mat-header-cell>
         <mat-cell *matCellDef="let tipo"> {{tipo.descripcion}} </mat-cell>
     </ng-container>
 
     <!-- Objetivo del ejercicio Column -->
     <ng-container matColumnDef="descripcionValenciano">
-        <mat-header-cell *matHeaderCellDef> {{'tipos.header.descripcionValenciano' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'tipos.header.descripcionValenciano' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let tipo"> {{tipo.descripcionValenciano}} </mat-cell>
     </ng-container>
 
     <!-- Nivel del ejercicio Column -->
     <ng-container matColumnDef="activo">
-        <mat-header-cell *matHeaderCellDef> {{'tipos.header.activo' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'tipos.header.activo' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let tipo"> {{tipo.activo}} </mat-cell>
     </ng-container>
 
@@ -52,7 +54,7 @@
       <button mat-icon-button color="primary" aria-label="Editar ejercicio" (click)="openEditDialog(tipo)">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn" aria-label="Borrar ejercicio" (click)="confirmarBorrado()">
+      <button mat-icon-button color="primary" aria-label="Borrar ejercicio" (click)="confirmarBorrado(tipo)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>
@@ -60,4 +62,5 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+   
 </mat-table>

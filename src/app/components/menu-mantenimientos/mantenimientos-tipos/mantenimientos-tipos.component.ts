@@ -1,36 +1,47 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { EditTipoComponent } from './edit-tipo/edit-tipo.component';
+import { TiposService } from 'src/app/services/tipos.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-mantenimientos-tipos',
   templateUrl: './mantenimientos-tipos.component.html',
   styleUrls: ['./mantenimientos-tipos.component.css']
 })
-export class MantenimientosTiposComponent {
-  tiposArray = [
-    { codigo: '001', descripcion: 'Estado', descripcionValenciano: 'Estat', activo: true },
-    { codigo: '002', descripcion: 'Tipo Alimentacion', descripcionValenciano: 'Tipus Alimentacion', activo: false },
-    { codigo: '003', descripcion: 'Material', descripcionValenciano: 'Material', activo: true },
-  ];
+export class MantenimientosTiposComponent{
+
+  tiposArray = []
 
   displayedColumns: string[] = ['codigo', 'descripcion', 'descripcionValenciano', 'activo', 'acciones'];
 
 
   showSearch = false;
   searchValue: string | undefined;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   tipos = new MatTableDataSource(this.tiposArray);
 
-  constructor(public dialog: MatDialog, public dialogService: DialogService) {}
+  
+
+  constructor(public dialog: MatDialog, public dialogService: DialogService, private tiposService: TiposService) {
+    this.refreshTable();
+  }
 
   applyFilter(filterValue: string) {
     this.tipos.filter = filterValue.trim().toLowerCase();
   }
 
   abrirModal(): void {
-    this.dialog.open(EditTipoComponent);
+    const dialogRef = this.dialog.open(EditTipoComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('El diálogo fue cerrado');
+      // Aquí puedes manejar el resultado del diálogo (por ejemplo, actualizar el ejercicio)
+      this.refreshTable();
+    });
   }
 
   addRecord() {
@@ -46,18 +57,30 @@ export class MantenimientosTiposComponent {
     dialogRef.afterClosed().subscribe(result => {
       console.log('El diálogo fue cerrado');
       // Aquí puedes manejar el resultado del diálogo (por ejemplo, actualizar el ejercicio)
+      this.refreshTable();
     });
   }
 
-  confirmarBorrado(){
+  confirmarBorrado(tipo: any){
     this.dialogService.openConfirmDialog('¿Estás seguro de que quieres borrar el registro?').afterClosed().subscribe(res => {
       if (res) {
-        // El usuario hizo clic en Aceptar
-        alert('Borrado Correctamente');
+        this.tiposService.delete(tipo.codigo).subscribe(data => {
+          this.refreshTable();
+        });
       } else {
         // El usuario hizo clic en Cancelar
         alert('Cancelado');
       }
     });
   }
+
+  private refreshTable() {
+    this.tiposService.getTipos().subscribe(data => {
+      this.tiposArray = data;
+      this.tipos = new MatTableDataSource(this.tiposArray);
+      this.tipos.sort = this.sort;
+      this.tipos.paginator = this.paginator;
+    });
+  }
+
 }

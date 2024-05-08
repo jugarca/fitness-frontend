@@ -6,9 +6,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   template: `
     <h2 mat-dialog-title>Confirmación</h2>
     <mat-dialog-content>{{ data.message }}</mat-dialog-content>
-    <mat-dialog-actions>
-      <button mat-raised-button color="primary" [mat-dialog-close]="true">Aceptar</button>
-      <button mat-raised-button color="primary" [mat-dialog-close]="false">Cancelar</button>
+    <mat-dialog-actions class="justify-content-end">
+    <button mat-raised-button color="primary" [mat-dialog-close]="false"><mat-icon>cancel</mat-icon>Cancelar</button>
+      <button mat-raised-button color="primary" [mat-dialog-close]="true"><mat-icon>done</mat-icon>Aceptar</button>
     </mat-dialog-actions>
   `,
 })

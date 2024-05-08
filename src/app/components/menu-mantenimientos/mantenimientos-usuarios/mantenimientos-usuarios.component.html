@@ -15,80 +15,78 @@
     </fieldset>
 </div>
 
-<mat-table [dataSource]="usuarios">
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<mat-table [dataSource]="usuarios" matSort>
 
     <!-- ID del ejercicio Column -->
     <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> {{'usuarios.header.id' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'usuarios.header.id' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let usuario"> {{usuario.id}} </mat-cell>
     </ng-container>
 
     <!-- Nombre del ejercicio Column -->
     <ng-container matColumnDef="nombre">
-        <mat-header-cell *matHeaderCellDef> {{'usuarios.header.nombre' | transloco}}</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'usuarios.header.nombre' | transloco}}</mat-header-cell>
         <mat-cell *matCellDef="let usuario"> {{usuario.nombre}} </mat-cell>
     </ng-container>
 
     <!-- Objetivo del ejercicio Column -->
     <ng-container matColumnDef="email">
-        <mat-header-cell *matHeaderCellDef> {{'usuarios.header.email' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'usuarios.header.email' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let usuario"> {{usuario.email}} </mat-cell>
     </ng-container>
 
     <!-- Nivel del ejercicio Column -->
-    <ng-container matColumnDef="rol">
-        <mat-header-cell *matHeaderCellDef> {{'usuarios.header.rol' | transloco}} </mat-header-cell>
-        <mat-cell *matCellDef="let usuario"> {{usuario.rol}} </mat-cell>
+    <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'usuarios.header.rol' | transloco}} </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{usuario.role}} </mat-cell>
     </ng-container>
 
     <!-- Duración del ejercicio Column -->
     <ng-container matColumnDef="edad">
-        <mat-header-cell *matHeaderCellDef> {{'usuarios.header.edad' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'usuarios.header.edad' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let usuario"> {{usuario.edad}} </mat-cell>
     </ng-container>
 
     <!-- Grupo muscular del ejercicio Column -->
     <ng-container matColumnDef="altura">
-        <mat-header-cell *matHeaderCellDef> {{'usuarios.header.altura' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'usuarios.header.altura' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let usuario"> {{usuario.altura}} </mat-cell>
     </ng-container>
 
     <!-- Deporte del ejercicio Column -->
     <ng-container matColumnDef="peso">
-        <mat-header-cell *matHeaderCellDef> {{'usuarios.header.peso' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'usuarios.header.peso' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let usuario"> {{usuario.peso}} </mat-cell>
     </ng-container>
 
     <!-- Material del ejercicio Column -->
-    <ng-container matColumnDef="nivel">
-        <mat-header-cell *matHeaderCellDef> {{'usuarios.header.nivel' | transloco}} </mat-header-cell>
-        <mat-cell *matCellDef="let usuario"> {{usuario.nivel}} </mat-cell>
+    <ng-container matColumnDef="nivelPersonalizado">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'usuarios.header.nivel' | transloco}} </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{usuario.nivelPersonalizado}} </mat-cell>
     </ng-container>
 
     <!-- Material del ejercicio Column -->
-    <ng-container matColumnDef="tiempo">
-        <mat-header-cell *matHeaderCellDef> {{'usuarios.header.tiempo' | transloco}} </mat-header-cell>
-        <mat-cell *matCellDef="let usuario"> {{usuario.tiempo}} </mat-cell>
+    <ng-container matColumnDef="tiempoEntrenamiento">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'usuarios.header.tiempo' | transloco}} </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{usuario.tiempoEntrenamiento}} </mat-cell>
     </ng-container>
 
     <!-- Material del ejercicio Column -->
-    <ng-container matColumnDef="objetivo">
-        <mat-header-cell *matHeaderCellDef> {{'usuarios.header.objetivo' | transloco}} </mat-header-cell>
-        <mat-cell *matCellDef="let usuario"> {{usuario.objetivo}} </mat-cell>
+    <ng-container matColumnDef="objetivoEntrenamiento">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'usuarios.header.objetivo' | transloco}} </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{usuario.objetivoEntrenamiento}} </mat-cell>
     </ng-container>
 
   <!-- Acciones Column -->
   <ng-container matColumnDef="acciones">
-    <mat-header-cell *matHeaderCellDef> {{'general.acciones' | transloco}} 
-        <button mat-icon-button color="primary" (click)="abrirModal()">
-            <mat-icon>add</mat-icon>
-        </button>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> {{'general.acciones' | transloco}} 
     </mat-header-cell>
     <mat-cell *matCellDef="let usuario"> 
       <button mat-icon-button color="primary" aria-label="Editar ejercicio" (click)="openEditDialog(usuario)">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn" aria-label="Borrar ejercicio" (click)="confirmarBorrado()">
+      <button mat-icon-button color="warn" aria-label="Borrar ejercicio" (click)="confirmarBorrado(usuario)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>

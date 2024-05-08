@@ -1,6 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { TiposVO } from 'src/app/interfaces/tipos.interface';
+import { EjerciciosService } from 'src/app/services/ejercicios.service';
+import { ParametrosService } from 'src/app/services/parametros.service';
 
 @Component({
   selector: 'app-edit-ejercicio',
@@ -11,10 +14,43 @@ export class EditEjercicioComponent {
 
   form: FormGroup;
 
+  public tiposNivel: TiposVO[] = [];
+  public tiposObjetivo: TiposVO[] = [];
+  public tiposGrupoMuscular: TiposVO[] = [];
+  public tiposTiempos: TiposVO[] = [];
+  public tiposDeporte: TiposVO[] = [];
+  public tiposMaterial: TiposVO[] = [];
+
   constructor(
     private fb: FormBuilder,
+    private ejerciciosService: EjerciciosService,
+    private parametrosService: ParametrosService, 
     public dialogRef: MatDialogRef<EditEjercicioComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
+
+    this.parametrosService.getByTipo('NIVEL').subscribe(data => {
+      this.tiposNivel = data;
+    });
+
+    this.parametrosService.getByTipo('OBJETIVO').subscribe(data => {
+      this.tiposObjetivo = data;
+    });
+
+    this.parametrosService.getByTipo('TIEMPO').subscribe(data => {
+      this.tiposTiempos = data;
+    });
+
+    this.parametrosService.getByTipo('DEPORTE').subscribe(data => {
+      this.tiposDeporte = data;
+    });
+
+    this.parametrosService.getByTipo('GRUPMUS').subscribe(data => {
+      this.tiposGrupoMuscular = data;
+    });
+
+    this.parametrosService.getByTipo('MATERIAL').subscribe(data => {
+      this.tiposMaterial = data;
+    });
 
         // Si se inserta un registro nuevo se crea un formulario vacio
     if (data == null){
@@ -54,7 +90,9 @@ export class EditEjercicioComponent {
   onSave(): void {
     if (this.form.valid) {
       //TODO: Aqui se añadira la llamada al guardado de la receta en la base de datos.
-      this.dialogRef.close(this.form.value);
+      this.ejerciciosService.save(this.form.value).subscribe(data => {
+        this.dialogRef.close(this.form.value);
+      });
     }
   }
 

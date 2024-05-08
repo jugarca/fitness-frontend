@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { TiposService } from './../../../services/tipos.service';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { EditParametroComponent } from './edit-parametro/edit-parametro.component';
+import { ParametrosService } from '../../../services/parametros.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-mantenimientos-parametros',
@@ -10,29 +14,37 @@ import { EditParametroComponent } from './edit-parametro/edit-parametro.componen
   styleUrls: ['./mantenimientos-parametros.component.css']
 })
 export class MantenimientosParametrosComponent {
-  parametrosArray = [
-    { tipo: 'Estado', codigo: 'A', descripcion: 'Abierto', descripcionValenciano: 'Obert', activo: true },
-    { tipo: 'Estado', codigo: 'C', descripcion: 'Cerrado', descripcionValenciano: 'Tancat', activo: false },
-    { tipo: 'Tipo de Alimentacion', codigo: 'V', descripcion: 'Vegana', descripcionValenciano: 'Vegana', activo: true },
-    { tipo: 'Tipo de Alimentacion', codigo: 'P', descripcion: 'Proteica', descripcionValenciano: 'Proteica', activo: true },
-    { tipo: 'Tipo de Alimentacion', codigo: 'D', descripcion: 'Dieta', descripcionValenciano: 'Dieta', activo: true },
-  ];
+  parametrosArray = [];
 
-  displayedColumns: string[] = ['tipo','codigo', 'descripcion', 'descripcionValenciano', 'activo', 'acciones'];
+
+  displayedColumns: string[] = ['tipo','codigo', 'descripcion', 'descripcionV', 'activo', 'acciones'];
 
 
   showSearch = false;
   searchValue: string | undefined;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   parametros = new MatTableDataSource(this.parametrosArray);
 
-  constructor(public dialog: MatDialog, public dialogService: DialogService) {}
+  constructor(public dialog: MatDialog, public dialogService: DialogService, 
+    private parametrosService: ParametrosService,
+    private TiposService: TiposService) {
+
+      this.refreshTable();
+
+  }
 
   applyFilter(filterValue: string) {
     this.parametros.filter = filterValue.trim().toLowerCase();
   }
 
   abrirModal(): void {
-    this.dialog.open(EditParametroComponent);
+    const dialogRef = this.dialog.open(EditParametroComponent, {
+      width: '50%'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.refreshTable();
+    });
   }
 
   addRecord() {
@@ -46,20 +58,26 @@ export class MantenimientosParametrosComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('El diálogo fue cerrado');
-      // Aquí puedes manejar el resultado del diálogo (por ejemplo, actualizar el ejercicio)
+      this.refreshTable();
     });
   }
 
-  confirmarBorrado(){
+  confirmarBorrado(parametro: any){
     this.dialogService.openConfirmDialog('¿Estás seguro de que quieres borrar el registro?').afterClosed().subscribe(res => {
       if (res) {
-        // El usuario hizo clic en Aceptar
-        alert('Borrado Correctamente');
-      } else {
-        // El usuario hizo clic en Cancelar
-        alert('Cancelado');
-      }
+        this.parametrosService.delete(parametro).subscribe(data => {
+            this.refreshTable();
+        });
+      } 
+    });
+  }
+
+  private refreshTable() {
+    this.parametrosService.getParametros().subscribe(data => {
+      this.parametrosArray = data;
+      this.parametros = new MatTableDataSource(this.parametrosArray);
+      this.parametros.sort = this.sort;
+      this.parametros.paginator = this.paginator;
     });
   }
 }

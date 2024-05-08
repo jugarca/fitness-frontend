@@ -17,7 +17,7 @@
       <div class="col-md-6">
         <mat-form-field class="w-100">
         <mat-label>{{'usuarios.header.email' | transloco}}</mat-label>
-        <input matInput formControlName="email">
+        <input type="email" matInput formControlName="email">
         </mat-form-field>
       </div>
     </div>
@@ -25,7 +25,9 @@
         <div class="col-md-4">
             <mat-form-field class="w-100">
             <mat-label>{{'usuarios.header.rol' | transloco}}</mat-label>
-            <input matInput  formControlName="rol">
+            <mat-select formControlName="role">
+              <mat-option *ngFor="let role of tiposRole" [value]="role.codigo">{{ role.descripcion }}</mat-option>
+            </mat-select>
             </mat-form-field>
         </div>
         <div class="col-md-4">
@@ -45,19 +47,25 @@
       <div class="col-md-4">
           <mat-form-field class="w-100">
           <mat-label>{{'usuarios.header.nivel' | transloco}}</mat-label>
-          <input matInput  formControlName="nivel">
+          <mat-select formControlName="nivelPersonalizado">
+            <mat-option *ngFor="let nivel of tiposNivel" [value]="nivel.codigo">{{ nivel.descripcion }}</mat-option>
+          </mat-select>
           </mat-form-field>
       </div>
       <div class="col-md-4">
         <mat-form-field class="w-100">
         <mat-label>{{'usuarios.header.tiempo' | transloco}}</mat-label>
-        <input matInput formControlName="tiempo">
+        <mat-select formControlName="tiempoEntrenamiento">
+          <mat-option *ngFor="let tiempo of tiposTiempo" [value]="tiempo.codigo">{{ tiempo.descripcion }}</mat-option>
+        </mat-select>
         </mat-form-field>
     </div>
     <div class="col-md-4">
       <mat-form-field class="w-100">
       <mat-label>{{'usuarios.header.objetivo' | transloco}}</mat-label>
-      <input matInput formControlName="objetivo">
+      <mat-select formControlName="objetivoEntrenamiento">
+        <mat-option *ngFor="let objetivo of tiposObjetivo" [value]="objetivo.codigo">{{ objetivo.descripcion }}</mat-option>
+      </mat-select>
       </mat-form-field>
     </div>
   </div>
@@ -66,7 +74,7 @@
 
 
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-raised-button color="primary" (click)="onCancel()">Cancelar</button>
-  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="form.invalid">Guardar</button>
+<mat-dialog-actions class="justify-content-end">
+  <button mat-raised-button color="primary" (click)="onCancel()"><mat-icon>cancel</mat-icon> Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="form.invalid"><mat-icon>save</mat-icon>Guardar</button>
 </mat-dialog-actions>

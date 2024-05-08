@@ -5,31 +5,35 @@
         <div class="col-md-2">
             <mat-form-field class="w-100">
             <mat-label>{{'tipos.header.codigo' | transloco}}</mat-label>
-            <input matInput formControlName="codigo">
+            <input *ngIf="isReadOnly" readonly maxlength="10" matInput formControlName="codigo">
+            <input *ngIf="!isReadOnly" matInput maxlength="10" formControlName="codigo">
             </mat-form-field>
         </div>
         <div class="col-md-3">
             <mat-form-field class="w-100">
             <mat-label>{{'tipos.header.descripcion' | transloco}}</mat-label>
-            <input matInput formControlName="descripcion">
+            <input matInput maxlength="1000" formControlName="descripcion">
             </mat-form-field>
         </div>
         <div class="col-md-3">
             <mat-form-field class="w-100">
             <mat-label>{{'tipos.header.descripcionValenciano' | transloco}}</mat-label>
-            <input matInput formControlName="descripcionValenciano">
+            <input matInput maxlength="1000" formControlName="descripcionValenciano">
             </mat-form-field>
         </div>
         <div class="col-md-3">
             <mat-form-field class="w-100">
             <mat-label>{{'tipos.header.activo' | transloco}}</mat-label>
-            <input matInput formControlName="activo">
+            <mat-select formControlName="activo">
+              <mat-option value="S">Si</mat-option>
+              <mat-option value="N">No</mat-option>
+            </mat-select>
             </mat-form-field>
         </div>
     </div>
   </form>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-raised-button color="primary" (click)="onNoClick()">{{'ejercicios.modal.cancel' | transloco}}</button>
-  <button mat-raised-button color="primary" (click)="onSave()">{{'ejercicios.modal.save' | transloco}}</button>
+<mat-dialog-actions class="justify-content-end">
+  <button mat-raised-button color="primary" (click)="cancel()"><mat-icon>cancel</mat-icon>{{'ejercicios.modal.cancel' | transloco}}</button>
+  <button mat-raised-button color="primary" (click)="onSave()"><mat-icon>save</mat-icon>{{'ejercicios.modal.save' | transloco}}</button>
 </mat-dialog-actions>

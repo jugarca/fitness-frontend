@@ -15,17 +15,22 @@
 @include mat.all-legacy-component-typographies();
 @include mat.legacy-core();
 
+$color-verde: #00d084;
+$color-gris: #808080;
+
+$color-verde-grisaceo: mix($color-verde, $color-gris, 60%);
+
 $fitness-palette: (
-  50: #e0f4fa,
-  100: #b0e2f3,
-  200: #7ccfeb,
-  300: #48bce3,
-  400: #11799b,
-  500: #00a1dc,
-  600: #0093ce,
-  700: #19aee0,
-  800: #0070a8,
-  900: #005189,
+  50: lighten($color-verde-grisaceo, 40%),
+  100: lighten($color-verde-grisaceo, 30%),
+  200: lighten($color-verde-grisaceo, 20%),
+  300: lighten($color-verde-grisaceo, 10%),
+  400: $color-verde-grisaceo,
+  500: darken($color-verde-grisaceo, 10%),
+  600: darken($color-verde-grisaceo, 20%),
+  700: darken($color-verde-grisaceo, 30%),
+  800: darken($color-verde-grisaceo, 40%),
+  900: darken($color-verde-grisaceo, 50%),
   contrast: (
     50: #272727,
     100: #272727,
@@ -38,11 +43,128 @@ $fitness-palette: (
     800: #fbfbfb,
     900: #fbfbfb
   ),
-  A100: #c97b84,
-  A200: #fba900,
-  A400: #c97b84,
-  A700: #fba900
+  A100: lighten($color-verde-grisaceo, 50%),
+  A200: $color-verde-grisaceo,
+  A400: darken($color-verde-grisaceo, 50%),
+  A700: darken($color-verde-grisaceo, 60%)
 );
+//Teal50
+$fitness-paletteX: (
+  50: #E0F2F1,
+  100: #B2DFDB,
+  200: #80CBC4,
+  300: #4DB6AC,
+  400: #26A69A,
+  500: #009688,
+  600: #00897B,
+  700: #00796B,
+  800: #00695C,
+  900: #004D40,
+  contrast: (
+    50: #272727,
+    100: #272727,
+    200: #272727,
+    300: #272727,
+    400: #fbfbfb,
+    500: #fbfbfb,
+    600: #fbfbfb,
+    700: #fbfbfb,
+    800: #fbfbfb,
+    900: #fbfbfb
+  ),
+  A100: #A7FFEB,
+  A200: #64FFDA,
+  A400: #1DE9B6,
+  A700: #00BFA5
+);
+
+$fitness-palette2: (
+  50: #E0F7FA,
+  100: #B2EBF2,
+  200: #80DEEA,
+  300: #4DD0E1,
+  400: #26C6DA,
+  500: #00BCD4,
+  600: #00ACC1,
+  700: #0097A7,
+  800: #00838F,
+  900: #006064,
+  contrast: (
+    50: #272727,
+    100: #272727,
+    200: #272727,
+    300: #272727,
+    400: #fbfbfb,
+    500: #fbfbfb,
+    600: #fbfbfb,
+    700: #fbfbfb,
+    800: #fbfbfb,
+    900: #fbfbfb
+  ),
+  A100: #84FFFF,
+  A200: #18FFFF,
+  A400: #00E5FF,
+  A700: #00B8D4
+);
+
+$fitness-palette2: (
+  50: #FFF3E0,
+  100: #FFE0B2,
+  200: #FFCC80,
+  300: #FFB74D,
+  400: #FFA726,
+  500: #FF9800,
+  600: #FB8C00,
+  700: #F57C00,
+  800: #EF6C00,
+  900: #E65100,
+  contrast: (
+    50: #272727,
+    100: #272727,
+    200: #272727,
+    300: #272727,
+    400: #fbfbfb,
+    500: #fbfbfb,
+    600: #fbfbfb,
+    700: #fbfbfb,
+    800: #fbfbfb,
+    900: #fbfbfb
+  ),
+  A100: #FFD180,
+  A200: #FFAB40,
+  A400: #FF9100,
+  A700: #FF6D00
+);
+
+$fitness-palette4: (
+  50: #F3E5F5,
+  100: #E1BEE7,
+  200: #CE93D8,
+  300: #BA68C8,
+  400: #AB47BC,
+  500: #9C27B0,
+  600: #8E24AA,
+  700: #7B1FA2,
+  800: #6A1B9A,
+  900: #4A148C,
+  contrast: (
+    50: #272727,
+    100: #272727,
+    200: #272727,
+    300: #272727,
+    400: #fbfbfb,
+    500: #fbfbfb,
+    600: #fbfbfb,
+    700: #fbfbfb,
+    800: #fbfbfb,
+    900: #fbfbfb
+  ),
+  A100: #EA80FC,
+  A200: #E040FB,
+  A400: #D500F9,
+  A700: #AA00FF
+);
+
 $my-primary: mat.define-palette($fitness-palette, 400);
 $my-accent: mat.define-palette($fitness-palette, A100, A200, A400, A700);
 $my-warn: mat.define-palette(mat.$red-palette);

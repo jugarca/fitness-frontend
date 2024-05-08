@@ -5,19 +5,21 @@
         <div class="col-md-2">
             <mat-form-field class="w-100">
             <mat-label>{{'ejercicios.modal.id' | transloco}}</mat-label>
-            <input matInput formControlName="id">
+            <input matInput readonly formControlName="id">
             </mat-form-field>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <mat-form-field class="w-100">
             <mat-label>{{'ejercicios.modal.nombre' | transloco}}</mat-label>
             <input matInput formControlName="nombre">
             </mat-form-field>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <mat-form-field class="w-100">
             <mat-label>{{'ejercicios.modal.objetivo' | transloco}}</mat-label>
-            <input matInput formControlName="objetivo">
+            <mat-select formControlName="objetivo">
+                <mat-option *ngFor="let objetivo of tiposObjetivo" [value]="objetivo.codigo">{{ objetivo.descripcion }}</mat-option>
+            </mat-select>
             </mat-form-field>
         </div>
     </div>
@@ -25,19 +27,25 @@
         <div class="col-md-3">
             <mat-form-field class="w-100">
             <mat-label>{{'ejercicios.modal.nivel' | transloco}}</mat-label>
-            <input matInput formControlName="nivel">
+            <mat-select formControlName="nivel">
+                <mat-option *ngFor="let nivel of tiposNivel" [value]="nivel.codigo">{{ nivel.descripcion }}</mat-option>
+            </mat-select>
             </mat-form-field>
         </div>
         <div class="col-md-3">
             <mat-form-field class="w-100">
             <mat-label>{{'ejercicios.modal.duracion' | transloco}}</mat-label>
-            <input matInput formControlName="duracion">
+            <mat-select formControlName="duracion">
+                <mat-option *ngFor="let duracion of tiposTiempos" [value]="duracion.codigo">{{ duracion.descripcion }}</mat-option>
+            </mat-select>
             </mat-form-field>
         </div>
         <div class="col-md-3">
             <mat-form-field class="w-100">
             <mat-label>{{'ejercicios.modal.grupoMuscular' | transloco}}</mat-label>
-            <input matInput formControlName="grupoMuscular">
+            <mat-select formControlName="grupoMuscular">
+                <mat-option *ngFor="let grupo of tiposGrupoMuscular" [value]="grupo.codigo">{{ grupo.descripcion }}</mat-option>
+            </mat-select>
             </mat-form-field>
         </div>
     </div>
@@ -45,19 +53,23 @@
         <div class="col-md-3">
             <mat-form-field class="w-100">
             <mat-label>{{'ejercicios.modal.deporte' | transloco}}</mat-label>
-            <input matInput formControlName="deporte">
+            <mat-select formControlName="deporte">
+                <mat-option *ngFor="let deporte of tiposDeporte" [value]="deporte.codigo">{{ deporte.descripcion }}</mat-option>
+            </mat-select>
             </mat-form-field>
         </div>
         <div class="col-md-3">
             <mat-form-field class="w-100">
             <mat-label>{{'ejercicios.modal.material' | transloco}}</mat-label>
-            <input matInput formControlName="material">
+            <mat-select formControlName="material">
+                <mat-option *ngFor="let material of tiposMaterial" [value]="material.codigo">{{ material.descripcion }}</mat-option>
+            </mat-select>
             </mat-form-field>
         </div>
     </div>
   </form>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-raised-button color="primary" (click)="onNoClick()">{{'ejercicios.modal.cancel' | transloco}}</button>
-  <button mat-raised-button color="primary" (click)="onSave()">{{'ejercicios.modal.save' | transloco}}</button>
+<mat-dialog-actions class="justify-content-end">
+  <button mat-raised-button color="primary" (click)="onNoClick()"><mat-icon>cancel</mat-icon>{{'ejercicios.modal.cancel' | transloco}}</button>
+  <button mat-raised-button color="primary" (click)="onSave()"><mat-icon>save</mat-icon>{{'ejercicios.modal.save' | transloco}}</button>
 </mat-dialog-actions>

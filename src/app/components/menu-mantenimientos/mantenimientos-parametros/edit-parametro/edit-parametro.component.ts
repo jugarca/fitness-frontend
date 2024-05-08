@@ -1,6 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { TiposVO } from 'src/app/interfaces/tipos.interface';
+import { ParametrosService } from 'src/app/services/parametros.service';
+import { TiposService } from 'src/app/services/tipos.service';
 
 @Component({
   selector: 'app-edit-parametro',
@@ -10,33 +13,40 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class EditParametroComponent {
 
   form: FormGroup;
+  isReadOnly: boolean = true;
+  tipoOptions: TiposVO[] = [];
 
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<EditParametroComponent>,
+    private tiposService: TiposService,
+    private parametrosService: ParametrosService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
+
+      tiposService.getTipos().subscribe(data => {
+        this.tipoOptions = data;
+      });
 
         // Si se inserta un registro nuevo se crea un formulario vacio
     if (data == null){
         this.form = this.fb.group({
-          tipo: [null], 
-          codigo: [null], 
-          descripcion: [null, Validators.required],
-          descripcionValenciano: [null, Validators.required],
-          activo: [null, Validators.required]
-          // Agrega más controles aquí para las otras propiedades de la receta
+          tipo: [null, [Validators.required, Validators.maxLength(100)]], 
+          codigo: [null, [Validators.required, Validators.maxLength(20)]], 
+          descripcion: [null, [Validators.required, Validators.maxLength(1000)]],
+          descripcionV: [null, [Validators.required, Validators.maxLength(1000)]],
+          activo: [null, [Validators.required, Validators.maxLength(1)]]
         });
+        this.isReadOnly= false;
   
   
       }else{
         // Si se edita un registro se crea un formulario con los datos del registro.
-        this.form = this.fb.group({
+          this.form = this.fb.group({
             tipo: [data.parametro.tipo], 
             codigo: [data.parametro.codigo], 
-            descripcion: [data.parametro.descripcion, Validators.required],
-            descripcionValenciano: [data.parametro.descripcionValenciano, Validators.required],
-            activo: [data.parametro.activo, Validators.required],
-            // Agrega más controles aquí para las otras propiedades de la receta
+            descripcion: [data.parametro.descripcion,[Validators.required, Validators.maxLength(1000)]],
+            descripcionV: [data.parametro.descripcionV,[Validators.required, Validators.maxLength(1000)]],
+            activo: [data.parametro.activo,[Validators.required, Validators.maxLength(1)]],
           });
       }
     }
@@ -47,8 +57,11 @@ export class EditParametroComponent {
 
   onSave(): void {
     if (this.form.valid) {
-      //TODO: Aqui se añadira la llamada al guardado de la receta en la base de datos.
-      this.dialogRef.close(this.form.value);
+      console.log(this.form.value);
+      this.parametrosService.save(this.form.value).subscribe(data => {
+        console.log(data);
+        this.dialogRef.close(this.form.value);
+      });
     }
   }
 

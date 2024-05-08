@@ -1,0 +1,8 @@
+.margin-title {
+    margin-top: 20px;
+}
+
+.card-no-hover:hover {
+    transform: none;
+    background-color: inherit;
+}

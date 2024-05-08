@@ -16,6 +16,8 @@ import { MantenimientosUsuariosComponent } from './components/menu-mantenimiento
 import { MantenimientosTiposComponent } from './components/menu-mantenimientos/mantenimientos-tipos/mantenimientos-tipos.component';
 import { MantenimientosParametrosComponent } from './components/menu-mantenimientos/mantenimientos-parametros/mantenimientos-parametros.component';
 import { DetalleEjercicioComponent } from './components/ejercicios/detalle-ejercicio/detalle-ejercicio.component';
+import { UsuarioPerfilComponent } from './components/usuario-perfil/usuario-perfil.component';
+import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
 
 
 const routes: Routes = [
@@ -34,6 +36,9 @@ const routes: Routes = [
   { path: 'mantenimientosTipos', component: MantenimientosTiposComponent },
   { path: 'mantenimientosParametros', component: MantenimientosParametrosComponent },
   { path: 'detalle-entrenamiento/:id', component: DetalleEjercicioComponent},
+  { path: 'usuario-perfil', component: UsuarioPerfilComponent},
+  { path: 'estadisticas', component: EstadisticasComponent},
+  { path: 'calendario', component: CalendarioComponent},
   { path: '', component: LoginComponent },
 ];
 

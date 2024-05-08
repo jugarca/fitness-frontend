@@ -7,7 +7,7 @@
       <legend>{{'general.busqueda' | transloco}}</legend>
       <mat-form-field>
         <mat-label>{{'tipos.buscar' | transloco}}</mat-label>
-        <input matInput [(ngModel)]="searchValue">
+        <input matInput [(ngModel)]="searchValue" (keyup.enter)="applyFilter(searchValue!)">
         <button mat-button matSuffix aria-label="Buscar" (click)="applyFilter(searchValue!)">
           <mat-icon>search</mat-icon>
         </button>
@@ -15,34 +15,35 @@
     </fieldset>
 </div>
 
-<mat-table [dataSource]="parametros">
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<mat-table [dataSource]="parametros" matSort>
 
     <!-- ID del ejercicio Column -->
     <ng-container matColumnDef="tipo">
-        <mat-header-cell *matHeaderCellDef> {{'tipos.header.tipo' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'tipos.header.tipo' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let parametro"> {{parametro.tipo}} </mat-cell>
     </ng-container>
     <!-- ID del ejercicio Column -->
     <ng-container matColumnDef="codigo">
-        <mat-header-cell *matHeaderCellDef> {{'tipos.header.codigo' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'tipos.header.codigo' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let parametro"> {{parametro.codigo}} </mat-cell>
     </ng-container>
 
     <!-- Nombre del ejercicio Column -->
     <ng-container matColumnDef="descripcion">
-        <mat-header-cell *matHeaderCellDef> {{'tipos.header.descripcion' | transloco}}</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'tipos.header.descripcion' | transloco}}</mat-header-cell>
         <mat-cell *matCellDef="let parametro"> {{parametro.descripcion}} </mat-cell>
     </ng-container>
 
     <!-- Objetivo del ejercicio Column -->
-    <ng-container matColumnDef="descripcionValenciano">
-        <mat-header-cell *matHeaderCellDef> {{'tipos.header.descripcionValenciano' | transloco}} </mat-header-cell>
-        <mat-cell *matCellDef="let parametro"> {{parametro.descripcionValenciano}} </mat-cell>
+    <ng-container matColumnDef="descripcionV">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'tipos.header.descripcionValenciano' | transloco}} </mat-header-cell>
+        <mat-cell *matCellDef="let parametro"> {{parametro.descripcionV}} </mat-cell>
     </ng-container>
 
     <!-- Nivel del ejercicio Column -->
     <ng-container matColumnDef="activo">
-        <mat-header-cell *matHeaderCellDef> {{'tipos.header.activo' | transloco}} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{'tipos.header.activo' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let parametro"> {{parametro.activo}} </mat-cell>
     </ng-container>
 
@@ -57,7 +58,7 @@
       <button mat-icon-button color="primary" aria-label="Editar ejercicio" (click)="openEditDialog(parametro)">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn" aria-label="Borrar ejercicio" (click)="confirmarBorrado()">
+      <button mat-icon-button color="primary" aria-label="Borrar ejercicio" (click)="confirmarBorrado(parametro)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>
