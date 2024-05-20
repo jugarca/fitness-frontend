@@ -1,1 +1,50 @@
-<p>estadisticas works!</p>
+<br>
+<div class="align-center-title">
+    <a class="link-grafico" (click)="tipoGrafico = 'resumen'"><strong>Resumen Ejercicio Realizados</strong></a>
+    <a class="link-grafico" (click)="tipoGrafico = 'imc'"><strong>Resumen IMC</strong></a>
+    <a class="link-grafico" (click)="tipoGrafico = 'gm'"><strong>Entrenamiento por Grupo Muscular</strong></a>
+</div>
+
+<div class="align-center">
+    <ngx-charts-pie-grid *ngIf="tipoGrafico === 'resumen'"
+    [view]="[700,400]"
+    [scheme]="colorScheme"
+    [results]="single"
+    >
+    </ngx-charts-pie-grid>
+</div>
+
+<div class="align-center"> 
+    <ngx-charts-line-chart *ngIf="tipoGrafico === 'imc'"
+    [view]="[700,400]"
+    [scheme]="colorSchemeImc"
+    [legend]="legend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="xAxis"
+    [yAxis]="yAxis"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [timeline]="timeline"
+    [results]="multi"
+    >
+    </ngx-charts-line-chart>
+</div>
+
+<div class="align-center">
+    <ngx-charts-bar-vertical *ngIf="tipoGrafico === 'gm'"
+    [view]="[700, 400]"
+    [scheme]="colorSchemeGM"
+    [results]="grupoMuscular"
+    [gradient]="gradient"
+    [xAxis]="showXAxisLabelGM"
+    [yAxis]="showYAxisLabelGM"
+    [legend]="showLegendGM"
+    [showXAxisLabel]="showXAxisLabelGM"
+    [showYAxisLabel]="showYAxisLabelGM"
+    [xAxisLabel]="xAxisLabelGM"
+    [yAxisLabel]="yAxisLabelGM">
+    </ngx-charts-bar-vertical>
+</div>
+<!--[scheme]="colorScheme"-->
+  

@@ -1,41 +1,57 @@
-<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<div class="d-flex align-items-center justify-content-center title-margin" style="height: 40px;">
+    <div class="d-flex align-items-center justify-content-center border-bottom w-100 h-100">
+        <h1 class="title-custom">
+            {{'receta.title' | transloco}}
+        </h1>
+    </div>
+</div>
 
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 <mat-table [dataSource]="dataSource" matSort>
 
     <!-- Nombre Plato Column -->
-    <ng-container matColumnDef="nombrePlato">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre Plato</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.nombrePlato}}</mat-cell>
+    <ng-container matColumnDef="nombreReceta">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{'receta.nombre' | transloco}}</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.nombreReceta}}</mat-cell>
     </ng-container>
 
     <!-- Kilocalorias Column -->
     <ng-container matColumnDef="kilocalorias">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Kilocalorias</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{'receta.kilocalorias' | transloco}}</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.kilocalorias}}</mat-cell>
     </ng-container>
 
     <!-- Tipo Alimentacion Column -->
     <ng-container matColumnDef="tipoAlimentacion">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Tipo Alimentacion</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{'receta.tipo' | transloco}}</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.tipoAlimentacion}}</mat-cell>
     </ng-container>
 
     <!-- Fecha Column -->
     <ng-container matColumnDef="fecha">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.fecha}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{'receta.fecha' | transloco}}</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.fecha | date:'dd/MM/yyyy'}}</mat-cell>
     </ng-container>
 
     <!-- Horario Comida Column -->
-    <ng-container matColumnDef="horarioComida">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Horario Comida</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.horarioComida}}</mat-cell>
+    <ng-container matColumnDef="horario">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>{{'receta.horario' | transloco}}</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.horario}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="descripcion">
+        <mat-header-cell hidden *matHeaderCellDef mat-sort-header>{{'receta.descripcion' | transloco}}</mat-header-cell>
+        <mat-cell hidden *matCellDef="let element">{{element.descripcion}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="imagen">
+        <mat-cell hidden *matCellDef="let element">{{element.imagen}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="acciones">
-        <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> {{'receta.acciones' | transloco}} </mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button mat-icon-button (click)="verReceta(element)" aria-label="Ver receta">
+          <button mat-icon-button color="primary" (click)="verReceta(element)" aria-label="Ver receta">
             <mat-icon>visibility</mat-icon>
           </button>
         </mat-cell>

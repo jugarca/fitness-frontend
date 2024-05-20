@@ -14,6 +14,11 @@
     "ejerciciosTitle": "Workouts",
     "usuariosTitle": "Users",
     "tiposTitle": "Types",
+    "idioma.es": "Spanish",
+    "idioma.en": "English",
+    "idioma.ca": "Valencian",
+    "logout": "Log out",
+    "perfil": "View Profile",
     "parametros": "Parameters",
     "general.busqueda": "Search criteria",
     "general.acciones": "Actions",
@@ -30,6 +35,28 @@
     "recetas.modal.descripcion": "Description of the recipe",
     "recetas.modal.kcal": "Kcal of the recipe",
     "recetas.modal.tipo": "Food types",
+    "recetas.modal.imagen": "Image",
+    "resumen": "Summary of the Workout Plan",
+    "titleWorkouth1": "Create/Edit Workout Plan",
+    "titleWorkout": "Workout Plan",
+    "altura": "Height",
+    "error.altura":  "The height cannot exceed 2.5 meters.",
+    "error.requerido": "This field is required.",
+    "peso": "Weight",
+    "error.peso": "The weight cannot exceed 500 kg.",
+    "tiempo": "Time",
+    "material": "Material",
+    "dias": "Days",
+    "dias2": "Days of the week",
+    "siguiente": "Next",
+    "anterior": "Previous",
+    "guardar": "Save",
+    "alimentacion": "Nutrition",
+    "pregunta": "Do you want to create a menu plan?",
+    "kilocalorias": "Kilocalories",
+    "tipoalimentacion": "Type of food",
+    "fechaInicio": "Start date",
+    "fechaFin": "End date",
     "formulario": {
         "iniciarSesion": "Log in",
         "registrarse": "Register"
@@ -58,7 +85,7 @@
         },
         "buscar": "Search exercise",
         "modal": {
-          "title": "Edit Exercise",
+          "title": "Create/Edit Exercise",
           "id": "Exercise ID",
           "nombre": "Exercise Name",
           "objetivo": "Exercise Objective",
@@ -125,6 +152,42 @@
           "edit": "Edit",
           "delete": "Delete"
         }
+      },
+      "entrenamiento":{
+        "title": "Plan of Workout",
+        "titleModal": "Detail of Workout",
+        "titleModalEstado": "Change State of Workout",
+        "nombre": "Name",
+        "descripcion": "Description",
+        "duracion":"Duration",
+        "fecha": "Date",
+        "material": "Material",
+        "estado": "State",
+        "cerrar": "Close",
+        "guardar": "Save",
+        "acciones": "Actions"
+      },
+      "receta":{
+        "title": "Recipe of User",
+        "titleModal": "Detail of Recipe",
+        "nombre": "Name",
+        "descripcion": "Description",
+        "fecha": "Date",
+        "tipo":"Type",
+        "kilocalorias": "Kilocalories",
+        "horario": "Schedule",
+        "estado": "State",
+        "cerrar": "Close",
+        "guardar": "Save",
+        "acciones": "Actions"
+      },
+      "calendarioView":{
+        "day": "Day",
+        "week": "Week",
+        "month": "Month",
+        "previous": "Previous",
+        "today": "Today",
+        "next": "Next"
       }
    
 }

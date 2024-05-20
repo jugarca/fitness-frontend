@@ -1,6 +1,6 @@
  
 <!-- <app-board-header> -->
-    <div class="d-flex align-items-center justify-content-center" style="height: 40px;">
+    <div class="d-flex align-items-center justify-content-center margin-title" style="height: 40px;">
         <div class="d-flex align-items-center justify-content-center border-bottom w-100 h-100">
             <h1 class="title-custom">
                 {{ 'crearEntrenamiento' | transloco }}
@@ -29,13 +29,13 @@
             </div>
             <div class="col">
                 <div class="card h-100 p-3 card-no-hover">
-                    <h2 class="title-custom">Resumen del Plan de Entrenamiento</h2>
-                    <p class="texto-grande"><strong>Nivel personalizado:</strong> Elite</p>
-                    <p class="texto-grande"><strong>Tiempo de entrenamiento:</strong> 30 minutos</p>
-                    <p class="texto-grande"><strong>Objetivo de entrenamiento:</strong> Perdida de peso</p>
-                    <p class="texto-grande"><strong>Grupo muscular:</strong> Core</p>
-                    <p class="texto-grande"><strong>Kilocalorías máximas:</strong> 10000 kilocalorias</p>
-                    <p class="texto-grande"><strong>Tipo de alimentación:</strong> Vegana</p>
+                    <h2 class="title-custom">{{ 'resumen' | transloco }}</h2>
+                    <p class="texto-grande"><strong>{{ 'ejercicios.header.nivel' | transloco }}:</strong> {{usuario.nivelPersonalizado}}</p>
+                    <p class="texto-grande"><strong>{{ 'ejercicios.header.duracion' | transloco }}:</strong> {{ usuario.tiempoEntrenamiento }} minutos</p>
+                    <p class="texto-grande"><strong>{{ 'ejercicios.header.objetivo' | transloco }}:</strong> {{ usuario.objetivoEntrenamiento }}</p>
+                    <p class="texto-grande"><strong>{{ 'ejercicios.header.grupoMuscular' | transloco }}:</strong> {{ usuario.grupoMuscular }}</p>
+                    <p class="texto-grande"><strong>{{ 'receta.kilocalorias' | transloco }}:</strong> {{usuario.kilocaloriasMaximas}} kilocalorias</p>
+                    <p class="texto-grande"><strong>{{ 'receta.tipo' | transloco }}:</strong> {{usuario.tipoAlimentacion}}</p>
                 </div>
             </div>
         </div>

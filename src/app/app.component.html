@@ -1,8 +1,9 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 <!-- TODO: Montar lo comun en todas las pantallas Cabecera y Footer -->
 <mat-toolbar color="primary" style="display: flex; justify-content: space-between;">
   <div>
-    <mat-icon>fitness_center</mat-icon>
-    <button mat-button [matMenuTriggerFor]="menu">Fitness</button>
+    <mat-icon routerLink="/pantallaPrincipal">fitness_center</mat-icon>
+    <button mat-button [matMenuTriggerFor]="menu">FitLife Connect</button>
   </div>
   <div>
     <button mat-button [matMenuTriggerFor]="languageMenu">
@@ -18,27 +19,32 @@
 
 
 <mat-menu #menu="matMenu">
-  <button mat-menu-item routerLink="/entrenamiento">Plan de Entrenamiento</button>
-  <button mat-menu-item routerLink="/ejercicios">Ejercicios</button>
-  <button mat-menu-item routerLink="/recetas">Recetas</button>
-  <button mat-menu-item routerLink="/compra">Lista de la Compra</button>
-  <button mat-menu-item [matMenuTriggerFor]="submenu">Mantenimiento</button>
+  <button mat-menu-item routerLink="/planEntrenamiento">{{'planEntrenamiento' | transloco}}</button>
+  <button mat-menu-item routerLink="/ejercicios">{{'entrenamientos' | transloco}}</button>
+  <button mat-menu-item routerLink="/misRecetas">{{'recetas' | transloco}}</button>
+  <button mat-menu-item routerLink="/misListaCompra">{{'listaCompra' | transloco}}</button>
+  <button mat-menu-item routerLink="/calendario">{{'calendario' | transloco}}</button>
+  <button mat-menu-item routerLink="/estadisticas">{{'estadisticas' | transloco}}</button>
+  <button mat-menu-item [matMenuTriggerFor]="submenu">{{'mantenimientos' | transloco}}</button>
 </mat-menu>
 
 <mat-menu #submenu="matMenu">
-  <button mat-menu-item routerLink="/mantenimiento/ejercicios">Ejercicios</button>
-  <button mat-menu-item routerLink="/mantenimiento/valores">Valores</button>
+  <button mat-menu-item routerLink="/mantenimientosRecetas">{{'recetas' | transloco}}</button>
+  <button mat-menu-item routerLink="/mantenimientosEjercicios">{{'entrenamientos' | transloco}}</button>
+  <button mat-menu-item routerLink="/mantenimientosUsuarios">{{'usuario' | transloco}}</button>
+  <button mat-menu-item routerLink="/mantenimientosTipos">{{'tiposTitle' | transloco}}</button>
+  <button mat-menu-item routerLink="/mantenimientosParametros">{{'parametros' | transloco}}</button>
 </mat-menu>
 
 <mat-menu #userMenu="matMenu">
-  <button mat-menu-item>Ver perfil</button>
-  <button mat-menu-item>Logout</button>
+  <button mat-menu-item (click)="verPerfil()">{{'perfil' | transloco}}</button>
+  <button mat-menu-item (click)="logout()">{{'logout' | transloco}}</button>
 </mat-menu>
 
 <mat-menu #languageMenu="matMenu">
-  <button mat-menu-item (click)="changeLanguage('es')">Castellano</button>
-  <button mat-menu-item (click)="changeLanguage('ca')">Valenciano</button>
-  <button mat-menu-item (click)="changeLanguage('en')">Inglés</button>
+  <button mat-menu-item (click)="changeLanguage('es')">{{'idioma.es' | transloco}}</button>
+  <button mat-menu-item (click)="changeLanguage('ca')">{{'idioma.ca' | transloco}}</button>
+  <button mat-menu-item (click)="changeLanguage('en')">{{'idioma.en' | transloco}}</button>
 </mat-menu>
 <!-- Contenido Central de la pantalla-->
 <router-outlet></router-outlet>

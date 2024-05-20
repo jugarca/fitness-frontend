@@ -26,9 +26,14 @@ import { EditEjercicioComponent } from "./menu-mantenimientos/mantenimientos-eje
 import { EditUsuarioComponent } from "./menu-mantenimientos/mantenimientos-usuarios/edit-usuario/edit-usuario.component";
 import { EditTipoComponent } from "./menu-mantenimientos/mantenimientos-tipos/edit-tipo/edit-tipo.component";
 import { EditParametroComponent } from "./menu-mantenimientos/mantenimientos-parametros/edit-parametro/edit-parametro.component";
-import { DetalleEjercicioComponent } from './ejercicios/detalle-ejercicio/detalle-ejercicio.component';
 import { UsuarioPerfilComponent } from './usuario-perfil/usuario-perfil.component';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component';
+import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { ModalEjercicioComponent } from "./ejercicios/modal-ejercicio/modal-ejercicio.component";
+import { ModalEstadoEjercicioComponent } from "./ejercicios/modal-estado-ejercicio/modal-estado-ejercicio.component";
+import { ModalRecetaUsuarioComponent } from "./recetas-usuario/modal-receta-usuario/modal-receta-usuario.component";
+import { CalendarModule, DateAdapter } from "angular-calendar";
+import { adapterFactory } from "angular-calendar/date-adapters/date-fns";
 
 @NgModule({
     declarations: [
@@ -53,9 +58,11 @@ import { EstadisticasComponent } from './estadisticas/estadisticas.component';
         EditTipoComponent,
         EditParametroComponent,
         LoginComponent,
-        DetalleEjercicioComponent,
         UsuarioPerfilComponent,
-        EstadisticasComponent
+        EstadisticasComponent, 
+        ModalEjercicioComponent,
+        ModalEstadoEjercicioComponent,
+        ModalRecetaUsuarioComponent
     ],
     imports: [
         CommonModule,
@@ -64,7 +71,12 @@ import { EstadisticasComponent } from './estadisticas/estadisticas.component';
         RouterModule,
         TranslocoRootModule,
         FormsModule,
-        MatDialogModule
+        MatDialogModule,
+        NgxChartsModule,
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory,
+          })
     ],
     providers: [],
     bootstrap: []

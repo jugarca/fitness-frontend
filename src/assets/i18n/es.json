@@ -14,6 +14,11 @@
    "ejerciciosTitle": "Entrenamientos",
    "usuariosTitle": "Usuarios",
    "tiposTitle": "Tipos",
+   "idioma.es": "Castellano",
+   "idioma.en": "Inglés",
+   "idioma.ca": "Valenciano",
+   "logout": "Cerrar Sesión",
+   "perfil": "Ver Perfil",
    "parametros": "Parámetros",
    "general.busqueda": "Críterios de búsqueda",
    "general.acciones": "Acciones",
@@ -30,6 +35,28 @@
    "recetas.modal.descripcion": "Descripción de la receta",
    "recetas.modal.kcal": "Kcal de la receta",
    "recetas.modal.tipo": "Tipo de Alimentación",
+   "recetas.modal.imagen": "Imagen",
+   "titleWorkouth1": "Crear/Editar Plan de Entrenamiento",
+   "titleWorkout": "Plan de Entrenamiento",
+   "resumen": "Resumen del Plan de Entrenamiento",
+   "altura": "Altura",
+   "error.altura": "La altura no puede exceder los 300 cm.",
+   "error.requerido": "Este campo es requerido.",
+   "peso": "Peso",
+   "error.peso": "El peso no puede exceder los 350 kg.",
+   "tiempo": "Tiempo de entranamiento",
+   "material": "Material para ejercicio",
+   "dias": "Días de entrenamiento",
+   "dias2": "Días de la semana",
+   "siguiente": "Siguiente",
+   "anterior": "Anterior",
+   "guardar": "Guardar",
+   "alimentacion": "Datos de Alimentación",
+   "pregunta": "¿Quieres tener un plan de alimentación?",
+   "kilocalorias": "Kilocalorías máximas",
+   "tipoalimentacion": "Tipo de alimentación",
+   "fechaInicio": "Fecha de inicio",
+   "fechaFin": "Fecha fin",
    "formulario": {
       "iniciarSesion": "Iniciar sesión",
       "registrarse": "Registrarse"
@@ -58,7 +85,7 @@
       },
       "buscar": "Buscar ejercicio",
       "modal": {
-        "title": "Editar Ejercicio",
+        "title": "Crear/Editar Ejercicio",
         "id": "ID del Ejercicio",
         "nombre": "Nombre del Ejercicio",
         "objetivo": "Objetivo del Ejercicio",
@@ -125,6 +152,43 @@
         "edit": "Editar",
         "delete": "Borrar"
       }
+    },
+    "entrenamiento":{
+      "title": "Plan del Entrenamiento",
+      "titleModal": "Detalle del Entrenamiento",
+      "titleModalEstado": "Estado del Entrenamiento",
+      "nombre": "Nombre",
+      "descripcion": "Descripción",
+      "duracion":"Duración",
+      "fecha": "Data de realización",
+      "material": "Material",
+      "estado": "Estado",
+      "cerrar": "Cerrar",
+      "guardar": "Guardar",
+      "acciones": "Acciones"
+    },
+    "receta":{
+      "title": "Recetas del Usuario",
+      "titleModal": "Detalle de la Receta",
+      "nombre": "Nombre",
+      "descripcion": "Descripción",
+      "fecha": "Fecha",
+      "tipo":"Tipo de Alimentación",
+      "kilocalorias": "Kilocalorías",
+      "horario": "Horario",
+      "estado": "Estado",
+      "cerrar": "Cerrar",
+      "guardar": "Guardar",
+      "acciones": "Acciones"
+    },
+    "calendarioView":{
+      "day": "Día",
+      "week": "Semana",
+      "month": "Mes",
+      "previous": "Anterior",
+      "today": "Hoy",
+      "next": "Siguiente"
+      
     }
 }
 

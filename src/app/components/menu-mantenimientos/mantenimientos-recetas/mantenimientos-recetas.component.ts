@@ -16,7 +16,7 @@ export class MantenimientosRecetasComponent {
 
   
 
-  displayedColumns: string[] = ['id', 'nombrePlato', 'descripcion', 'kilocalorias', 'tipoAlimentacion', 'acciones'];
+  displayedColumns: string[] = ['id', 'nombrePlato', 'descripcion', 'kilocalorias', 'tipoAlimentacion', 'imagen', 'acciones'];
   
   recetasArray = [];
 

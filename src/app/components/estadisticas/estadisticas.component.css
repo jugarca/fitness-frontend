@@ -1,0 +1,19 @@
+.link-grafico {
+    color: green;
+    margin: 10px;
+    font-size: 1.5em;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+.align-center {
+    text-align: center;
+    justify-content: center;
+    margin-left: 28%;
+    margin-top: 5%;
+}
+
+.align-center-title {
+    text-align: center;
+    justify-content: center;
+}

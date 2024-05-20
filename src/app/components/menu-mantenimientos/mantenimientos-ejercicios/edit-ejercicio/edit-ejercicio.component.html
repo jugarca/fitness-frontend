@@ -1,75 +1,100 @@
-<h2 mat-dialog-title>{{'ejercicios.modal.title' | transloco}}</h2>
-<mat-dialog-content>
-  <form [formGroup]="form">
-    <div class="row">
-        <div class="col-md-2">
-            <mat-form-field class="w-100">
-            <mat-label>{{'ejercicios.modal.id' | transloco}}</mat-label>
-            <input matInput readonly formControlName="id">
-            </mat-form-field>
+<div class="border-green">
+    <h2 mat-dialog-title>{{'ejercicios.modal.title' | transloco}}</h2>
+    <mat-dialog-content>
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-md-2">
+                <mat-form-field class="w-100">
+                <mat-label>{{'ejercicios.modal.id' | transloco}}</mat-label>
+                <input matInput readonly formControlName="id">
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field class="w-100">
+                <mat-label>{{'ejercicios.modal.nombre' | transloco}}</mat-label>
+                <input required matInput formControlName="nombre">
+                </mat-form-field>
+            </div>
+            <mat-error *ngIf="form.get('nombre')?.hasError('required')">
+                {{'error.requerido' | transloco}}
+            </mat-error>
+            <div class="col-md-4">
+                <mat-form-field class="w-100">
+                <mat-label>{{'ejercicios.modal.objetivo' | transloco}}</mat-label>
+                <mat-select formControlName="objetivo">
+                    <mat-option *ngFor="let objetivo of tiposObjetivo" [value]="objetivo.codigo">{{ objetivo.descripcion }}</mat-option>
+                </mat-select>
+                </mat-form-field>
+                <mat-error *ngIf="form.get('objetivo')?.hasError('required')">
+                    {{'error.requerido' | transloco}}
+                </mat-error>
+            </div>
         </div>
-        <div class="col-md-4">
-            <mat-form-field class="w-100">
-            <mat-label>{{'ejercicios.modal.nombre' | transloco}}</mat-label>
-            <input matInput formControlName="nombre">
-            </mat-form-field>
+        <div class="row">
+            <div class="col-md-3">
+                <mat-form-field class="w-100">
+                <mat-label>{{'ejercicios.modal.nivel' | transloco}}</mat-label>
+                <mat-select formControlName="nivel">
+                    <mat-option *ngFor="let nivel of tiposNivel" [value]="nivel.codigo">{{ nivel.descripcion }}</mat-option>
+                </mat-select>
+                </mat-form-field>
+                <mat-error *ngIf="form.get('nivel')?.hasError('required')">
+                    {{'error.requerido' | transloco}}
+                </mat-error>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field class="w-100">
+                <mat-label>{{'ejercicios.modal.duracion' | transloco}}</mat-label>
+                <mat-select formControlName="duracion">
+                    <mat-option *ngFor="let duracion of tiposTiempos" [value]="duracion.codigo">{{ duracion.descripcion }}</mat-option>
+                </mat-select>
+                </mat-form-field>
+                <mat-error *ngIf="form.get('duracion')?.hasError('required')">
+                    {{'error.requerido' | transloco}}
+                </mat-error>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field class="w-100">
+                <mat-label>{{'ejercicios.modal.grupoMuscular' | transloco}}</mat-label>
+                <mat-select formControlName="grupoMuscular">
+                    <mat-option *ngFor="let grupo of tiposGrupoMuscular" [value]="grupo.codigo">{{ grupo.descripcion }}</mat-option>
+                </mat-select>
+                </mat-form-field>
+            </div>
         </div>
-        <div class="col-md-4">
-            <mat-form-field class="w-100">
-            <mat-label>{{'ejercicios.modal.objetivo' | transloco}}</mat-label>
-            <mat-select formControlName="objetivo">
-                <mat-option *ngFor="let objetivo of tiposObjetivo" [value]="objetivo.codigo">{{ objetivo.descripcion }}</mat-option>
-            </mat-select>
-            </mat-form-field>
+        <div class="row">
+            <div class="col-md-3">
+                <mat-form-field class="w-100">
+                <mat-label>{{'ejercicios.modal.deporte' | transloco}}</mat-label>
+                <mat-select formControlName="deporte">
+                    <mat-option *ngFor="let deporte of tiposDeporte" [value]="deporte.codigo">{{ deporte.descripcion }}</mat-option>
+                </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field class="w-100">
+                <mat-label>{{'ejercicios.modal.material' | transloco}}</mat-label>
+                <mat-select formControlName="material">
+                    <mat-option *ngFor="let material of tiposMaterial" [value]="material.codigo">{{ material.descripcion }}</mat-option>
+                </mat-select>
+                </mat-form-field>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <mat-form-field class="w-100">
-            <mat-label>{{'ejercicios.modal.nivel' | transloco}}</mat-label>
-            <mat-select formControlName="nivel">
-                <mat-option *ngFor="let nivel of tiposNivel" [value]="nivel.codigo">{{ nivel.descripcion }}</mat-option>
-            </mat-select>
-            </mat-form-field>
+        <div class="row">
+            <div class="row">
+                <mat-form-field class="w-100">
+                  <mat-label>{{'recetas.modal.imagen' | transloco}}</mat-label>
+                  <input matInput formControlName="imagen">
+                </mat-form-field>
+                <mat-error *ngIf="form.get('imagen')?.hasError('required')">
+                    {{'error.requerido' | transloco}}
+                </mat-error>
+              </div>
         </div>
-        <div class="col-md-3">
-            <mat-form-field class="w-100">
-            <mat-label>{{'ejercicios.modal.duracion' | transloco}}</mat-label>
-            <mat-select formControlName="duracion">
-                <mat-option *ngFor="let duracion of tiposTiempos" [value]="duracion.codigo">{{ duracion.descripcion }}</mat-option>
-            </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="col-md-3">
-            <mat-form-field class="w-100">
-            <mat-label>{{'ejercicios.modal.grupoMuscular' | transloco}}</mat-label>
-            <mat-select formControlName="grupoMuscular">
-                <mat-option *ngFor="let grupo of tiposGrupoMuscular" [value]="grupo.codigo">{{ grupo.descripcion }}</mat-option>
-            </mat-select>
-            </mat-form-field>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <mat-form-field class="w-100">
-            <mat-label>{{'ejercicios.modal.deporte' | transloco}}</mat-label>
-            <mat-select formControlName="deporte">
-                <mat-option *ngFor="let deporte of tiposDeporte" [value]="deporte.codigo">{{ deporte.descripcion }}</mat-option>
-            </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="col-md-3">
-            <mat-form-field class="w-100">
-            <mat-label>{{'ejercicios.modal.material' | transloco}}</mat-label>
-            <mat-select formControlName="material">
-                <mat-option *ngFor="let material of tiposMaterial" [value]="material.codigo">{{ material.descripcion }}</mat-option>
-            </mat-select>
-            </mat-form-field>
-        </div>
-    </div>
-  </form>
-</mat-dialog-content>
-<mat-dialog-actions class="justify-content-end">
-  <button mat-raised-button color="primary" (click)="onNoClick()"><mat-icon>cancel</mat-icon>{{'ejercicios.modal.cancel' | transloco}}</button>
-  <button mat-raised-button color="primary" (click)="onSave()"><mat-icon>save</mat-icon>{{'ejercicios.modal.save' | transloco}}</button>
-</mat-dialog-actions>
+    </form>
+    </mat-dialog-content>
+    <mat-dialog-actions class="justify-content-end">
+    <button mat-raised-button color="primary" (click)="onNoClick()"><mat-icon>cancel</mat-icon>{{'ejercicios.modal.cancel' | transloco}}</button>
+    <button mat-raised-button color="primary" (click)="onSave()"><mat-icon>save</mat-icon>{{'ejercicios.modal.save' | transloco}}</button>
+    </mat-dialog-actions>
+</div>    

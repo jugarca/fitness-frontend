@@ -1,7 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { EjercicioUsuarioVO } from 'src/app/interfaces/ejercicio-usuarios';
+import { EjerciciosUsuariosService } from 'src/app/services/ejercicios-usuario.service';
+import { ModalEjercicioComponent } from './modal-ejercicio/modal-ejercicio.component';
+import { ModalEstadoEjercicioComponent } from './modal-estado-ejercicio/modal-estado-ejercicio.component';
 
 @Component({
   selector: 'app-ejercicios',
@@ -10,59 +16,52 @@ import { Router } from '@angular/router';
 })
 export class EjerciciosComponent {
 
-  displayedColumns: string[] = ['nombreEntrenamiento', 'descripcion', 'duracion', 'fecha', 'material', 'acciones'];
-  dataSource = new MatTableDataSource<EjercicioUsuario>(ELEMENT_DATA);
+  ejerciciosUsuarioArray: EjercicioUsuarioVO[]= [];
 
-  constructor(public dialog: MatDialog, private router: Router) {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  displayedColumns: string[] = ['nombreEntrenamiento', 'ejercicioId', 'duracion', 'fechaRealizacion', 'material', 'estado','imagen', 'acciones'];
+  dataSource = new MatTableDataSource(this.ejerciciosUsuarioArray);
 
-  verEjercicio(element: EjercicioUsuario) {
-    this.router.navigate(['/detalle-entrenamiento', element.nombreEntrenamiento]);
-    // Aquí puedes definir lo que sucede cuando se hace clic en el botón de ver receta
-    /*this.dialog.open(RecetaDialogComponent, {
-      data: {
-        nombre: element.nombrePlato,
-        descripcion: "Esta informacion se cargara desde la base de datos",
-        kilocalorias: element.kilocalorias,
-        tipoAlimentacion: element.tipoAlimentacion,
-        ingredientes: "Esta informacion se cargara desde la base de datos"
-      },
-      width: '500px',
-      height: '300px'
-    });*/
+  constructor(public ejerciciosUsuarioService: EjerciciosUsuariosService, public dialog: MatDialog, private router: Router) {
+    this.refreshTable();
+  }
+
+  verEjercicio(element: EjercicioUsuarioVO) {
+    console.log(element);
+      const dialogRef = this.dialog.open(ModalEjercicioComponent, {
+        width: '50%',
+        data: {ejercicio: element}
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('El diálogo fue cerrado');
+      });
+    
+  }
+
+  cambiarEstado(element: EjercicioUsuarioVO) {
+    console.log(element);
+      const dialogRef = this.dialog.open(ModalEstadoEjercicioComponent, {
+        width: '50%',
+        data: {ejercicio: element}
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('El diálogo fue cerrado');
+        this.refreshTable();
+      });
+    
+  }
+
+  private refreshTable() {
+    this.ejerciciosUsuarioService.getByUserId(Number(sessionStorage.getItem('id'))).subscribe(data => {
+      console.log(data);
+      this.ejerciciosUsuarioArray = data;
+      this.dataSource = new MatTableDataSource(this.ejerciciosUsuarioArray);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
 }
-
-
-export interface EjercicioUsuario {
-  nombreEntrenamiento: string;
-  descripcion: string;
-  fecha: string;
-  duracion: string;
-  material: string;
-}
-
-const ELEMENT_DATA: EjercicioUsuario[] = [
-  {
-    nombreEntrenamiento: 'Entrenamiento 1',
-    descripcion: 'Entrenamiento de fuerza',
-    fecha: '2022-01-01',
-    duracion: '30 minutos',
-    material: 'Pesas'
-  },
-  {
-    nombreEntrenamiento: 'Entrenamiento 2',
-    descripcion: 'Entrenamiento de cardio',
-    fecha: '2022-01-02',
-    duracion: '45 minutos',
-    material: 'Cinta de correr'
-  },
-  {
-    nombreEntrenamiento: 'Entrenamiento 3',
-    descripcion: 'Entrenamiento de flexibilidad',
-    fecha: '2022-01-03',
-    duracion: '15 minutos',
-    material: 'Esterilla de yoga'
-  }
-];
-  // Agrega más registros aquí

@@ -1,102 +1,110 @@
-<h2 mat-dialog-title>{{'recetas.modal.title' | transloco}}</h2>
-<mat-dialog-content>
-  <form [formGroup]="form">
-    <div class="row">
-       <div class="col-md-2">
-          <mat-form-field class="w-100">
-          <mat-label>{{'recetas.modal.id' | transloco}}</mat-label>
-          <input matInput readonly="true" formControlName="id">
-          </mat-form-field>
-        </div>
-      <div class="col-md-3">
-        <mat-form-field class="w-100">
-        <mat-label>{{'recetas.modal.nombre' | transloco}}</mat-label>
-        <input matInput formControlName="nombrePlato">
-        </mat-form-field>
-      </div>
-      <div class="col-md-6">
-        <mat-form-field class="w-100">
-        <mat-label>{{'recetas.modal.descripcion' | transloco}}</mat-label>
-        <input matInput formControlName="descripcion">
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row">
+<div class="border-green">
+  <h2 mat-dialog-title>{{'recetas.modal.title' | transloco}}</h2>
+  <mat-dialog-content>
+    <form [formGroup]="form">
+      <div class="row">
         <div class="col-md-2">
             <mat-form-field class="w-100">
-            <mat-label>{{'recetas.modal.kcal' | transloco}}</mat-label>
-            <input matInput type="number" formControlName="kilocalorias">
+            <mat-label>{{'recetas.modal.id' | transloco}}</mat-label>
+            <input matInput readonly="true" formControlName="id">
             </mat-form-field>
-        </div>
-        <div class="col-md-4">
+          </div>
+        <div class="col-md-3">
           <mat-form-field class="w-100">
-                <mat-label>{{'recetas.modal.tipo' | transloco}}</mat-label>
-                <mat-select formControlName="tipoAlimentacion">
-                  <mat-option *ngFor="let tipo of tiposAlimentacion" [value]="tipo">{{ tipo }}</mat-option>
-                </mat-select>
+          <mat-label>{{'recetas.modal.nombre' | transloco}}</mat-label>
+          <input matInput formControlName="nombrePlato">
           </mat-form-field>
         </div>
-    </div>
-  </form>
-  <!-- Tabla de ingredientes -->
-  <table mat-table [dataSource]="ingredientes" class="mat-elevation-z8">
-
-    <!-- Columna de ID -->
-    <ng-container matColumnDef="idIngrediente">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let ingrediente">
-        <div *ngIf="!ingrediente.editando"> 
-            {{ingrediente.idAlimento}} 
+        <div class="col-md-6">
+          <mat-form-field class="w-100">
+          <mat-label>{{'recetas.modal.descripcion' | transloco}}</mat-label>
+          <input matInput formControlName="descripcion">
+          </mat-form-field>
         </div>
-        <mat-select *ngIf="ingrediente.editando">
-          <mat-option *ngFor="let ingrediente of tiposIngredientes" [value]="ingrediente.codigo">{{ ingrediente.descripcion }}</mat-option>
-        </mat-select>
-      </td>
-    </ng-container>
-  
-  
-    <!-- Columna de cantidad -->
-    <ng-container matColumnDef="cantidad">
-        <th mat-header-cell *matHeaderCellDef> Cantidad </th>
-        <td mat-cell *matCellDef="let ingrediente">
-        <div *ngIf="!ingrediente.editando">
-            {{ingrediente.cantidad}}
-        </div>
-        <mat-form-field *ngIf="ingrediente.editando">
-            <input matInput [(ngModel)]="ingrediente.cantidad" type="number">
+      </div>
+      <div class="row">
+          <div class="col-md-2">
+              <mat-form-field class="w-100">
+              <mat-label>{{'recetas.modal.kcal' | transloco}}</mat-label>
+              <input matInput type="number" formControlName="kilocalorias">
+              </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="w-100">
+                  <mat-label>{{'recetas.modal.tipo' | transloco}}</mat-label>
+                  <mat-select formControlName="tipoAlimentacion">
+                    <mat-option *ngFor="let tipo of tiposAlimentacion" [value]="tipo">{{ tipo }}</mat-option>
+                  </mat-select>
+            </mat-form-field>
+          </div>
+      </div>
+      <div class="row">
+        <mat-form-field class="w-100">
+          <mat-label>{{'recetas.modal.imagen' | transloco}}</mat-label>
+          <input matInput formControlName="imagen">
         </mat-form-field>
+      </div>
+    </form>
+    <!-- Tabla de ingredientes -->
+    <table mat-table [dataSource]="ingredientes" class="mat-elevation-z8">
+
+      <!-- Columna de ID -->
+      <ng-container matColumnDef="idIngrediente">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let ingrediente">
+          <div *ngIf="!ingrediente.editando"> 
+              {{ingrediente.idAlimento}} 
+          </div>
+          <mat-select *ngIf="ingrediente.editando">
+            <mat-option *ngFor="let ingrediente of tiposIngredientes" [value]="ingrediente.codigo">{{ ingrediente.descripcion }}</mat-option>
+          </mat-select>
         </td>
-    </ng-container>
-  
-    <!-- Columna de acciones -->
-    <ng-container matColumnDef="acciones">
-      <th mat-header-cell *matHeaderCellDef> Acciones
-        <button mat-icon-button color="primary" (click)="agregarIngrediente()">
-          <mat-icon>add</mat-icon>
-        </button> 
-      </th>
-      <td mat-cell *matCellDef="let ingrediente">
-        <button mat-icon-button color="primary" (click)="ingrediente.editando = !ingrediente.editando">
-            <mat-icon *ngIf="!ingrediente.editando">edit</mat-icon>
-            <mat-icon *ngIf="ingrediente.editando">save</mat-icon>
-        </button>
-        <button *ngIf="!ingrediente.editando" mat-icon-button color="warn" (click)="borrarIngrediente(ingrediente.idAlimento)">
-          <mat-icon >delete</mat-icon>
-        </button>
-        <button *ngIf="ingrediente.editando" mat-icon-button color="warn" (click)="cancelarCambio()">
-          <mat-icon *ngIf="ingrediente.editando">cancel</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  <!--End table ingredientes-->
+      </ng-container>
+    
+    
+      <!-- Columna de cantidad -->
+      <ng-container matColumnDef="cantidad">
+          <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+          <td mat-cell *matCellDef="let ingrediente">
+          <div *ngIf="!ingrediente.editando">
+              {{ingrediente.cantidad}}
+          </div>
+          <mat-form-field *ngIf="ingrediente.editando">
+              <input matInput [(ngModel)]="ingrediente.cantidad" type="number">
+          </mat-form-field>
+          </td>
+      </ng-container>
+    
+      <!-- Columna de acciones -->
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones
+          <button mat-icon-button color="primary" (click)="agregarIngrediente()">
+            <mat-icon>add</mat-icon>
+          </button> 
+        </th>
+        <td mat-cell *matCellDef="let ingrediente">
+          <button mat-icon-button color="primary" (click)="ingrediente.editando = !ingrediente.editando">
+              <mat-icon *ngIf="!ingrediente.editando">edit</mat-icon>
+              <mat-icon *ngIf="ingrediente.editando">save</mat-icon>
+          </button>
+          <button *ngIf="!ingrediente.editando" mat-icon-button color="warn" (click)="borrarIngrediente(ingrediente.idAlimento)">
+            <mat-icon >delete</mat-icon>
+          </button>
+          <button *ngIf="ingrediente.editando" mat-icon-button color="warn" (click)="cancelarCambio()">
+            <mat-icon *ngIf="ingrediente.editando">cancel</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <!--End table ingredientes-->
 
 
-</mat-dialog-content>
-<mat-dialog-actions class="justify-content-end">
-  <button mat-raised-button color="primary" (click)="onCancel()"><mat-icon>cancel</mat-icon>Cancelar</button>
-  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="form.invalid"><mat-icon>save</mat-icon>Guardar</button>
-</mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions class="justify-content-end">
+    <button mat-raised-button color="primary" (click)="onCancel()"><mat-icon>cancel</mat-icon>Cancelar</button>
+    <button mat-raised-button color="primary" (click)="onSave()" [disabled]="form.invalid"><mat-icon>save</mat-icon>Guardar</button>
+  </mat-dialog-actions>
+</div>

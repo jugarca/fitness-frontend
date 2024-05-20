@@ -27,6 +27,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatNativeDateModule } from "@angular/material/core";
 
 @NgModule({
         declarations: [
@@ -50,6 +52,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
             MatMenuModule,
             MatPaginatorModule,
             MatProgressSpinnerModule,
+            MatSnackBarModule,
             MatSelectModule,
             MatSlideToggleModule,
             MatSortModule,
@@ -58,7 +61,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
             MatTabsModule,
             MatToolbarModule,
             MatTooltipModule,
-            
+            MatNativeDateModule,
         ],
         exports:[
              MatAutocompleteModule,
@@ -78,6 +81,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
              MatMenuModule,
              MatPaginatorModule,
              MatProgressSpinnerModule,
+             MatSnackBarModule,
              MatSelectModule,
              MatSlideToggleModule,
              MatSortModule,
@@ -86,6 +90,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
              MatTabsModule,
              MatToolbarModule,
              MatTooltipModule,
+             MatNativeDateModule,
              
         ],
         providers: [],

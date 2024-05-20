@@ -7,6 +7,7 @@ import { RecetasService } from 'src/app/services/recetas.service';
 import { RecetasIngredientesService } from '../../../../services/recetas-ingredientes.service';
 import { RecetasAlimentosVO } from 'src/app/interfaces/recetas-ingredientes.interface';
 import { ValoresTipoVO } from 'src/app/interfaces/valoresTipos.interface';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-edit-receta',
@@ -31,17 +32,11 @@ export class EditRecetaComponent {
     private recetasService: RecetasService,
     private recetasIngredientesService: RecetasIngredientesService,
     private parametrosService: ParametrosService,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private snackbarService: SnackbarService
   ) {
 
-    this.recetasIngredientesService.getByReceta(data.receta.id).subscribe(data => {
-      console.log(data);
-      this.ingredientes = data;
-      this.ingredientes = this.ingredientes.map((item: RecetasAlimentosVO) => {
-        return {...item, editando: false};
-      });
-      console.log(this.ingredientes);
-    });
+    
 
     this.parametrosService.getByTipo('INGREDIENTE').subscribe(data => {
       console.log(data);
@@ -56,6 +51,7 @@ export class EditRecetaComponent {
         descripcion: [null, Validators.required],
         kilocalorias: [null, Validators.required],
         tipoAlimentacion: [null, Validators.required],
+        imagen: [null]
         // Agrega más controles aquí para las otras propiedades de la receta
       });
 
@@ -63,6 +59,15 @@ export class EditRecetaComponent {
       this.ingredientes = [];
 
     }else{
+      this.recetasIngredientesService.getByReceta(data.receta.id).subscribe(data => {
+        console.log(data);
+        this.ingredientes = data;
+        this.ingredientes = this.ingredientes.map((item: RecetasAlimentosVO) => {
+          return {...item, editando: false};
+        });
+        console.log(this.ingredientes);
+      });
+      
       // Si se edita un registro se crea un formulario con los datos del registro.
       this.form = this.fb.group({
         id: [data.receta.id, Validators.required], 
@@ -70,6 +75,7 @@ export class EditRecetaComponent {
         descripcion: [data.receta.descripcion, Validators.required],
         kilocalorias: [data.receta.kilocalorias, Validators.required],
         tipoAlimentacion: [data.receta.tipoAlimentacion, Validators.required],
+        imagen: [data.receta.imagen]
         // Agrega más controles aquí para las otras propiedades de la receta
       });
     }
@@ -82,8 +88,8 @@ export class EditRecetaComponent {
   onSave(): void {
     if (this.form.valid) {
       this.recetasService.save(this.form.value).subscribe(data => {
-        console.log(data);
         this.dialogRef.close(this.form.value);
+        this.snackbarService.openSnackBar('Guardado correctamente');
       });
     }
   }

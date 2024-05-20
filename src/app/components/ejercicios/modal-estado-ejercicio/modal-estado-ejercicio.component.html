@@ -1,0 +1,25 @@
+<div class="border-green">
+  <h2 style="text-align: center;" mat-dialog-title>{{'entrenamiento.titleModalEstado' | transloco}}</h2>
+  <mat-dialog-content>
+    <div class="row">
+      <div class="col-md-6">
+          <form [formGroup]="form">
+            <mat-form-field class="w-100">
+              <mat-label>{{'entrenamiento.estado' | transloco}}</mat-label>
+              <mat-select required formControlName="estado">
+                <mat-option *ngFor="let option of estadoEjercicio" [value]="option.codigo">
+                  {{option.descripcion}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </form>  
+      </div>
+
+    </div>
+    
+  </mat-dialog-content>
+  <mat-dialog-actions class="justify-content-end">
+    <button mat-raised-button color="primary" (click)="onNoClick()"><mat-icon>cancel</mat-icon>{{'entrenamiento.cerrar' | transloco}}</button>
+    <button mat-raised-button color="primary" (click)="onSave()"><mat-icon>save</mat-icon>{{'entrenamiento.guardar' | transloco}}</button>
+  </mat-dialog-actions>
+</div>

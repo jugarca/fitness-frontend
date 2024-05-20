@@ -29,4 +29,16 @@ export class UsuariosService {
   save(user: any): Observable<any> {
     return this.http.post(this.API_URL + "/save", user);
   }
+
+  registro(user: any): Observable<any> {
+    return this.http.post(this.API_URL + "/registro", user);
+  }
+
+  login(user: any): Observable<any> {
+    return this.http.post(this.API_URL + "/login", user);
+  }
+
+  plan(plan: any): Observable<any> {
+    return this.http.post(this.API_URL + "/plan", plan);
+  }
 }

@@ -14,6 +14,11 @@
     "ejerciciosTitle": "Entrenaments",
     "usuariosTitle": "Usuaris",
     "tiposTitle": "Tipus",
+    "idioma.es": "Castellà",
+    "idioma.en": "Anglès",
+    "idioma.ca": "Valencià",
+    "logout": "Tancar Sessió",
+    "perfil": "Veure Perfil",
     "parametros": "Paràmetres",
     "general.busqueda": "Críteris de búsqueda",
     "general.acciones": "Accions",
@@ -30,6 +35,28 @@
     "recetas.modal.descripcion": "Descripció de la recepta",
     "recetas.modal.kcal": "Kcal de la recepta",
     "recetas.modal.tipo": "Tipo de Alimentació",
+    "recetas.modal.imagen": "Imagen",
+    "resumen": "Resum del Plan de Entrenament",
+    "titleWorkouth1": "Crear/Editar Pla de Entrenament",
+    "titleWorkout": "Pla de Entrenament",
+    "altura": "Altura",
+    "error.altura": "La altura no pot exceder los 300 cm.",
+    "error.requerido": "Aquest input es obligatori.",
+    "peso": "Pes",
+    "error.peso": "El pes no pot excedir els 350kg",
+    "tiempo": "Temps de entranament",
+    "material": "Material para exercici",
+    "dias": "Días de entrenament",
+    "dias2": "Días de la setmana",
+    "siguiente": "Següent",
+    "anterior": "Anterior",
+    "guardar": "Guardar",
+    "alimentacion": "Dades de Alimentación",
+    "pregunta": "¿vols tindre un pla de alimentació?",
+    "kilocalorias": "Kilocaloríes máximes",
+    "tipoalimentacion": "Tipús de alimentació",
+    "fechaInicio": "Data d'inici",
+    "fechaFin": "Data de finalització",
     "formulario": {
         "iniciarSesion": "Inicia sessió",
         "registrarse": "Registra't"
@@ -58,7 +85,7 @@
         },
         "buscar": "Buscar ejercici",
         "modal": {
-          "title": "Editar Ejercici",
+          "title": "Crear/Editar Ejercici",
           "id": "ID del Ejercici",
           "nombre": "Nombre del Ejercici",
           "objetivo": "Objectiu del Ejercici",
@@ -125,6 +152,42 @@
           "edit": "Edita",
           "delete": "Esborra"
         }
+      },
+      "entrenamiento":{
+        "title": "Plan del Entrenamient",
+        "titleModal": "Detall del Entrenamient",
+        "titleModalEstado": "Estado del Entrenamient",
+        "nombre": "Nom",
+        "descripcion": "Descripció",
+        "duracion":"Duració",
+        "fecha": "Data de realizaçió",
+        "material": "Material",
+        "estado": "Estat",
+        "cerrar": "Tancar",
+        "guardar": "Guardar",
+        "acciones": "Accions"
+      },
+      "receta":{
+        "title": "Receptes de l'Usuari",
+        "titleModal": "Detall de la Recepta",
+        "nombre": "Nom de la recepta",
+        "descripcion": "Descripció",
+        "fecha": "Data",
+        "tipo":"Tipus d'alimentació",
+        "kilocalorias": "Kilocalories",
+        "horario": "Horari",
+        "estado": "Estat",
+        "cerrar": "Tancar",
+        "guardar": "Guardar",
+        "acciones": "Accions"
+      },
+      "calendarioView":{
+        "day": "Día",
+        "week": "Setmana",
+        "month": "Mes",
+        "previous": "Anterior",
+        "today": "Avui",
+        "next": "Següent"
       }
 
     

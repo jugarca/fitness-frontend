@@ -2,8 +2,12 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import { MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 import { map, Observable, startWith } from 'rxjs';
+import { ParametrosService } from '../../../services/parametros.service';
+import { ValoresTipoVO } from '../../../interfaces/valoresTipos.interface';
+import { UsuariosService } from '../../../services/usuarios.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-plan-entrenamiento-editar',
@@ -20,14 +24,15 @@ export class PlanEntrenamientoEditarComponent{
   materials: string[] = ['Pesas'];
 
   //TODO: Cargarlo en el constructor desde Base de datos.
-  public niveles = ['nivel basico', 'nivel intermedio', 'nivel avanzado', 'elite'];
-  public tiempos = ['15 minutos', '30 minutos', '45 minutos', '60 minutos', '75 minutos', '90 minutos'];
-  public objetivos = ['Perdida de grasa', 'Aumento Muscular', 'Resistencia', 'Mantenimiento'];
-  public grupoMuscular = ['Todo', 'Core', 'Brazos', 'Hombros','Pecho','Espalda','Pierna','Tren Superior','Tren Inferior'];
+  public niveles: ValoresTipoVO[]= [];
+  public tiempos: ValoresTipoVO[]= [];
+  public objetivos: ValoresTipoVO[]= [];
+  public grupoMuscular: ValoresTipoVO[]= [];
+  public tiposAlimentacion: ValoresTipoVO[] = [];
 
   //Esto es una prueba de concepto de autocomplete con chips
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  filteredMateriales: Observable<string[]>;
+  filteredMateriales!: Observable<string[]>;
   //TODO: Aqui se marcaran los que vienen de Base de datos.
   materiales: string[] = [];
   allMaterials: string[] = ['Mancuernas', 'Comba', 'Cintas', 'Pesas Rusas', 'Barra'];
@@ -35,30 +40,71 @@ export class PlanEntrenamientoEditarComponent{
   @ViewChild('materialInput') materialInput: ElementRef<HTMLInputElement> | undefined;
 
   //Para el autocomplete de dias
-  filteredDias: Observable<string[]>;
+  filteredDias!: Observable<string[]>;
   //TODO: Aqui se marcaran los que vienen de Base de datos.
   dias: string[] = [];
   allDias: string[] = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
   diaCtrl = new FormControl('');
   @ViewChild('diaInput') diaInput: ElementRef<HTMLInputElement> | undefined;
 
-  constructor(private _formBuilder: FormBuilder) {
+  constructor(private _formBuilder: FormBuilder, private parametrosService: ParametrosService,
+    private usuariosService: UsuariosService, private router: Router) {
     this.primerFormGroup = this._formBuilder.group({
       altura: ['', [Validators.required, Validators.max(300)]],
       peso: ['', [Validators.required, Validators.max(350)]],
       nivel: [''],
       tiempo: [''],
       objetivo: [''],
-      grupoMuscular: ['']
-      // Agrega más controles aquí
+      grupoMuscular: [''],
+      fechaInicio: ['', Validators.required],
+      fechaFin: ['', Validators.required]
     });
+
+    this.parametrosService.getByTipo('MATERIAL').subscribe(data => {
+      this.allMaterials = data.map((data: { codigo: any, descripcion: any }) => data.codigo.toString() + " - " + data.descripcion);
+
+      this.filteredMateriales = this.segundoFormGroup.valueChanges.pipe(
+        startWith(null),
+        map((material: string | null) => (material ? this._filter(material) : this.allMaterials.slice())),
+      );
+    });
+
+    this.parametrosService.getByTipo('DIAS').subscribe(data => {
+      this.allDias = data.map((data: { codigo: any }) => data.codigo);
+
+      this.filteredDias = this.tercerFormGroup.valueChanges.pipe(
+        startWith(null),
+        map((dia: string | null) => (dia ? this._filterDia(dia) : this.allDias.slice())),
+      );
+    });
+
+    this.parametrosService.getByTipo('NIVEL').subscribe(data => {
+      this.niveles = data;
+    });
+
+    this.parametrosService.getByTipo('TIEMPO').subscribe(data => {
+      this.tiempos = data;
+    });
+
+    this.parametrosService.getByTipo('OBJETIVO').subscribe(data => {
+      this.objetivos = data;
+    });
+
+    this.parametrosService.getByTipo('GRUPMUS').subscribe(data => {
+      this.grupoMuscular = data;
+    });
+
+    this.parametrosService.getByTipo('TALIME').subscribe(data => {
+      this.tiposAlimentacion = data;
+    });
+
 
     this.segundoFormGroup = this._formBuilder.group({
       materialDisponible: ['']
     })
 
     this.tercerFormGroup = this._formBuilder.group({
-      diasSemana: ['']
+      diasSemana: [''],
     })
 
     this.cuartoFormGroup = this._formBuilder.group({
@@ -68,16 +114,6 @@ export class PlanEntrenamientoEditarComponent{
       // Agrega más controles aquí
     });
 
-    //Prueba de concepto del autocomplete
-    this.filteredMateriales = this.segundoFormGroup.valueChanges.pipe(
-      startWith(null),
-      map((material: string | null) => (material ? this._filter(material) : this.allMaterials.slice())),
-    );
-
-    this.filteredDias = this.tercerFormGroup.valueChanges.pipe(
-      startWith(null),
-      map((dia: string | null) => (dia ? this._filterDia(dia) : this.allDias.slice())),
-    );
   }
 
   /* Metodos para crear los Autocomplete */
@@ -152,6 +188,29 @@ export class PlanEntrenamientoEditarComponent{
     const filterValue = value.toLowerCase();
 
     return this.allDias.filter(dia => dia.toLowerCase().includes(filterValue));
+  }
+
+  onSave() {
+    const datos = {
+      idUser: sessionStorage.getItem('id'),
+      ...this.primerFormGroup.value,
+      ...this.segundoFormGroup.value,
+      ...this.tercerFormGroup.value,
+      ...this.cuartoFormGroup.value
+    };
+
+    datos.diasSemana = this.dias;
+    datos.materialDisponible = this.materiales;
+
+    console.log(this.dias);
+    
+    // Ahora puedes enviar `datos` a tu método en Java...
+    console.log(datos);
+    this.usuariosService.plan(datos).subscribe(data => {
+      this.router.navigate(['/planEntrenamiento']);
+      //alert("Plan de entrenamiento guardado correctamente");
+    });
+    
   }
 
 

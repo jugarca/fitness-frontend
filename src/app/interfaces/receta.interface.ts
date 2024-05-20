@@ -4,4 +4,5 @@ export interface RecetaVO {
     descripcion: string;
     kilocalorias: number;
     tipoAlimentacion: string;
+    imagen: string;
 }

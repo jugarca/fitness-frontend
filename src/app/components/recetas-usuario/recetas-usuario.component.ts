@@ -1,8 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { RecetaDialogComponent } from './receta-dialog-component';
+import { UsuarioMenuService } from '../../services/usuario-menu.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { UsuariosMenuVO } from '../../interfaces/usuario-menu.interface';
+import { ModalRecetaUsuarioComponent } from './modal-receta-usuario/modal-receta-usuario.component';
 
 @Component({
   selector: 'app-recetas-usuario',
@@ -11,46 +16,33 @@ import { RecetaDialogComponent } from './receta-dialog-component';
 })
 export class RecetasUsuarioComponent {
 
-  displayedColumns: string[] = ['nombrePlato', 'kilocalorias', 'tipoAlimentacion', 'fecha', 'horarioComida', 'acciones'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  usuarioMenuVOArray: UsuariosMenuVO[] = []
 
-  constructor(public dialog: MatDialog) {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  displayedColumns: string[] = ['nombreReceta', 'kilocalorias', 'tipoAlimentacion', 'fecha', 'horario', 'acciones'];
+  dataSource = new MatTableDataSource<UsuariosMenuVO>(this.usuarioMenuVOArray);
 
-  verReceta(element: PeriodicElement) {
+  constructor(public dialog: MatDialog, private usuarioMenuService :UsuarioMenuService) {
+    this.usuarioMenuService.getByUserId(Number(sessionStorage.getItem('id'))).subscribe(data => {
+      this.usuarioMenuVOArray = data;
+      this.dataSource = new MatTableDataSource<UsuariosMenuVO>(this.usuarioMenuVOArray);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
+  }
+
+  verReceta(element: any) {
     // Aquí puedes definir lo que sucede cuando se hace clic en el botón de ver receta
-    this.dialog.open(RecetaDialogComponent, {
-      data: {
-        nombre: element.nombrePlato,
-        descripcion: "Esta informacion se cargara desde la base de datos",
-        kilocalorias: element.kilocalorias,
-        tipoAlimentacion: element.tipoAlimentacion,
-        ingredientes: "Esta informacion se cargara desde la base de datos"
-      },
-      width: '500px',
-      height: '300px'
+    const dialogRef = this.dialog.open(ModalRecetaUsuarioComponent, {
+      width: '50%',
+      data: {receta: element}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('El diálogo fue cerrado');
     });
   }
 
 }
 
-
-export interface PeriodicElement {
-  nombrePlato: string;
-  kilocalorias: number;
-  tipoAlimentacion: string;
-  fecha: string;
-  horarioComida: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {nombrePlato: 'Plato 1', kilocalorias: 200, tipoAlimentacion: 'Vegetariana', fecha: '2022-01-01', horarioComida: 'Desayuno'},
-  {nombrePlato: 'Plato 2', kilocalorias: 300, tipoAlimentacion: 'Vegana', fecha: '2022-01-02', horarioComida: 'Almuerzo'},
-  {nombrePlato: 'Plato 3', kilocalorias: 400, tipoAlimentacion: 'Omnivora', fecha: '2022-01-03', horarioComida: 'Cena'},
-  {nombrePlato: 'Plato 1', kilocalorias: 200, tipoAlimentacion: 'Vegetariana', fecha: '2022-01-01', horarioComida: 'Desayuno'},
-  {nombrePlato: 'Plato 2', kilocalorias: 300, tipoAlimentacion: 'Vegana', fecha: '2022-01-02', horarioComida: 'Almuerzo'},
-  {nombrePlato: 'Plato 3', kilocalorias: 400, tipoAlimentacion: 'Omnivora', fecha: '2022-01-03', horarioComida: 'Cena'},
-  {nombrePlato: 'Plato 1', kilocalorias: 200, tipoAlimentacion: 'Vegetariana', fecha: '2022-01-01', horarioComida: 'Desayuno'},
-  {nombrePlato: 'Plato 2', kilocalorias: 300, tipoAlimentacion: 'Vegana', fecha: '2022-01-02', horarioComida: 'Almuerzo'},
-
-  // Agrega más registros aquí
-];

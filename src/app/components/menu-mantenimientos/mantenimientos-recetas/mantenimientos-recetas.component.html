@@ -48,6 +48,12 @@
         <mat-cell *matCellDef="let receta"> {{receta.tipoAlimentacion}} </mat-cell>
     </ng-container>
 
+    <!-- ID de la receta Column -->
+    <ng-container matColumnDef="imagen">
+      <mat-header-cell hidden *matHeaderCellDef mat-sort-header> {{'recetas.header.id' | transloco}} </mat-header-cell>
+      <mat-cell hidden *matCellDef="let receta"> {{receta.imagen}} </mat-cell>
+  </ng-container>
+
   <!-- Acciones Column -->
   <ng-container matColumnDef="acciones">
     <mat-header-cell *matHeaderCellDef> {{'general.acciones' | transloco}} 

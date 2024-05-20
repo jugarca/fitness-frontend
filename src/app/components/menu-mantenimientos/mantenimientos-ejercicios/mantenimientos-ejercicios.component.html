@@ -66,6 +66,12 @@
         <mat-cell *matCellDef="let ejercicio"> {{ejercicio.material}} </mat-cell>
     </ng-container>
 
+    <!-- ID del ejercicio Column -->
+    <ng-container matColumnDef="imagen">
+      <mat-header-cell hidden *matHeaderCellDef mat-sort-header> {{'ejercicios.header.id' | transloco}} </mat-header-cell>
+      <mat-cell hidden *matCellDef="let ejercicio"> {{ejercicio.imagen}} </mat-cell>
+  </ng-container>
+
   <!-- Acciones Column -->
   <ng-container matColumnDef="acciones">
     <mat-header-cell *matHeaderCellDef> {{'general.acciones' | transloco}} 

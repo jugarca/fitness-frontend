@@ -15,7 +15,7 @@ import { EjercicioVO } from 'src/app/interfaces/ejercicio.interface';
 })
 export class MantenimientosEjerciciosComponent {
   
-  displayedColumns: string[] = ['id', 'nombre', 'objetivo', 'nivel', 'duracion', 'grupoMuscular', 'deporte', 'material', 'acciones'];
+  displayedColumns: string[] = ['id', 'nombre', 'objetivo', 'nivel', 'duracion', 'grupoMuscular', 'deporte', 'material', 'imagen', 'acciones'];
   
   ejerciciosArray = [];
 
@@ -74,6 +74,8 @@ export class MantenimientosEjerciciosComponent {
 
   private refreshTable() {
     this.ejercicioService.getEjercicios().subscribe(data => {
+      console.log(data);
+      
       this.ejerciciosArray = data;
       this.ejercicios = new MatTableDataSource(this.ejerciciosArray);
       this.ejercicios.sort = this.sort;

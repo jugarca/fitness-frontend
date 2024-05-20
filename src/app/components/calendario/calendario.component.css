@@ -1,0 +1,31 @@
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #33b082;
+    --bs-btn-border-color: #33b082;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #2d926d;
+    --bs-btn-hover-border-color: #2d926d;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #2d926d;
+    --bs-btn-active-border-color: #2d926d;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #2d926d;
+    --bs-btn-disabled-border-color: #0d62d926defd;
+}
+
+.buttons-margin{
+    margin-top: 20px;
+}
+
+.cal-month-view .cal-day-badge {
+    background-color: #639280 !important;
+    color: #fff;
+}
+
+.cal-month-view .cal-open-day-events {
+    color: #fff;
+    background-color: #639280 !important;
+    box-shadow: inset 0 0 15px 0 rgba(0, 0, 0, 0.5);
+}

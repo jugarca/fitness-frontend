@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TiposVO } from 'src/app/interfaces/tipos.interface';
 import { ParametrosService } from 'src/app/services/parametros.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 import { TiposService } from 'src/app/services/tipos.service';
 
 @Component({
@@ -21,7 +22,8 @@ export class EditParametroComponent {
     public dialogRef: MatDialogRef<EditParametroComponent>,
     private tiposService: TiposService,
     private parametrosService: ParametrosService,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private snackbarService: SnackbarService) {
 
       tiposService.getTipos().subscribe(data => {
         this.tipoOptions = data;
@@ -57,10 +59,9 @@ export class EditParametroComponent {
 
   onSave(): void {
     if (this.form.valid) {
-      console.log(this.form.value);
       this.parametrosService.save(this.form.value).subscribe(data => {
-        console.log(data);
         this.dialogRef.close(this.form.value);
+        this.snackbarService.openSnackBar('Guardado correctamente');
       });
     }
   }

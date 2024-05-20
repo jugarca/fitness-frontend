@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TiposVO } from 'src/app/interfaces/tipos.interface';
 import { EjerciciosService } from 'src/app/services/ejercicios.service';
 import { ParametrosService } from 'src/app/services/parametros.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-edit-ejercicio',
@@ -26,7 +27,8 @@ export class EditEjercicioComponent {
     private ejerciciosService: EjerciciosService,
     private parametrosService: ParametrosService, 
     public dialogRef: MatDialogRef<EditEjercicioComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private snackbarService: SnackbarService) {
 
     this.parametrosService.getByTipo('NIVEL').subscribe(data => {
       this.tiposNivel = data;
@@ -62,7 +64,8 @@ export class EditEjercicioComponent {
           duracion: [null, Validators.required],
           grupoMuscular: [null],
           deporte: [null],
-          material: [null]
+          material: [null],
+          imagen: [null, Validators.required]
           // Agrega más controles aquí para las otras propiedades de la receta
         });
   
@@ -74,10 +77,11 @@ export class EditEjercicioComponent {
             nombre: [data.ejercicio.nombre, Validators.required],
             objetivo: [data.ejercicio.objetivo, Validators.required],
             nivel: [data.ejercicio.nivel, Validators.required],
-            duracion: [data.ejercicio.duracion, Validators.required],
+            duracion: [data.ejercicio.duracion.toString(), Validators.required],
             grupoMuscular: [data.ejercicio.grupoMuscular],
             deporte: [data.ejercicio.deporte],
-            material: [data.ejercicio.material]
+            material: [data.ejercicio.material],
+            imagen: [data.ejercicio.imagen, Validators.required]
             // Agrega más controles aquí para las otras propiedades de la receta
           });
       }
@@ -89,9 +93,9 @@ export class EditEjercicioComponent {
 
   onSave(): void {
     if (this.form.valid) {
-      //TODO: Aqui se añadira la llamada al guardado de la receta en la base de datos.
       this.ejerciciosService.save(this.form.value).subscribe(data => {
         this.dialogRef.close(this.form.value);
+        this.snackbarService.openSnackBar('Guardado correctamente');
       });
     }
   }

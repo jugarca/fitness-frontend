@@ -1,6 +1,20 @@
-<mat-table [dataSource]="listaCompra">
+<div class="d-flex align-items-center justify-content-center title-margin" style="height: 40px;">
+    <div class="d-flex align-items-center justify-content-center border-bottom w-100 h-100">
+        <h1 class="title-custom">
+            Lista de la compra
+        </h1>
+    </div>
+</div>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<mat-table [dataSource]="dataSource">
 
     <!-- Nombre del producto Column -->
+    <ng-container hidden matColumnDef="id">
+        <mat-header-cell hidden *matHeaderCellDef> Nombre del producto </mat-header-cell>
+        <mat-cell hidden *matCellDef="let producto"> {{producto.id}} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="nombre">
         <mat-header-cell *matHeaderCellDef> Nombre del producto </mat-header-cell>
         <mat-cell *matCellDef="let producto"> {{producto.nombre}} </mat-cell>
@@ -16,7 +30,7 @@
     <ng-container matColumnDef="comprado">
         <mat-header-cell *matHeaderCellDef> Comprado </mat-header-cell>
         <mat-cell *matCellDef="let producto"> 
-            <mat-checkbox [(ngModel)]="producto.comprado"></mat-checkbox>
+            <mat-checkbox [(ngModel)]="producto.comprado" (click)="guardarComprado(producto)"></mat-checkbox>
         </mat-cell>
     </ng-container>
 

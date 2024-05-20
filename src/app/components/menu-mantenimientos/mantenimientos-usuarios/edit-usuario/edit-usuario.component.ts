@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { TiposVO } from 'src/app/interfaces/tipos.interface';
 import { ParametrosService } from 'src/app/services/parametros.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
@@ -26,7 +27,8 @@ export class EditUsuarioComponent {
     private dialogRef: MatDialogRef<EditUsuarioComponent>,
     private usuariosService: UsuariosService,
     private parametrosService: ParametrosService,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private snackbarService: SnackbarService
   ) {
 
     this.parametrosService.getByTipo('NIVEL').subscribe(data => {
@@ -83,9 +85,9 @@ export class EditUsuarioComponent {
 
   onSave(): void {
     if (this.form.valid) {
-      //TODO: Aqui se añadira la llamada al guardado de la receta en la base de datos.
       this.usuariosService.save(this.form.value).subscribe(data => {
         this.dialogRef.close(this.form.value);
+        this.snackbarService.openSnackBar('Guardado correctamente');
       });
     }
   }

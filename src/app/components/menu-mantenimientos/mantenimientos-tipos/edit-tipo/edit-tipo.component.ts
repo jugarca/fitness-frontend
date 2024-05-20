@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 import { TiposService } from 'src/app/services/tipos.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class EditTipoComponent {
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<EditTipoComponent>,
     private tiposService: TiposService,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private snackbarService: SnackbarService) {
 
         // Si se inserta un registro nuevo se crea un formulario vacio
     if (data == null){
@@ -50,8 +52,8 @@ export class EditTipoComponent {
     if (this.form.valid) {
       //TODO: Aqui se añadira la llamada al guardado de la receta en la base de datos.
       this.tiposService.save(this.form.value).subscribe(data => {
-        console.log(data);
         this.dialogRef.close(this.form.value);
+        this.snackbarService.openSnackBar('Guardado correctamente');
       });
     }
   }
