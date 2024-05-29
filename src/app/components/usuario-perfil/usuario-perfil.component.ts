@@ -23,14 +23,14 @@ export class UsuarioPerfilComponent {
   public tiposTiempo: TiposVO[] = [];
   public tiposAlimentacion: TiposVO[] = [];
   public tiposGruposMusculares: TiposVO[] = [];
-
+  public robohashUrl?: string; 
+  identifier = sessionStorage.getItem('nombre');
+  
   constructor(private fb: FormBuilder, private randomUserService: RandomUserService,
               private usuariosService: UsuariosService, private parametrosService: ParametrosService,
               private snackBar: MatSnackBar){
 
-    this.randomUserService.getUser().subscribe((data: any) => {
-      this.fotoPerfil= data.results[0].picture.large;
-    });
+    this.robohashUrl = `https://robohash.org/${this.identifier}.png`;
 
     //1. Se cargan las lista que se van a usar en el formulario
     this.parametrosService.getByTipo('NIVEL').subscribe(data => {

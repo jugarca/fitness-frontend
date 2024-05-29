@@ -6,10 +6,12 @@ import { RouterModule } from "@angular/router";
 import { MaterialModule } from "../material.module";
 import { TranslocoRootModule } from "../transloco-root.module";
 import { ConfirmDialogComponent } from "./components/confirm-dialog.component";
+import { DialogComponent } from "./components/dialog.component";
 
 @NgModule({
     declarations: [
-        ConfirmDialogComponent
+        ConfirmDialogComponent,
+        DialogComponent
     ],
     imports: [
         CommonModule,

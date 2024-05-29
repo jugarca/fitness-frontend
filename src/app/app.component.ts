@@ -11,8 +11,11 @@ export class AppComponent {
   
   title = 'fitness-example2';
   currentYear = new Date().getFullYear();
+  selectLang = 'es';
 
-  constructor(private translocoService: TranslocoService, private router: Router) {}
+  constructor(private translocoService: TranslocoService, private router: Router) {
+    this.changeLanguage(this.selectLang);
+  }
 
   changeLanguage(lang: string) {
     this.translocoService.setActiveLang(lang);

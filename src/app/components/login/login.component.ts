@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { TranslocoService } from '@ngneat/transloco';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/shared/components/dialog.component';
 
 @Component({
   selector: 'app-login',
@@ -15,12 +18,14 @@ export class LoginComponent {
   registro!: FormGroup;
   loginUsuario!: FormGroup;
   errorMessage?: string;
+  errorMessageRegistro?: string;
 
-  constructor(private userService: UsuariosService, fb: FormBuilder, private router: Router) {
+  constructor(private userService: UsuariosService, fb: FormBuilder, private router: Router,
+    private translocoService: TranslocoService, public dialog: MatDialog) {
     this.registro = fb.group({
-      email: ['',[Validators.required, Validators.email]],
-      password: ['',[Validators.required]],
-      nombre: ['',[Validators.required]],
+      email: [null,[Validators.required, Validators.email]],
+      password: [null,[Validators.required]],
+      nombre: [null,[Validators.required]],
       terminos:[false],
     });
 
@@ -52,13 +57,25 @@ export class LoginComponent {
   registrarse(){
     if (this.registro.controls['terminos'].value === false) {
       //TODO: Sustituir alerta por dialog.
-      alert('Debes aceptar los términos y condiciones');
+      this.dialog.open(DialogComponent, {
+        data: {
+          message: 'Debe aceptar los terminos y condiciones para registrarse.'
+        }
+      });
       return;
     }
     this.userService.registro(this.registro.value).subscribe( ()=>{
-      //TODO: Sacar una alerta por dialog
-      alert('Usuario registrado correctamente');
-    } );
+      if (this.errorMessageRegistro) {
+        this.errorMessageRegistro = this.translocoService.translate('error.registro');
+      }else{
+        //TODO: Sacar una alerta por dialog
+        this.dialog.open(DialogComponent, {
+          data: {
+            message: 'Usuario registrado correctamente'
+          }
+        });
+      }   
+    });
   }
 
   login(){
@@ -71,7 +88,7 @@ export class LoginComponent {
       },
       error => {
         console.error('Error en el login:', error);
-        this.errorMessage = 'Usuario o contraseña incorrectos';
+        this.errorMessage = this.translocoService.translate('error.login');
       }
     );
   }

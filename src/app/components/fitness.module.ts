@@ -20,7 +20,7 @@ import { MantenimientosUsuariosComponent } from './menu-mantenimientos/mantenimi
 import { MantenimientosTiposComponent } from './menu-mantenimientos/mantenimientos-tipos/mantenimientos-tipos.component';
 import { MantenimientosParametrosComponent } from './menu-mantenimientos/mantenimientos-parametros/mantenimientos-parametros.component';
 import { EditRecetaComponent } from './menu-mantenimientos/mantenimientos-recetas/edit-receta/edit-receta.component';
-import { MatDialogModule } from "@angular/material/dialog";
+import { MatDialogActions, MatDialogModule } from "@angular/material/dialog";
 import { LoginComponent } from './login/login.component';
 import { EditEjercicioComponent } from "./menu-mantenimientos/mantenimientos-ejercicios/edit-ejercicio/edit-ejercicio.component";
 import { EditUsuarioComponent } from "./menu-mantenimientos/mantenimientos-usuarios/edit-usuario/edit-usuario.component";
