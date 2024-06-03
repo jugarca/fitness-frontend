@@ -20,7 +20,7 @@ export class EjerciciosComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  displayedColumns: string[] = ['nombreEntrenamiento', 'ejercicioId', 'duracion', 'fechaRealizacion', 'material', 'estado','imagen', 'acciones'];
+  displayedColumns: string[] = ['nombreEntrenamiento', 'ejercicioId', 'duracion', 'fechaRealizacion', 'material', 'estado','imagen','descripcion', 'acciones'];
   dataSource = new MatTableDataSource(this.ejerciciosUsuarioArray);
 
   constructor(public ejerciciosUsuarioService: EjerciciosUsuariosService, public dialog: MatDialog, private router: Router) {

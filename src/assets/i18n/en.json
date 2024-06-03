@@ -21,6 +21,7 @@
     "perfil": "View Profile",
     "error.login": "Error in the login",
     "error.registro": "Error in the registration",
+    "error.campos": "There are fields that are not correct",
     "alta.registro": "Registration completed successfully",
     "parametros": "Parameters",
     "general.busqueda": "Search criteria",
@@ -133,6 +134,7 @@
             "email": "Email",
             "rol": "Role",
             "edad": "Age",
+            "sexo": "Sex",
             "altura": "Height",
             "peso": "Weight",
             "title": "Edit User"

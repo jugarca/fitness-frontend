@@ -21,6 +21,7 @@
     "perfil": "Veure Perfil",
     "error.login": "Error al iniciar sessió",
     "error.registro": "Error al registrar-se",
+    "error.campos": "Error en els camps del formulari",
     "alta.registro": "Usuari registrat correctament",
     "parametros": "Paràmetres",
     "general.busqueda": "Críteris de búsqueda",
@@ -133,6 +134,7 @@
             "email": "Correu electrònic",
             "rol": "Rol",
             "edad": "Edat",
+            "sexo": "Sexe",
             "altura": "Altura",
             "peso": "Pes",
             "title": "Editar Usuari"

@@ -22,6 +22,8 @@
    "error.login": "Usuario o contraseña incorrectos",
    "error.registro": "Error al realizar el registro del usuario",
    "alta.registro": "Usuario registrado correctamente",
+   "error.registro.ok": "Usuario registrado correctamente",
+   "error.campos": "Debes rellenar todos los campos correctamente",
    "parametros": "Parámetros",
    "general.busqueda": "Críterios de búsqueda",
    "general.acciones": "Acciones",
@@ -133,6 +135,7 @@
          "email": "Correo electrónico",
          "rol": "Rol",
          "edad": "Edad",
+         "sexo": "Sexo",
          "altura": "Altura",
          "peso": "Peso",
          "title": "Editar Usuario"

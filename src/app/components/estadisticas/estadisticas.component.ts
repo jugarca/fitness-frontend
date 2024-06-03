@@ -5,6 +5,8 @@ import { single } from './data';
 import { multi } from './dataImc';
 import { grupoMuscular } from './dataGrupoMuscular';
 import { EjercicioEstadoService } from '../../services/ejercicio-estado.service';
+import { GrupoMuscularUsuarioService } from 'src/app/services/grupo-muscular-usuario.service';
+import { UsuarioImcService } from '../../services/usuario-imc.service';
 
 @Component({
   selector: 'app-estadisticas',
@@ -71,19 +73,53 @@ export class EstadisticasComponent {
     group: ScaleType.Ordinal,
   };
 
-  constructor(private ejercicioEstadoService: EjercicioEstadoService) {
+  constructor(private ejercicioEstadoService: EjercicioEstadoService, 
+              private grupoMuscularUsuarioService: GrupoMuscularUsuarioService,
+              private usuarioImcService: UsuarioImcService) {
     ejercicioEstadoService.getByUserId(Number(sessionStorage.getItem('id'))).subscribe(data => {
-      console.log(data);
       this.single = data;
     });
+
+    grupoMuscularUsuarioService.getByUserId(Number(sessionStorage.getItem('id'))).subscribe(data => {
+      this.grupoMuscular = this.transformData(data as any[]);
+    });
+
+    usuarioImcService.getByUserId(Number(sessionStorage.getItem('id'))).subscribe(data => {
+     this.multi = [
+          {
+            name: sessionStorage.getItem('nombre'),
+            series: this.transformDataMulti(data as any[])
+          }
+        ];
+    });
+
+    
+
     Object.assign(this, { single });
     Object.assign(this, { multi });
   }
 
+  private transformData(data: any[]): any[] {
 
+    // Mapea los datos a la nueva estructura
+    const transformedData = data.map(item => ({
+      name: item.grupo,
+      value: item.contador,
+    }));
+  
+    return transformedData;
+  }
 
-  /*onSelect(event) {
-    console.log(event);
-  }^*/
+  private transformDataMulti(data: any[]): any[] {
+
+    // Mapea los datos a la nueva estructura
+    const transformedData = data.map(item => ({
+      name: item.name,
+      value: item.imc
+    }));
+  
+    return transformedData;
+  }
+
 
 }

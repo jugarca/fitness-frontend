@@ -39,7 +39,6 @@ export class EditRecetaComponent {
     
 
     this.parametrosService.getByTipo('INGREDIENTE').subscribe(data => {
-      console.log(data);
       this.tiposIngredientes = data;
     });
 
@@ -60,12 +59,10 @@ export class EditRecetaComponent {
 
     }else{
       this.recetasIngredientesService.getByReceta(data.receta.id).subscribe(data => {
-        console.log(data);
         this.ingredientes = data;
         this.ingredientes = this.ingredientes.map((item: RecetasAlimentosVO) => {
           return {...item, editando: false};
         });
-        console.log(this.ingredientes);
       });
       
       // Si se edita un registro se crea un formulario con los datos del registro.
@@ -94,24 +91,41 @@ export class EditRecetaComponent {
     }
   }
 
-//Agregar los metodos relacionados con la tabla de ingredientes
 
-editarIngrediente(idIngrediente: number): void {
-  // Aquí puedes agregar el código para editar el ingrediente
-}
-
-borrarIngrediente(idIngrediente: number): void {
-  console.log(idIngrediente);  
+borrarIngrediente(ingrediente: any): void {
+  console.log(ingrediente);  
+  this.recetasIngredientesService.delete(ingrediente).subscribe(data => {
+    this.recetasIngredientesService.getByReceta(ingrediente.idReceta).subscribe(data => {
+      this.ingredientes = data;
+      this.ingredientes = this.ingredientes.map((item: RecetasAlimentosVO) => {
+        return {...item, editando: false};
+      });
+    });
+    this.tabla.renderRows();
+  });
 }
 
 guardarIngrediente(ingrediente: any):void{
-  console.log(ingrediente);
+  this.recetasIngredientesService.save(ingrediente).subscribe(data => {
+    ingrediente.editando = false;
+  });
 }
 
-cancelarCambio(){
+cancelarCambio(ingrediente: any){
+  ingrediente.editando = false;
 }
 
 agregarIngrediente() {
+  // Crea un nuevo objeto ingrediente
+  const nuevoIngrediente = {
+    idReceta: this.form.value.id,
+    idAlimento: '', // o cualquier valor por defecto que desees
+    cantidad: 0, // o cualquier valor por defecto que desees
+    editando: true
+  };
+
+  // Agrega el nuevo ingrediente al array de ingredientes
+  this.ingredientes.push(nuevoIngrediente);
 
   this.tabla.renderRows();
 }

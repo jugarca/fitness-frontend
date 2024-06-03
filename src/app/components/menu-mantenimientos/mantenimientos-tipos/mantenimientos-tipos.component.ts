@@ -67,10 +67,7 @@ export class MantenimientosTiposComponent{
         this.tiposService.delete(tipo.codigo).subscribe(data => {
           this.refreshTable();
         });
-      } else {
-        // El usuario hizo clic en Cancelar
-        alert('Cancelado');
-      }
+      } 
     });
   }
 

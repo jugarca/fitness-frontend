@@ -11,11 +11,11 @@ export class FitnessGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const condition = true; // Cambia esto por tu propia lógica
+    const condition = true; 
     const variable = sessionStorage.getItem('id');
 
     if (!variable) {
-      this.router.navigate(['/']); // Cambia '/main' por la ruta de tu pantalla principal
+      this.router.navigate(['/']); 
       return false;
     }
 

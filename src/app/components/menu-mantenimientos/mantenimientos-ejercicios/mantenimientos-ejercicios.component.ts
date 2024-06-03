@@ -65,9 +65,6 @@ export class MantenimientosEjerciciosComponent {
         this.ejercicioService.delete(ejercicio.id).subscribe(data => {
           this.refreshTable();
         });
-      } else {
-        // El usuario hizo clic en Cancelar
-        alert('Cancelado');
       }
     });
   }

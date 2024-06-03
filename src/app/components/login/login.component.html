@@ -67,6 +67,10 @@
                             <input matInput type="password" required formControlName="password">
                         </mat-form-field>
                     </div>
+
+                    <div *ngIf="errorMessageRegistro" class="alert alert-danger">
+                        {{ errorMessageRegistro }}
+                    </div>
                 
                     <div class="form-field mb-3">
                         <mat-checkbox formControlName="terminos">{{ 'registro.formulario.aceptoTerminos' | transloco }}</mat-checkbox>

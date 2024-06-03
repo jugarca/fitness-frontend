@@ -18,9 +18,8 @@ import { RecetasAlimentosVO } from "../interfaces/recetas-ingredientes.interface
         return this.http.get(this.API_URL + "/findByReceta", { params: params });
     }
    
-    delete(id: number){
-      let params = new HttpParams().set('id', id);
-      return this.http.delete(this.API_URL + "/delete", { params: params });
+    delete(receta: RecetasAlimentosVO){
+      return this.http.post(this.API_URL + "/delete",  receta);
     }
   
     save(tipo: RecetasAlimentosVO): Observable<any> {

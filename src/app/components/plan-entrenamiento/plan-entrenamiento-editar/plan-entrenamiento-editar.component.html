@@ -30,18 +30,30 @@
             </div>
             <div class="mb-3">
                 <mat-form-field class="mr-3 margin-campos">
-                    <mat-label>{{'usuarios.header.nivel' | transloco}}</mat-label>
-                    <mat-select formControlName="nivel">
-                      <mat-option *ngFor="let nivel of niveles" [value]="nivel.codigo">{{nivel.descripcion}}</mat-option>
+                    <mat-label>{{'usuarios.header.sexo' | transloco}}</mat-label>
+                    <mat-select formControlName="sexo">
+                      <mat-option *ngFor="let sexo of sexos" [value]="sexo.codigo">{{sexo.descripcion}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field class="mr-3 margin-campos">
-                    <mat-label>{{'tiempo' | transloco}}</mat-label>
-                    <mat-select formControlName="tiempo">
-                      <mat-option *ngFor="let tiempo of tiempos" [value]="tiempo.codigo">{{tiempo.descripcion}}</mat-option>
-                    </mat-select>
+                  <mat-label>{{'usuarios.header.edad' | transloco}}</mat-label>
+                  <input matInput type="number" formControlName="edad">
                 </mat-form-field>
             </div>
+            <div class="mb-3">
+              <mat-form-field class="mr-3 margin-campos">
+                  <mat-label>{{'usuarios.header.nivel' | transloco}}</mat-label>
+                  <mat-select formControlName="nivel">
+                    <mat-option *ngFor="let nivel of niveles" [value]="nivel.codigo">{{nivel.descripcion}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+              <mat-form-field class="mr-3 margin-campos">
+                  <mat-label>{{'tiempo' | transloco}}</mat-label>
+                  <mat-select formControlName="tiempo">
+                    <mat-option *ngFor="let tiempo of tiempos" [value]="tiempo.codigo">{{tiempo.descripcion}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+             </div>
             <div class="mb-6">
                 <mat-form-field class="mr-6 margin-campos">
                     <mat-label>{{'usuarios.header.objetivo' | transloco}}</mat-label>

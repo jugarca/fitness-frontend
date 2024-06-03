@@ -43,6 +43,11 @@
         <mat-cell *matCellDef="let element">{{element.material}}</mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="descripcion" hidden>
+        <mat-header-cell hidden *matHeaderCellDef mat-sort-header>{{'entrenamiento.descripcion' | transloco}}</mat-header-cell>
+        <mat-cell hidden *matCellDef="let element">{{element.descripcion}}</mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="estado">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{'entrenamiento.estado' | transloco}}</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.estado}}</mat-cell>

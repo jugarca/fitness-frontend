@@ -56,7 +56,6 @@ export class LoginComponent {
 
   registrarse(){
     if (this.registro.controls['terminos'].value === false) {
-      //TODO: Sustituir alerta por dialog.
       this.dialog.open(DialogComponent, {
         data: {
           message: 'Debe aceptar los terminos y condiciones para registrarse.'
@@ -64,14 +63,18 @@ export class LoginComponent {
       });
       return;
     }
+    if (this.registro.invalid) {
+      this.errorMessageRegistro = this.translocoService.translate('error.campos');
+      return;
+    }
+    this.errorMessageRegistro = '';
     this.userService.registro(this.registro.value).subscribe( ()=>{
       if (this.errorMessageRegistro) {
         this.errorMessageRegistro = this.translocoService.translate('error.registro');
       }else{
-        //TODO: Sacar una alerta por dialog
         this.dialog.open(DialogComponent, {
           data: {
-            message: 'Usuario registrado correctamente'
+            message: this.translocoService.translate('alta.registro')
           }
         });
       }   

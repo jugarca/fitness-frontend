@@ -20,11 +20,11 @@
         <div class="row">
           <div class="col-md-12"><strong>{{'entrenamiento.fecha' | transloco}}:</strong> {{data.ejercicio.fechaRealizacion | date:'dd/MM/yyyy'}}</div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="data.ejercicio.material != null">
           <div class="col-md-12"><strong>{{'entrenamiento.material' | transloco}}:</strong> {{data.ejercicio.material}}</div>
         </div>
         <div class="row">
-          <div class="col-md-12"><strong>{{'entrenamiento.descripcion' | transloco}}:</strong> Este ejercicio físico es uno de los tres realizados en powerlifting (peso muerto, sentadillas, y press de banca), y también se utiliza en el culturismo como un ejercicio para el pecho, (principalmente músculos pectorales) el tríceps y el fascículo anterior del deltoides. El levantador se tumba sobre su espalda en un banco, levantando y bajando la barra directamente por encima del pecho.</div>
+          <div class="col-md-12"><strong>{{'entrenamiento.descripcion' | transloco}}:</strong> {{data.ejercicio.descripcion}} </div>
         </div>
       </div>
 

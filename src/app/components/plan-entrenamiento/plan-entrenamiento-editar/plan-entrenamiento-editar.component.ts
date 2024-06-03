@@ -29,6 +29,7 @@ export class PlanEntrenamientoEditarComponent{
   public objetivos: ValoresTipoVO[]= [];
   public grupoMuscular: ValoresTipoVO[]= [];
   public tiposAlimentacion: ValoresTipoVO[] = [];
+  public sexos: ValoresTipoVO[] = [];
 
   //Esto es una prueba de concepto de autocomplete con chips
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -52,6 +53,8 @@ export class PlanEntrenamientoEditarComponent{
     this.primerFormGroup = this._formBuilder.group({
       altura: ['', [Validators.required, Validators.max(300)]],
       peso: ['', [Validators.required, Validators.max(350)]],
+      sexo: ['', Validators.required],
+      edad: ['', Validators.required],
       nivel: [''],
       tiempo: [''],
       objetivo: [''],
@@ -80,6 +83,10 @@ export class PlanEntrenamientoEditarComponent{
 
     this.parametrosService.getByTipo('NIVEL').subscribe(data => {
       this.niveles = data;
+    });
+
+    this.parametrosService.getByTipo('SEXO').subscribe(data => {
+      this.sexos = data;
     });
 
     this.parametrosService.getByTipo('TIEMPO').subscribe(data => {
@@ -202,13 +209,11 @@ export class PlanEntrenamientoEditarComponent{
     datos.diasSemana = this.dias;
     datos.materialDisponible = this.materiales;
 
-    console.log(this.dias);
     
     // Ahora puedes enviar `datos` a tu método en Java...
     console.log(datos);
     this.usuariosService.plan(datos).subscribe(data => {
       this.router.navigate(['/planEntrenamiento']);
-      //alert("Plan de entrenamiento guardado correctamente");
     });
     
   }

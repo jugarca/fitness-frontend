@@ -55,7 +55,7 @@
           <div *ngIf="!ingrediente.editando"> 
               {{ingrediente.idAlimento}} 
           </div>
-          <mat-select *ngIf="ingrediente.editando">
+          <mat-select *ngIf="ingrediente.editando" [(value)]="ingrediente.idAlimento">
             <mat-option *ngFor="let ingrediente of tiposIngredientes" [value]="ingrediente.codigo">{{ ingrediente.descripcion }}</mat-option>
           </mat-select>
         </td>
@@ -83,14 +83,14 @@
           </button> 
         </th>
         <td mat-cell *matCellDef="let ingrediente">
-          <button mat-icon-button color="primary" (click)="ingrediente.editando = !ingrediente.editando">
+          <button mat-icon-button color="primary" (click)="ingrediente.editando ? guardarIngrediente(ingrediente) : ingrediente.editando = !ingrediente.editando">
               <mat-icon *ngIf="!ingrediente.editando">edit</mat-icon>
               <mat-icon *ngIf="ingrediente.editando">save</mat-icon>
           </button>
-          <button *ngIf="!ingrediente.editando" mat-icon-button color="warn" (click)="borrarIngrediente(ingrediente.idAlimento)">
+          <button *ngIf="!ingrediente.editando" mat-icon-button color="warn" (click)="borrarIngrediente(ingrediente)">
             <mat-icon >delete</mat-icon>
           </button>
-          <button *ngIf="ingrediente.editando" mat-icon-button color="warn" (click)="cancelarCambio()">
+          <button *ngIf="ingrediente.editando" mat-icon-button color="warn" (click)="cancelarCambio(ingrediente)">
             <mat-icon *ngIf="ingrediente.editando">cancel</mat-icon>
           </button>
         </td>
